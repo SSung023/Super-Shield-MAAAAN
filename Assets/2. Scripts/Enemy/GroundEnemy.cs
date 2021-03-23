@@ -12,9 +12,11 @@ public class GroundEnemy : Enemy
     private float curTime;
 
     private bool isRoaming;
+    private bool isReached;
 
     private int nextRoamingIndex = 0;
 
+    [Header("Sound")]
     [SerializeField] private AudioSource enemyAudioSource;
 
     private void Awake()
@@ -27,6 +29,7 @@ public class GroundEnemy : Enemy
     {
         isDetected = false;
         isRoaming = false;
+        isReached = false;
         isGroggy = false;
         isPause = false;
 
@@ -116,12 +119,16 @@ public class GroundEnemy : Enemy
         {
             isRoaming = true;
 
-            if (nextRoamingIndex == roamingPoint.Length)
+            if (isReached)
             {
-                nextRoamingIndex = 0;
+                nextRoamingIndex++;
+                if (nextRoamingIndex == roamingPoint.Length)
+                {
+                    nextRoamingIndex = 0;
+                }
+                isReached = false;
             }
-            
-            Move(roamingPoint[nextRoamingIndex++].position);
+            Move(roamingPoint[nextRoamingIndex].position);
         }
     }
 
@@ -129,23 +136,25 @@ public class GroundEnemy : Enemy
     {
         // point지점으로 이동하게하는 코드
         float remainDistance = Vector2.Distance(transform.position, point);
-
-        if (point.x - transform.position.x < 0)
+        
+        if (point.x - transform.position.x < -0.001)
         {
             isSightLeft = true;
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
             myAnimator.SetFloat("Direction", 0);
         }
-        else
+        else if(point.x - transform.position.x > 0.001)
         {
             isSightLeft = false;
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
             myAnimator.SetFloat("Direction", 1);
         }
-        
-        
-        Sequence sequence = DOTween.Sequence()
-            .Append(transform.DOMove(point, remainDistance / speed).SetEase(Ease.Linear))
-            .OnComplete(() => { isRoaming = false; });
-        
+        else if (-0.001 <= remainDistance && remainDistance <= 0.001) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
+        {
+            isReached = true;
+        }
+
+        isRoaming = false;
     }
     
     protected void OnDrawGizmos()
