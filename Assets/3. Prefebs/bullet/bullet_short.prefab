@@ -100,7 +100,7 @@ MonoBehaviour:
   mother: {fileID: 0}
   isLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
   speed: 7
   distance: 0.2
   damage: 1

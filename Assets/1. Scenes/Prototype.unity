@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140645769}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: D_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 533477596}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: ShieldT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1185,6 +1185,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sample Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 982621894700252582, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
 --- !u!4 &689911402 stripped
@@ -1400,7 +1404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1000903048}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: S_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1505,7 +1509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1231169271}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: C_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1826,7 +1830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394832207}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Z_shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

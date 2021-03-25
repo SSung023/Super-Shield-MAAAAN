@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mother: {fileID: 0}
-  speed: 5
-  distance: 0.2
   isLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8448
+  speed: 5
+  distance: 0.2
   damage: 1
 --- !u!50 &5092834840700449048
 Rigidbody2D:
