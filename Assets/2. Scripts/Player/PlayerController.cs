@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         if (isShieldUp) _curShieldT = -1;
+
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     private IEnumerator ProcessMakingShield(ShieldMaterial mat)
