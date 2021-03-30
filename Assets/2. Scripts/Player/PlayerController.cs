@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public Player player;
     public float dashInvincibleTime;
     public float runSpeed = 40f;
+    public float facingRight = 0f;
     [SerializeField] private Transform itemCheck;
     private float _horizontalMove = 0f;
     private bool _jump = false;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         
         if (_isMaking) return;
         _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        facingRight = Mathf.Sign(player.transform.localScale.x);
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -62,10 +64,17 @@ public class PlayerController : MonoBehaviour
             else print("실패!");
         }
 
+
         if (Input.GetButtonDown("Throw") && curShield != null)
         {
-            // 던지는 애니메이션
-            curShield.transform.SetPositionAndRotation(shieldT[0].position, shieldT[0].rotation);
+            // 플레이어 방향 확인 후 던져지는 방패 생성
+            if (facingRight != -1) curShield.transform.SetPositionAndRotation(shieldT[0].position, shieldT[0].rotation);
+            else curShield.transform.SetPositionAndRotation(shieldT[3].position, shieldT[3].rotation);
+
+            // 던짐과 동시에 방패를 shield layer로 보냄
+            // instantiate 직후에 보내는 것도 고려해 볼 만함
+            curShield.gameObject.layer = 13;
+
             curShield.Use(true);
             curShield.Throw();
             curShield = null;

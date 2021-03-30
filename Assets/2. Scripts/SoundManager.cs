@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
     // 어떠한 스크립트에서도 사운드 매니저로 접근할 수 있는 스태틱 필드
     public static SoundManager _snd;
 
+
     private AudioSource     musSource;
     private AudioSource     sfxSource;
     private AudioSource     ambSource;
@@ -228,8 +229,13 @@ public class SoundManager : MonoBehaviour
             Debug.Log("SoundManager : _snd 스태틱 필드 할당됨");
             _snd = this;
             DontDestroyOnLoad(_snd);
+    
         }
-        
+        else if (_snd != this)
+        {
+            Destroy(this.gameObject);
+        }
+
         AudioSource[] audSources = GetComponents<AudioSource>();
 
         //Debug.Log(audSources.Length);

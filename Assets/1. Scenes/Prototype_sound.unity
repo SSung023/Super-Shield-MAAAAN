@@ -683,6 +683,7 @@ MonoBehaviour:
   player: {fileID: 516218311}
   dashInvincibleTime: 1
   runSpeed: 15
+  facingRight: 0
   itemCheck: {fileID: 124379317}
   dashCool: 1
   shieldT:
@@ -1165,6 +1166,10 @@ PrefabInstance:
     - target: {fileID: 982621894700252582, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
       propertyPath: m_Name
       value: Sample Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 982621894700252582, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}

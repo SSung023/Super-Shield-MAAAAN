@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, targetPos, Time.fixedDeltaTime * 0.8f);
         }
-        print(focusOut);
+          // print(focusOut);
     }
 
     private void Isfocusout(Vector3 minPos, Vector3 maxPos, Vector3 cameraPos)
