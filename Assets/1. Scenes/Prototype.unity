@@ -573,8 +573,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -175120223
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1181146085422009775, guid: bedd66004db4e6144be626d6e56389d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -683,6 +683,7 @@ MonoBehaviour:
   player: {fileID: 516218311}
   dashInvincibleTime: 1
   runSpeed: 15
+  facingRight: 0
   itemCheck: {fileID: 124379317}
   dashCool: 1
   shieldT:
@@ -1358,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 601556636402965974, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.76
+      value: 4.92
       objectReference: {fileID: 0}
     - target: {fileID: 601556636402965974, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3126,9 +3127,13 @@ PrefabInstance:
       propertyPath: canMake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617218, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617219, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3136,7 +3141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.83
+      value: -3.02
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3173,6 +3178,14 @@ PrefabInstance:
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1907681449
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617222, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_Name
