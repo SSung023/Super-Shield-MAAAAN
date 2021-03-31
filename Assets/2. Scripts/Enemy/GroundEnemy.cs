@@ -137,19 +137,19 @@ public class GroundEnemy : Enemy
         // point지점으로 이동하게하는 코드
         float remainDistance = Vector2.Distance(transform.position, point);
         
-        if (point.x - transform.position.x < -0.001)
+        if (point.x - transform.position.x < -0.01)
         {
             isSightLeft = true;
             transform.Translate(Vector3.left * speed * Time.deltaTime);
             myAnimator.SetFloat("Direction", 0);
         }
-        else if(point.x - transform.position.x > 0.001)
+        else if(point.x - transform.position.x > 0.01)
         {
             isSightLeft = false;
             transform.Translate(Vector3.right * speed * Time.deltaTime);
             myAnimator.SetFloat("Direction", 1);
         }
-        else if (-0.001 <= remainDistance && remainDistance <= 0.001) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
+        else if (-0.01 <= remainDistance && remainDistance <= 0.01) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
         {
             isReached = true;
         }
