@@ -107,7 +107,18 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            SceneManager.LoadScene(0);
+            GameManager.instance.gameExit();
+        }
+        if(Input.GetKeyDown(KeyCode.F2))
+        {
+            if(GameManager.instance.getGameState() == GameManager.State.play)
+            {
+                GameManager.instance.setGameState(GameManager.State.stop);
+            }
+            else if(GameManager.instance.getGameState() == GameManager.State.stop)
+            {
+                GameManager.instance.setGameState(GameManager.State.play);
+            }
         }
     }
 

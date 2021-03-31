@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     {
         health = maxHealth;
         invCor = GetInv(0);
+        GameManager.instance.gameReset();//일단 임시로 여기에 게임 리셋을 넣어둠
     }
     public void TakeHit(int damage)
     {
@@ -29,7 +30,8 @@ public class Player : MonoBehaviour
         if(health == 0)
         {
             GetComponent<SpriteRenderer>().color = Color.black;
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
+            GameManager.instance.setGameState(GameManager.State.gameover);
         }
     }
     public void GetInvincibility(float duration)

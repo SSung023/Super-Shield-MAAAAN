@@ -31,7 +31,7 @@ public class Gold : MonoBehaviour
             if (raycast.collider.tag == "Player")
             {
                 // 일단은 그냥 사라지게 구현
-                GameManager.instance.GoldChange(1);
+                GameManager.instance.goldChange(1);
                 Destroy(this.gameObject);
             }
         }
