@@ -51,10 +51,13 @@ public class Shield : MonoBehaviour
         myCollider.enabled = isUse;
     }
 
-    public void OnCollisionEnter(Collision other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other);
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Hit!");
+            
             other.gameObject.GetComponent<Enemy>().TakeHit(durability);
             Destroy(gameObject);
         }

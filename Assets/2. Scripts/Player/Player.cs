@@ -47,4 +47,28 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(duration);
         isInvincible = false;
     }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            SpriteRenderer spr = other.GetComponent<SpriteRenderer>();
+
+            Color color = spr.material.color;
+            color.a = 1f;
+            spr.material.color = color;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Interactable"))
+        {
+            SpriteRenderer spr = other.GetComponent<SpriteRenderer>();
+
+            Color color = spr.material.color;
+            color.a = 0.6f;
+            spr.material.color = color;
+        }
+    }
 }

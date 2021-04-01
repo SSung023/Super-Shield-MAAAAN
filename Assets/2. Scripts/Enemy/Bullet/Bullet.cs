@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     protected Rigidbody2D rigid;
 
     private bool isShooting;
+    private bool isSightLeft;
     
     public float speed;
     public float distance;
@@ -25,6 +26,7 @@ public class Bullet : MonoBehaviour
     {
         Invoke("DestroyBullet", 1.5f);
         isShooting = false;
+        isSightLeft = mother.isSightLeft;
     }
     
     
@@ -64,12 +66,14 @@ public class Bullet : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         
         isShooting = true;
-        if (mother.isSightLeft)
+        if (isSightLeft)
         {
+            Debug.Log("L");
             rigid.AddForce(transform.right * -1f * speed * Time.deltaTime, ForceMode2D.Impulse);
         }
         else
         {
+            Debug.Log("R");
             rigid.AddForce(transform.right * speed * Time.deltaTime, ForceMode2D.Impulse);
         }
 

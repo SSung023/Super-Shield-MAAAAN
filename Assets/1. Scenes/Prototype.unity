@@ -1349,9 +1349,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1421891800}
     m_Modifications:
+    - target: {fileID: 601556635039103694, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 601556636402965973, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_Name
       value: Hp bar
+      objectReference: {fileID: 0}
+    - target: {fileID: 601556636402965973, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 601556636402965974, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1935,6 +1943,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1568787864116949451, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
   m_PrefabInstance: {fileID: 1568787865322504224}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1491055084
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491055083}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1503340609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,13 +2872,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2122622976}
     m_Modifications:
+    - target: {fileID: 601556635039103692, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 601556635039103694, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 601556635625974401, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 601556636402965973, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_Name
       value: Hp bar
       objectReference: {fileID: 0}
     - target: {fileID: 601556636402965973, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 601556636402965974, guid: a643923f31d2b8e4dbb1eefb5b9bb52c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3010,6 +3051,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2122622976}
     m_Modifications:
+    - target: {fileID: 1491055084, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: mother
       value: 
@@ -3187,9 +3232,17 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617222, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_Name
       value: ShieldMaterial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617222, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a74907657d90f944ea99dfdf36590538, type: 3}
