@@ -8,7 +8,12 @@ public class Player : MonoBehaviour
     public bool isInvincible = false;
 
     private IEnumerator invCor;
-    
+
+    public bool shield_memory_barrier = false;
+    public int shield_memory_maxhealth = 0;
+
+
+
     private void Awake()
     {
         health = maxHealth;

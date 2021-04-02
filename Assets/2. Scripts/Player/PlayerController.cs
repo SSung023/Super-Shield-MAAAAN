@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     private int _curShieldT = -1;
     [SerializeField] private AudioSource _playerAudioSource;
 
+    public float shield_passive_speed = 1f;
+    public float shield_passive_dashcooldown = 0f;
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -55,13 +59,14 @@ public class PlayerController : MonoBehaviour
             _curDashCool = dashCool;
         }
 
-        if (Input.GetButtonDown("Make") && curShield == null)
+        if (Input.GetButtonDown("Make") && curShield == null) //방패를 만드는 입력
         {
             var mats = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
                 where col.gameObject.layer == 12
                 select col.GetComponent<ShieldMaterial>()).ToArray();
             if(mats.Length != 0) StartCoroutine(ProcessMakingShield(mats.First()));
             else print("실패!");
+
         }
 
 
@@ -85,7 +90,11 @@ public class PlayerController : MonoBehaviour
             var items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
                 where col.gameObject.layer == 11
                 select col.GetComponent<ShieldItem>()).ToArray();
-            if(items.Length != 0) curShield = Instantiate(items.First().GetItem(), shieldT[0].parent);
+            if (items.Length != 0)
+            {
+                curShield = Instantiate(items.First().GetItem(), shieldT[0].parent);
+                curShield.GetComponent<Shield>().Root();
+            }
         }
 
         var isShieldUp = true;

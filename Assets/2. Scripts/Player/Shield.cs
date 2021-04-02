@@ -13,6 +13,9 @@ public class Shield : MonoBehaviour
     [SerializeField] private float throwingSpeed = 5.0f;
     private bool isThrown = false;
     private bool isCollided = false;
+
+    public int shield_memory_durability = 0;
+    public int shield_passive_throwdamege = 0;
     private void FixedUpdate()
     {
         if (isThrown)

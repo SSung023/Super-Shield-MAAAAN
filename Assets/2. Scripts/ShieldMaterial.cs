@@ -22,6 +22,7 @@ public class ShieldMaterial : MonoBehaviour
             tmp.transform.SetParent(null);
             Destroy(gameObject);
         }
+        print(_curMakingTime+"!!");
     }
 
     public void MakeShield()
