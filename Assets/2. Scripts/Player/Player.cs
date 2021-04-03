@@ -27,6 +27,11 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        if(shield_memory_barrier)
+        {
+            shield_memory_barrier = false;
+            return;
+        }
         else if(endHealth < 0)
         {
             endHealth = 0;

@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         }
         
         if (_isMaking) return;
-        _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed * shield_passive_speed;
         facingRight = Mathf.Sign(player.transform.localScale.x);
 
         if (Input.GetButtonDown("Jump"))
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             player.GetInvincibility(dashInvincibleTime);
             controller.Dash();
-            _curDashCool = dashCool;
+            _curDashCool = dashCool - shield_passive_dashcooldown;
         }
 
         if (Input.GetButtonDown("Make") && curShield == null) //방패를 만드는 입력
@@ -82,7 +82,9 @@ public class PlayerController : MonoBehaviour
 
             curShield.Use(true);
             curShield.Throw();
+            GameManager.instance.shieldManager.throwShield(this, player, curShield);
             curShield = null;
+
         }
 
         if (Input.GetButtonDown("Root") && curShield == null)
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
             if (items.Length != 0)
             {
                 curShield = Instantiate(items.First().GetItem(), shieldT[0].parent);
-                curShield.GetComponent<Shield>().Root();
+                GameManager.instance.shieldManager.makeRandomShield(this, player, curShield);
             }
         }
 

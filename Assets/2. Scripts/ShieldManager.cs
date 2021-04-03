@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//임시로 스크립트만 개설해둠
-public class ShieldManager : MonoBehaviour
+public class ShieldManager
 {
-    private int[] level_bonus_table = new int[] { 1, 2, 3, 4, 5 }; //등급에 따른 벨류
-    private int[] memory_use_number_table = new int[] { 0, 0, 0, 0, 0 }; //방패의 기억 사용 횟수
+    public int[] level_bonus_table = new int[] { 1, 2, 3, 4, 5 }; //등급에 따른 벨류
+    public int[] memory_use_number_table = new int[] { 0, 0, 0, 0, 0 }; //방패의 기억 사용 횟수
     public int shield_debuff_num = 0; //디버프 종류
     public int shield_passive_num = 0; //패시브 종류
     public int shield_level_num = 0; //등급
@@ -14,19 +13,16 @@ public class ShieldManager : MonoBehaviour
         
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     public void shieldReset()
     {
-
+        for (int i = 0; i < memory_use_number_table.Length; i++)
+        {
+            memory_use_number_table[i] = 0;
+            shield_debuff_num = 0;
+            shield_passive_num = 0; 
+            shield_level_num = 0;
+        }
     }
 
     public void makeRandomShield(PlayerController controller, Player player, Shield shield)
@@ -81,6 +77,13 @@ public class ShieldManager : MonoBehaviour
             player.shield_memory_maxhealth = 5;
             shield.shield_memory_durability = 5;
         }
+
+        shield.Root();
+
+        Debug.Log("debuff: " +shield_debuff_num);
+        Debug.Log("passive: " + shield_passive_num);
+        Debug.Log("level: " + shield_level_num);
+
 
 
 

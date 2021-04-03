@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public enum State { play = 0, stop = 1, gameover = 2 };
     private State GameState = State.play;
     private int thisStage = 0;
-    private ShieldManager shieldManager;
+    public ShieldManager shieldManager;
 
     private void Awake()
     {

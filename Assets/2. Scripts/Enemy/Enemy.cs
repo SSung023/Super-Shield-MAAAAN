@@ -57,13 +57,27 @@ public class Enemy : ShieldMaterial
     protected int groggyCount = 0;
     [HideInInspector] public bool isSightLeft;
 
-    
+    public float shield_debuff_speed = 1f;
 
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
 
-        if(endHealth < 0)
+        int debuffNum = GameManager.instance.shieldManager.shield_debuff_num;
+        if(debuffNum == 1)
+        {
+            StartCoroutine(shieldDebuffSlow());
+        }
+        else if (debuffNum == 2)
+        {
+            StartCoroutine(shieldDebuffDotDamage());
+        }
+        else if (debuffNum == 3)
+        {
+            StartCoroutine(shieldDebuffGroggy());
+        }
+
+        if (endHealth < 0)
         {
             endHealth = 0;
         }
@@ -79,6 +93,23 @@ public class Enemy : ShieldMaterial
             }
         }
         if(curHealth == 0)
+        {
+            isGroggy = true;
+            Die();
+        }
+    }
+    private void dotHit(int damage)
+    {
+        int endHealth = curHealth - damage;
+
+        if (endHealth < 0)
+        {
+            endHealth = 0;
+        }
+        curHealth = endHealth;
+        UpdateHpBar();
+        
+        if (curHealth == 0)
         {
             isGroggy = true;
             Die();
@@ -186,5 +217,24 @@ public class Enemy : ShieldMaterial
     {
         
     }
-    
+    IEnumerator shieldDebuffSlow()
+    {
+        shield_debuff_speed = 1 - (GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num] * 0.1f);
+        yield return new WaitForSeconds(2.0f);
+        shield_debuff_speed = 1;
+    }
+    IEnumerator shieldDebuffDotDamage()
+    {
+        for(int i = 0; i < GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num]; i++)
+        {
+            dotHit(1);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+    IEnumerator shieldDebuffGroggy()
+    {
+        isGroggy = true;
+        yield return new WaitForSeconds(GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num] * 0.1f);
+        isGroggy = false;
+    }
 }

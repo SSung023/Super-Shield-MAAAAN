@@ -102,7 +102,7 @@ public class CharacterController2D : MonoBehaviour
 			StartCoroutine(controlDownGround());
 		}
 		// If the player should jump...
-		else if (jump && jumpCount < maxJumpCount)
+		else if (jump && jumpCount < (maxJumpCount+shield_passive_jumpbonus))
 		{
 			// Add a vertical force to the player.
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);

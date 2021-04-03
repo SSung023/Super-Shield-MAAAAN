@@ -26,7 +26,7 @@ public class Shield : MonoBehaviour
     
     public void Root()
     {
-        durability = maxDurability;
+        durability = maxDurability + shield_memory_durability;
     }
 
     public void Throw()
@@ -61,7 +61,7 @@ public class Shield : MonoBehaviour
         {
             Debug.Log("Hit!");
             
-            other.gameObject.GetComponent<Enemy>().TakeHit(durability);
+            other.gameObject.GetComponent<Enemy>().TakeHit(durability + shield_passive_throwdamege);
             Destroy(gameObject);
         }
     }

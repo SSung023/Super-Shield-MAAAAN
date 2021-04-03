@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         slider.value = player.health;
-        sliderTx.text = player.health.ToString() + " / " + player.maxHealth.ToString();
+        sliderTx.text = player.health.ToString() + " / " + (player.maxHealth+player.shield_memory_maxhealth).ToString();
         if (controller.curShield == null)
         {
             durabilityTx.text = "None";

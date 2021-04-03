@@ -107,7 +107,7 @@ public class GroundEnemy : Enemy
         else
         {
             Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y);
-            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed * shield_debuff_speed);
         }
         currentTime -= Time.deltaTime;
     }
@@ -140,13 +140,13 @@ public class GroundEnemy : Enemy
         if (point.x - transform.position.x < -0.01)
         {
             isSightLeft = true;
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            transform.Translate(Vector3.left * speed * Time.deltaTime * shield_debuff_speed);
             myAnimator.SetFloat("Direction", 0);
         }
         else if(point.x - transform.position.x > 0.01)
         {
             isSightLeft = false;
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            transform.Translate(Vector3.right * speed * Time.deltaTime * shield_debuff_speed);
             myAnimator.SetFloat("Direction", 1);
         }
         else if (-0.01 <= remainDistance && remainDistance <= 0.01) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
