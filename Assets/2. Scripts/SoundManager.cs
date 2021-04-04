@@ -8,7 +8,6 @@ public class SoundManager : MonoBehaviour
     // 어떠한 스크립트에서도 사운드 매니저로 접근할 수 있는 스태틱 필드
     public static SoundManager _snd;
 
-
     private AudioSource     musSource;
     private AudioSource     sfxSource;
     private AudioSource     ambSource;
@@ -27,7 +26,7 @@ public class SoundManager : MonoBehaviour
     private float _ambVol = 1.0f;
 
     // 다른 스크립트에서 효과음을 재생할 때 거쳐가는 필드
-    private AudioSource     receivedSource;
+    //private AudioSource     receivedSource;
 
     public enum SoundType : int { MUSIC, SFX, AMBIENT, INSTANTSFX, ERROR };
 
@@ -98,15 +97,18 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void SfxCall(AudioSource caller, int number)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            caller.volume = caller.volume * SfxVol;
-            caller.clip = sfxClips[number];
-            caller.Play();
-        }
-        else
-        {
-            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                caller.volume = caller.volume * SfxVol;
+                caller.clip = sfxClips[number];
+                caller.Play();
+            }
+            else
+            {
+                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -118,13 +120,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void InstantSfxCall(AudioSource caller, int number)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
-        }
-        else
-        {
-            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
+            }
+            else
+            {
+                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -137,13 +142,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume">효과음 음량(0.0f ~ 1.0f)</param>
     public void InstantSfxCall(AudioSource caller, int number, float volume)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
-        }
-        else
-        {
-            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
+            }
+            else
+            {
+                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -258,15 +266,18 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void SfxPlay(int number)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            sfxSource.clip = sfxClips[number];
-            sfxSource.loop = false;
-            sfxSource.Play();
-        }
-        else
-        {
-            Debug.Log("잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                sfxSource.clip = sfxClips[number];
+                sfxSource.loop = false;
+                sfxSource.Play();
+            }
+            else
+            {
+                Debug.Log("잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -278,15 +289,18 @@ public class SoundManager : MonoBehaviour
     /// <param name="loop"> 루프 여부 </param>
     public void SfxPlay(int number, bool loop)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            sfxSource.clip = sfxClips[number];
-            sfxSource.loop = loop;
-            sfxSource.Play();
-        }
-        else
-        {
-            Debug.Log("잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                sfxSource.clip = sfxClips[number];
+                sfxSource.loop = loop;
+                sfxSource.Play();
+            }
+            else
+            {
+                Debug.Log("잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -335,13 +349,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void InstantSfxPlay(int number)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            sfxSource.PlayOneShot(sfxClips[number]);
-        }
-        else
-        {
-            Debug.Log("잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                sfxSource.PlayOneShot(sfxClips[number]);
+            }
+            else
+            {
+                Debug.Log("잘못된 효과음 번호입니다.");
+            }
         }
     }
 
@@ -352,13 +369,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"> 효과음 음량(0.0f ~ 1.0f) </param>
     public void InstantSfxPlay(int number, float volume)
     {
-        if (number < sfxClips.Length && number >= 0)
+        if (!sfxMuted)
         {
-            sfxSource.PlayOneShot(sfxClips[number], volume);
-        }
-        else
-        {
-            Debug.Log("잘못된 효과음 번호입니다.");
+            if (number < sfxClips.Length && number >= 0)
+            {
+                sfxSource.PlayOneShot(sfxClips[number], volume);
+            }
+            else
+            {
+                Debug.Log("잘못된 효과음 번호입니다.");
+            }
         }
     }
 
