@@ -223,9 +223,4 @@ public class PlayerController : MonoBehaviour
             curShield.Use(false);
         }
     }
-
-    private void UpdateAnimator()
-    {
-        
-    }
 }
