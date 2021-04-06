@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         
         if (_isMaking) return;
         _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed * shield_passive_speed;
+        
+        UpdateMoveType();
         myAnimator.SetFloat("Direction", _horizontalMove);
         facingRight = Mathf.Sign(player.transform.localScale.x);
 
@@ -118,7 +120,7 @@ public class PlayerController : MonoBehaviour
         
         var isShieldUp = true;
         
-        CheckHaveShield();
+        myAnimator.SetBool("haveShield", _haveShield);
         myAnimator.SetBool("isShieldOn", !isShieldUp);
 
         for (var i = 0; i < 4; i++)
@@ -159,16 +161,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CheckHaveShield()
+    private void UpdateMoveType()
     {
-        myAnimator.SetBool("haveShield", _haveShield);
         if (_haveShield)
         {
-            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
+            if (_horizontalMove != 0)
+            {
+                myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
+            }
+            else // 움직이지 않는 경우
+            {
+                myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
+            }
         }
         else
         {
-            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.EMPTY);
+            if (_horizontalMove != 0)
+            {
+                myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
+            }
+            else // 움직이지 않는 경우
+            {
+                myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.EMPTY);
+            }
         }
     }
 
@@ -186,14 +201,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_horizontalMove != 0)
-        {
-            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
-        }
-        else if (_horizontalMove == 0)
-        {
-            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
-        }
         controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, _downJump);
         _jump = false;
 
