@@ -168,10 +168,12 @@ public class PlayerController : MonoBehaviour
             if (_horizontalMove != 0)
             {
                 myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
+                myAnimator.SetBool("isWalking", true);
             }
             else // 움직이지 않는 경우
             {
                 myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
+                myAnimator.SetBool("isWalking", false);
             }
         }
         else
@@ -179,10 +181,12 @@ public class PlayerController : MonoBehaviour
             if (_horizontalMove != 0)
             {
                 myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
+                myAnimator.SetBool("isWalking", true);
             }
             else // 움직이지 않는 경우
             {
                 myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.EMPTY);
+                myAnimator.SetBool("isWalking", false);
             }
         }
     }
