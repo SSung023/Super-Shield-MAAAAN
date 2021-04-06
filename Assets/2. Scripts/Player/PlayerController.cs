@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 {
     public CharacterController2D controller;
     public Player player;
+    public Animator myAnimator;
+
     public float dashInvincibleTime;
     public float runSpeed = 40f;
     public float facingRight = 0f;
@@ -17,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private bool _jump = false;
     private bool _downJump = false;
     private bool _isMaking = false;
+    private bool _haveShield = true; // 방패 소유의 여부
+        
     private float _curDashCool = 0;
     public float dashCool = 5f;
     public Transform[] shieldT = new Transform[4];
@@ -28,6 +32,10 @@ public class PlayerController : MonoBehaviour
     public float shield_passive_dashcooldown = 0f;
 
 
+    private void Awake()
+    {
+        myAnimator = GetComponent<Animator>();
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -43,12 +51,16 @@ public class PlayerController : MonoBehaviour
         
         if (_isMaking) return;
         _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed * shield_passive_speed;
+        myAnimator.SetFloat("Direction", _horizontalMove);
         facingRight = Mathf.Sign(player.transform.localScale.x);
 
         if (Input.GetButtonDown("Jump"))
         {
             SoundManager._snd.SfxCall(_playerAudioSource, 3); // 점프할 때 소리 내기 (임시)
             _jump = true;
+            
+            myAnimator.SetTrigger("MoveTrigger");
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.JUMP);
         }
 
         _downJump = Input.GetKey(KeyCode.DownArrow);
@@ -57,6 +69,9 @@ public class PlayerController : MonoBehaviour
             player.GetInvincibility(dashInvincibleTime);
             controller.Dash();
             _curDashCool = dashCool - shield_passive_dashcooldown;
+            
+            myAnimator.SetTrigger("MoveTrigger");
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.DASH);
         }
 
         if (Input.GetButtonDown("Make") && curShield == null) //방패를 만드는 입력
@@ -85,6 +100,7 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.shieldManager.throwShield(this, player, curShield);
             curShield = null;
 
+            _haveShield = false;
         }
 
         if (Input.GetButtonDown("Root") && curShield == null)
@@ -99,18 +115,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        
         var isShieldUp = true;
+        
+        CheckHaveShield();
+        myAnimator.SetBool("isShieldOn", !isShieldUp);
+
         for (var i = 0; i < 4; i++)
         {
             if (Input.GetButton("Shield_" + i.ToString()) && curShield != null)
             {
                 _curShieldT = i;
+                myAnimator.SetFloat("ShieldNum", _curShieldT); // 0~3
                 curShield.Use(true);
                 isShieldUp = false;
+                
+                myAnimator.SetBool("isShieldOn", !isShieldUp);
+                
             }
 
             if (Input.GetButtonUp("Shield_" + i.ToString()))
             {
+                myAnimator.SetBool("isShieldOn", !isShieldUp);
                 isShieldUp = true;
             }
         }
@@ -133,6 +159,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void CheckHaveShield()
+    {
+        myAnimator.SetBool("haveShield", _haveShield);
+        if (_haveShield)
+        {
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
+        }
+        else
+        {
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.EMPTY);
+        }
+    }
+
     private IEnumerator ProcessMakingShield(ShieldMaterial mat)
     {
         _isMaking = true;
@@ -147,6 +186,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_horizontalMove != 0)
+        {
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.RUN);
+        }
+        else if (_horizontalMove == 0)
+        {
+            myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.IDLE);
+        }
         controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, _downJump);
         _jump = false;
 
@@ -164,5 +211,10 @@ public class PlayerController : MonoBehaviour
         {
             curShield.Use(false);
         }
+    }
+
+    private void UpdateAnimator()
+    {
+        
     }
 }

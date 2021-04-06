@@ -6,4 +6,6 @@ public class Blackboard : MonoBehaviour
 {
     public static CommonVariable commonVariable = new CommonVariable();
     
+    
+    
 }
