@@ -68,12 +68,12 @@ public class Bullet : MonoBehaviour
         isShooting = true;
         if (isSightLeft)
         {
-            Debug.Log("L");
+
             rigid.AddForce(transform.right * -1f * speed * Time.deltaTime, ForceMode2D.Impulse);
         }
         else
         {
-            Debug.Log("R");
+
             rigid.AddForce(transform.right * speed * Time.deltaTime, ForceMode2D.Impulse);
         }
 
