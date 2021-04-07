@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
 
             curShield.Use(true);
             curShield.Throw();
+            //SoundManager._snd.RandomSfxCall(_playerAudioSource, 12, 18);
             GameManager.instance.shieldManager.throwShield(this, player, curShield);
             curShield = null;
 

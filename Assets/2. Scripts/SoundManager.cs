@@ -97,18 +97,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void SfxCall(AudioSource caller, int number)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                caller.volume = caller.volume * SfxVol;
-                caller.clip = sfxClips[number];
-                caller.Play();
-            }
-            else
-            {
-                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
-            }
+            caller.volume = caller.volume * SfxVol;
+            caller.clip = sfxClips[number];
+            caller.Play();
+        }
+        else
+        {
+            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
         }
     }
 
@@ -120,16 +118,14 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void InstantSfxCall(AudioSource caller, int number)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
-            }
-            else
-            {
-                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
-            }
+            caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
+        }
+        else
+        {
+            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
         }
     }
 
@@ -142,16 +138,14 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume">효과음 음량(0.0f ~ 1.0f)</param>
     public void InstantSfxCall(AudioSource caller, int number, float volume)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
-            }
-            else
-            {
-                Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
-            }
+            caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
+        }
+        else
+        {
+            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
         }
     }
 
@@ -266,18 +260,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void SfxPlay(int number)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                sfxSource.clip = sfxClips[number];
-                sfxSource.loop = false;
-                sfxSource.Play();
-            }
-            else
-            {
-                Debug.Log("잘못된 효과음 번호입니다.");
-            }
+            sfxSource.clip = sfxClips[number];
+            sfxSource.loop = false;
+            sfxSource.Play();
+        }
+        else
+        {
+            Debug.Log("잘못된 효과음 번호입니다.");
         }
     }
 
@@ -289,18 +281,16 @@ public class SoundManager : MonoBehaviour
     /// <param name="loop"> 루프 여부 </param>
     public void SfxPlay(int number, bool loop)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                sfxSource.clip = sfxClips[number];
-                sfxSource.loop = loop;
-                sfxSource.Play();
-            }
-            else
-            {
-                Debug.Log("잘못된 효과음 번호입니다.");
-            }
+            sfxSource.clip = sfxClips[number];
+            sfxSource.loop = loop;
+            sfxSource.Play();
+        }
+        else
+        {
+            Debug.Log("잘못된 효과음 번호입니다.");
         }
     }
 
@@ -349,16 +339,14 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void InstantSfxPlay(int number)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                sfxSource.PlayOneShot(sfxClips[number]);
-            }
-            else
-            {
-                Debug.Log("잘못된 효과음 번호입니다.");
-            }
+            sfxSource.PlayOneShot(sfxClips[number]);
+        }
+        else
+        {
+            Debug.Log("잘못된 효과음 번호입니다.");
         }
     }
 
@@ -369,17 +357,85 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"> 효과음 음량(0.0f ~ 1.0f) </param>
     public void InstantSfxPlay(int number, float volume)
     {
-        if (!sfxMuted)
+        if (!sfxMuted) return;
+        if (number < sfxClips.Length && number >= 0)
         {
-            if (number < sfxClips.Length && number >= 0)
-            {
-                sfxSource.PlayOneShot(sfxClips[number], volume);
-            }
-            else
-            {
-                Debug.Log("잘못된 효과음 번호입니다.");
-            }
+            sfxSource.PlayOneShot(sfxClips[number], volume);
         }
+        else
+        {
+            Debug.Log("잘못된 효과음 번호입니다.");
+        }
+    }
+
+    /// <summary>
+    /// 지정한 범위 내에서 랜덤한 글로벌 효과음을 재생합니다. 인스턴트 여부를 선택 가능합니다.
+    /// </summary>
+    /// <param name="rangeStart"> 효과음 범위 시작 번호(포함) </param>
+    /// <param name="rangeEnd"> 효과음 범위 종료 번호(포함) </param>
+    /// <param name="instant"> True 일 경우 인스턴트로 재생 </param>
+    public void RandomSfxPlay(int rangeStart, int rangeEnd, bool instant)
+    {
+        if (sfxMuted) return;
+
+        var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
+
+        if (instant)
+        {
+            InstantSfxPlay(sfxOutput);
+        }
+        else
+        {
+            SfxPlay(sfxOutput);
+        }
+    }
+
+    /// <summary>
+    /// 지정한 범위 내에서 랜덤한 글로벌 효과음을 재생합니다.
+    /// </summary>
+    /// <param name="rangeStart"> 효과음 범위 시작 번호(포함) </param>
+    /// <param name="rangeEnd"> 효과음 범위 종료 번호(포함) </param>
+    public void RandomSfxPlay(int rangeStart, int rangeEnd)
+    {
+        if (sfxMuted) return;
+        var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
+        SfxPlay(sfxOutput);
+    }
+
+    /// <summary>
+    /// 지정한 범위 내에서 랜덤한 로컬 효과음을 지정한 AudioSource에서 재생합니다. 인스턴트 여부를 선택 가능합니다.
+    /// </summary>
+    /// <param name="rangeStart"> 효과음 범위 시작 번호(포함) </param>
+    /// <param name="rangeEnd"> 효과음 범위 종료 번호(포함) </param>
+    /// <param name="caller"> 효과음을 출력할 AudioSource </param>
+    /// <param name="instant"> True 일 경우 인스턴트로 재생 </param>
+    public void RandomSfxCall(AudioSource caller, int rangeStart, int rangeEnd, bool instant)
+    {
+        if (sfxMuted) return;
+
+        var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
+
+        if (instant)
+        {
+            InstantSfxCall(caller, sfxOutput);
+        }
+        else
+        {
+            SfxCall(caller, sfxOutput);
+        }
+    }
+
+    /// <summary>
+    /// 지정한 범위 내에서 랜덤한 로컬 효과음을 지정한 AudioSource에서 재생합니다.
+    /// </summary>
+    /// <param name="rangeStart"> 효과음 범위 시작 번호(포함) </param>
+    /// <param name="rangeEnd"> 효과음 범위 종료 번호(포함) </param>
+    /// <param name="caller"> 효과음을 출력할 AudioSource </param>
+    public void RandomSfxCall(AudioSource caller, int rangeStart, int rangeEnd)
+    {
+        if (sfxMuted) return;
+        var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
+        SfxCall(caller, sfxOutput);
     }
 
     // 씬 시작 직전에 스태틱 필드에 _snd를 넣고, AudioSource, AudioListener를 찾고 할당함
@@ -447,10 +503,9 @@ public class SoundManager : MonoBehaviour
     {
         currentTrackNo = currentTrackNo + trackTo;
         currentTrackNo = Mathf.Clamp(currentTrackNo, 0, musClips.Length - 1);
-        string currentTrackNotice = "현재 곡 번호는 " + currentTrackNo.ToString() + " 번입니다.";
-        Debug.Log(currentTrackNotice);
+        Debug.Log("현재 곡 번호는 " + currentTrackNo.ToString() + " 번입니다.");
 
-        musSource.Pause();
+        musSource.Pause(); // 이 메서드 잘 작동하는지 모르겠는데 나중에 검토해봐야 할 듯, 정확한 용도는 무엇인지?
         MusPlay(currentTrackNo, true);
     }
 
@@ -461,6 +516,7 @@ public class SoundManager : MonoBehaviour
         {
             case KeyCode.Alpha1:
                 AudioListener.pause = AudioListener.pause == true ? false : true;
+                sfxMuted = AudioListener.pause;
                 Debug.Log("AudioListener 음소거 상태 : " + AudioListener.pause.ToString());
                 break;
             case KeyCode.Alpha2:
