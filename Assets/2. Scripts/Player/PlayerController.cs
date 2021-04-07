@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _jump = false;
     private bool _downJump = false;
     private bool _isMaking = false;
+    private bool _isTrigger = false; // jump, dash할 때 true
     private bool _haveShield = true; // 방패 소유의 여부
         
     private float _curDashCool = 0;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
             _jump = true;
             
             myAnimator.SetTrigger("MoveTrigger");
+            _isTrigger = true;
             myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.JUMP);
         }
 
@@ -73,6 +75,7 @@ public class PlayerController : MonoBehaviour
             _curDashCool = dashCool - shield_passive_dashcooldown;
             
             myAnimator.SetTrigger("MoveTrigger");
+            _isTrigger = true;
             myAnimator.SetFloat("MoveType", (float)CommonVariable.MoveType.DASH);
         }
 
@@ -164,6 +167,11 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveType()
     {
+        if (_isTrigger)
+        {
+            StartCoroutine("SetMoveType");
+            return;
+        }
         if (_haveShield)
         {
             if (_horizontalMove != 0)
@@ -190,6 +198,13 @@ public class PlayerController : MonoBehaviour
                 myAnimator.SetBool("isWalking", false);
             }
         }
+    }
+
+    private IEnumerator SetMoveType()
+    {
+        
+        yield return new WaitForSeconds(0.5f);
+        _isTrigger = false;
     }
 
     private IEnumerator ProcessMakingShield(ShieldMaterial mat)
