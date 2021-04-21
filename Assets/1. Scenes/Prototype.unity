@@ -4037,6 +4037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roaming enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1568787864855939639, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
 --- !u!1001 &7131391762879528159
