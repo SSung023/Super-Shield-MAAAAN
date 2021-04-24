@@ -43,6 +43,7 @@ public class CharacterController2D : MonoBehaviour
     public class BoolEvent : UnityEvent<bool> { }
 
     public int shield_passive_jumpbonus = 0;
+    
 
     private void Awake()
     {
@@ -70,7 +71,7 @@ public class CharacterController2D : MonoBehaviour
             if (groundColliders[i].gameObject != gameObject)
             {
                 m_Grounded = true;
-                if (!wasGrounded)
+                if (jumpCount > 0)
                 {
                     jumpCount = 0;
                     OnLandEvent.Invoke();
@@ -126,12 +127,16 @@ public class CharacterController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0);
-            jumpCount++;
+            StartCoroutine(jumpCountUp());
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
     }
-
+    IEnumerator jumpCountUp()
+    {
+        yield return new WaitForSeconds(0.05f);
+        jumpCount++;
+    }
     IEnumerator controlDownGround()
     {
         Collider2D[] cols = groundColliders;
