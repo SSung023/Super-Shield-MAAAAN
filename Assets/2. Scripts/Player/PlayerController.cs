@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
         
     private float _curDashCool = 0;
     public float dashCool = 5f;
+    private float shieldResetTime = 0.3f; // 해당 시간이 지난 이후 shield가 -1(활성화가 안된 상태)로 변환
+    private float shieldStandbyTime;
+    
     public Transform[] shieldT = new Transform[4];
     public Shield curShield;
     private int _curShieldT = -1;
@@ -54,6 +57,9 @@ public class PlayerController : MonoBehaviour
         _horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed * shield_passive_speed;
         
         UpdateMoveType();
+        
+        resetShieldNum();
+        
         myAnimator.SetFloat("Direction", _horizontalMove);
         facingRight = Mathf.Sign(player.transform.localScale.x);
 
@@ -162,6 +168,19 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.instance.setGameState(GameManager.State.play);
             }
+        }
+    }
+    private void resetShieldNum()
+    {
+        if (shieldStandbyTime <= 0)
+        {
+            _curShieldT = -1;
+            myAnimator.SetFloat("ShieldNum", _curShieldT); // -1 : shield 활성화 x
+            shieldStandbyTime = shieldResetTime;
+        }
+        else
+        {
+            shieldStandbyTime -= Time.deltaTime;
         }
     }
 
