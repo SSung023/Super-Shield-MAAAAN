@@ -13,9 +13,17 @@ public class Shield : MonoBehaviour
     [SerializeField] private float throwingSpeed = 5.0f;
     private bool isThrown = false;
     private bool isCollided = false;
+    protected BoxCollider2D collider;
 
     public int shield_memory_durability = 0;
     public int shield_passive_throwdamege = 0;
+    private void Awake()
+    {
+        collider = GetComponent<BoxCollider2D>();
+        collider.isTrigger = true;
+ 
+    }
+
     private void FixedUpdate()
     {
         if (isThrown)
