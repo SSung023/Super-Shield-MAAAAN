@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private bool _isMaking = false;
     private bool _isTrigger = false; // jump, dash할 때 true
     private bool _haveShield = true; // 방패 소유의 여부
+    private bool _isShieldOn = true; // 방패가 켜져있나의 여부
         
     private float _curDashCool = 0;
     public float dashCool = 5f;
@@ -128,10 +129,10 @@ public class PlayerController : MonoBehaviour
         }
 
         
-        var isShieldUp = true;
+        _isShieldOn = true;
         
         myAnimator.SetBool("haveShield", _haveShield);
-        myAnimator.SetBool("isShieldOn", !isShieldUp);
+        myAnimator.SetBool("isShieldOn", !_isShieldOn);
 
         for (var i = 0; i < 4; i++)
         {
@@ -140,19 +141,19 @@ public class PlayerController : MonoBehaviour
                 _curShieldT = i;
                 myAnimator.SetFloat("ShieldNum", _curShieldT); // 0~3
                 curShield.Use(true);
-                isShieldUp = false;
+                _isShieldOn = false;
                 
-                myAnimator.SetBool("isShieldOn", !isShieldUp);
+                myAnimator.SetBool("isShieldOn", !_isShieldOn);
                 
             }
 
             if (Input.GetButtonUp("Shield_" + i.ToString()))
             {
-                myAnimator.SetBool("isShieldOn", !isShieldUp);
-                isShieldUp = true;
+                myAnimator.SetBool("isShieldOn", !_isShieldOn);
+                _isShieldOn = true;
             }
         }
-        if (isShieldUp) _curShieldT = -1;
+        if (_isShieldOn) _curShieldT = -1;
 
         if(Input.GetKeyDown(KeyCode.F1))
         {
@@ -240,7 +241,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, _downJump);
+        controller.Move(_horizontalMove * Time.fixedDeltaTime, _jump, _downJump, _isShieldOn);
         _jump = false;
 
         if(_curDashCool != 0) 

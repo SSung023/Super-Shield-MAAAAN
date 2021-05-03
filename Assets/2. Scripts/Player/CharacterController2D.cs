@@ -99,7 +99,7 @@ public class CharacterController2D : MonoBehaviour
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
         }
     }
-    public void Move(float move, bool jump, bool downJump)
+    public void Move(float move, bool jump, bool downJump, bool isShieldOn)
     {
 
         //only control the player if grounded or airControl is turned on
