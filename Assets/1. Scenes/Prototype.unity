@@ -834,6 +834,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maaaaaaaaan_normal_v00
       objectReference: {fileID: 0}
+    - target: {fileID: 8698137438858802358, guid: 12e5a7d63171262418099ca8aa5cc1f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 6257320001505543764, guid: 12e5a7d63171262418099ca8aa5cc1f9, type: 3}
 --- !u!1 &470252327 stripped
@@ -4352,7 +4356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1430795770691483980, guid: a4608e963d9ad3343aaa0790a8a88180, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2214095848237184724, guid: a4608e963d9ad3343aaa0790a8a88180, type: 3}
       propertyPath: m_Layer
