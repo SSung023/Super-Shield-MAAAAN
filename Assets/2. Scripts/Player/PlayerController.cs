@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -139,10 +140,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Shield_" + i.ToString()) && curShield != null)
             {
                 _curShieldT = i;
-                myAnimator.SetFloat("ShieldNum", _curShieldT); // 0~3
+
+                if (facingRight == 1) // 오른쪽
+                {
+                    myAnimator.SetFloat("ShieldNum", _curShieldT); // 0~3
+                }
+                else if (facingRight == -1) // 왼쪽
+                {
+                    float tmp = Math.Abs(3 - _curShieldT);
+                    myAnimator.SetFloat("ShieldNum", tmp); // 0~3
+                }
+                
                 curShield.Use(true);
                 _isShieldOn = false;
-                
                 myAnimator.SetBool("isShieldOn", !_isShieldOn);
                 
             }
