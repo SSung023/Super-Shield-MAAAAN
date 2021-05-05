@@ -92,9 +92,15 @@ public class PlayerController : MonoBehaviour
             var mats = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
                 where col.gameObject.layer == 12
                 select col.GetComponent<ShieldMaterial>()).ToArray();
-            if(mats.Length != 0) StartCoroutine(ProcessMakingShield(mats.First()));
+            if (mats.Length != 0)
+            {
+                myAnimator.SetTrigger("MakeShield");
+                _haveShield = true;
+                StartCoroutine(ProcessMakingShield(mats.First()));
+            }
             else print("실패!");
-
+            
+            
         }
 
 

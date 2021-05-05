@@ -12,13 +12,15 @@ public class Player : MonoBehaviour
     public bool shield_memory_barrier = false;
     public int shield_memory_maxhealth = 0;
 
-
+    private Animator myAnimator;
 
     private void Awake()
     {
         health = maxHealth;
         invCor = GetInv(0);
         GameManager.instance.gameReset();//일단 임시로 여기에 게임 리셋을 넣어둠
+
+        myAnimator = GetComponent<Animator>();
     }
     public void TakeHit(int damage)
     {
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour
         {
             return;
         }
+        myAnimator.SetTrigger("OnHit");
         if(shield_memory_barrier)
         {
             shield_memory_barrier = false;
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = Color.black;
             //Time.timeScale = 0;
+            myAnimator.SetTrigger("OnDeath");
             GameManager.instance.setGameState(GameManager.State.gameover);
         }
     }
