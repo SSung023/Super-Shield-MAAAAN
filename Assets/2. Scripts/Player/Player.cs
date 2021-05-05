@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    /*public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Interactable"))
         {
@@ -84,5 +84,5 @@ public class Player : MonoBehaviour
             color.a = 0.6f;
             spr.material.color = color;
         }
-    }
+    }*/
 }

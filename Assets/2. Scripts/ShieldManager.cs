@@ -25,11 +25,11 @@ public class ShieldManager
         }
     }
 
-    public void makeRandomShield(PlayerController controller, Player player, Shield shield)
+    public void makeShield(PlayerController controller, Player player, Shield shield, int debuff, int passive, int level)
     {
-        shield_debuff_num = Random.Range(0, 4); //디버프 종류
-        shield_passive_num = Random.Range(0, 5); //패시브 종류
-        shield_level_num = Random.Range(0, 4); //등급
+        shield_debuff_num = debuff; //디버프 종류
+        shield_passive_num = passive; //패시브 종류
+        shield_level_num = level; //등급
         //일단 임시 수치를 넣어둠
 
         //패시브 효과 적용
@@ -80,9 +80,9 @@ public class ShieldManager
 
         shield.Root();
 
-        Debug.Log("debuff: " +shield_debuff_num);
-        Debug.Log("passive: " + shield_passive_num);
-        Debug.Log("level: " + shield_level_num);
+        Debug.Log("Hold debuff: " +shield_debuff_num);
+        Debug.Log("Hold passive: " + shield_passive_num);
+        Debug.Log("Hold level: " + shield_level_num);
 
 
 

@@ -527,14 +527,19 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 512
+  m_WhatIsDownGround:
+    serializedVersion: 2
+    m_Bits: 0
   m_GroundCheck: {fileID: 124379317}
   m_CeilingCheck: {fileID: 57336261}
+  m_PlayerCenter: {fileID: 0}
   m_dashDistance: 15
   maxJumpCount: 2
   shieldT: {fileID: 533477596}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
+  shield_passive_jumpbonus: 0
 --- !u!212 &516218305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -681,6 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 516218304}
   player: {fileID: 516218311}
+  myAnimator: {fileID: 0}
   dashInvincibleTime: 1
   runSpeed: 15
   facingRight: 0
@@ -693,6 +699,8 @@ MonoBehaviour:
   - {fileID: 1394832207}
   curShield: {fileID: 1716706811}
   _playerAudioSource: {fileID: 516218312}
+  shield_passive_speed: 1
+  shield_passive_dashcooldown: 0
 --- !u!114 &516218311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +716,8 @@ MonoBehaviour:
   health: 5
   maxHealth: 5
   isInvincible: 0
+  shield_memory_barrier: 0
+  shield_memory_maxhealth: 0
 --- !u!82 &516218312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2454,6 +2464,71 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1001 &1673585018
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: canMake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617219, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7131391761961617222, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Name
+      value: ShieldMaterial (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a74907657d90f944ea99dfdf36590538, type: 3}
 --- !u!1 &1684468458 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 745819995194084471, guid: 0a014b48c2bd8674da932a3056048f05, type: 3}
@@ -2529,6 +2604,7 @@ MonoBehaviour:
   curHealth: 0
   maxHealth: 5
   isSightLeft: 0
+  shield_debuff_speed: 1
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0

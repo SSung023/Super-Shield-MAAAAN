@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public float shield_passive_speed = 1f;
     public float shield_passive_dashcooldown = 0f;
 
+    private GameObject overlapObject;
 
     private void Awake()
     {
@@ -89,7 +90,13 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Make") && curShield == null) //방패를 만드는 입력
         {
-            var mats = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
+            if(overlapObject != null && overlapObject.gameObject.layer == 12)
+            {
+                myAnimator.SetTrigger("MakeShield");
+                _haveShield = true;
+                StartCoroutine(ProcessMakingShield(overlapObject.GetComponent<ShieldMaterial>()));
+            }
+            /*(var mats = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
                 where col.gameObject.layer == 12
                 select col.GetComponent<ShieldMaterial>()).ToArray();
             if (mats.Length != 0)
@@ -99,7 +106,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(ProcessMakingShield(mats.First()));
             }
             else print("실패!");
-            
+            */
             
         }
 
@@ -125,14 +132,23 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Root") && curShield == null)
         {
-            var items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
+            if (overlapObject != null && overlapObject.gameObject.layer == 11)
+            {
+                ShieldItem itemScript = overlapObject.GetComponent<ShieldItem>();
+                curShield = Instantiate(itemScript.GetItem(), shieldT[0].parent);
+                GameManager.instance.shieldManager.makeShield(this, player, curShield, itemScript.shield_debuff_num, itemScript.shield_passive_num, itemScript.shield_level_num);
+
+            }
+            /*var items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
                 where col.gameObject.layer == 11
                 select col.GetComponent<ShieldItem>()).ToArray();
             if (items.Length != 0)
             {
                 curShield = Instantiate(items.First().GetItem(), shieldT[0].parent);
-                GameManager.instance.shieldManager.makeRandomShield(this, player, curShield);
+                ShieldItem itemScript = items.First();
+                GameManager.instance.shieldManager.makeShield(this, player, curShield, itemScript.shield_debuff_num, itemScript.shield_passive_num, itemScript.shield_level_num);
             }
+            */
         }
 
         
@@ -274,5 +290,73 @@ public class PlayerController : MonoBehaviour
         {
             curShield.Use(false);
         }
+    }
+
+    public void OnTriggerStay2D(Collider2D other)
+    {
+
+        SpriteRenderer spr;
+        Color color;
+
+        if (overlapObject != null)
+        {
+            spr = overlapObject.GetComponent<SpriteRenderer>();
+
+            color = spr.material.color;
+            color.a = 0.6f;
+            spr.material.color = color;
+            overlapObject = null;
+        }
+
+        GameObject[] items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
+                              where col.gameObject.CompareTag("Interactable")
+                              select col.gameObject).ToArray();
+
+        if (items.Length != 0)
+        {
+            GameObject shortObject = items.First();
+            float shortDistance = 100;
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                float dis = Vector2.Distance(itemCheck.transform.position, items[i].transform.position);
+                if (shortDistance > dis)
+                {
+                    shortObject = items[i];
+                    shortDistance = dis;
+                }
+            }
+            overlapObject = shortObject;
+
+            spr = overlapObject.GetComponent<SpriteRenderer>();
+
+            color = spr.material.color;
+            color.a = 1f;
+            spr.material.color = color;
+
+            if(overlapObject.gameObject.layer == 11)
+            {
+                ShieldItem tempItem =  overlapObject.GetComponent<ShieldItem>();
+                Debug.Log("Hold debuff: " + tempItem.shield_debuff_num);
+                Debug.Log("Hold passive: " + tempItem.shield_passive_num);
+                Debug.Log("Hold level: " + tempItem.shield_level_num);
+            }
+        }
+        
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        SpriteRenderer spr;
+        Color color;
+        if (overlapObject != null)
+        {
+            spr = overlapObject.GetComponent<SpriteRenderer>();
+
+            color = spr.material.color;
+            color.a = 0.6f;
+            spr.material.color = color;
+        }
+        overlapObject = null;
+        
     }
 }

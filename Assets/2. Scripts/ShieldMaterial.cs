@@ -18,8 +18,17 @@ public class ShieldMaterial : MonoBehaviour
         if (_curMakingTime >= makingTime)
         {
             isMaking = false;
+
+            int debuff = Random.Range(0, 4); //디버프 종류
+            int passive = Random.Range(0, 5); //패시브 종류
+            int level = Random.Range(0, 4); //등급
+
             var tmp = Instantiate(myItem, this.transform);
             tmp.transform.SetParent(null);
+
+            ShieldItem item = tmp.GetComponent<ShieldItem>();
+            item.randomShieldSet(debuff, passive, level);
+
             Destroy(gameObject);
         }
     }
