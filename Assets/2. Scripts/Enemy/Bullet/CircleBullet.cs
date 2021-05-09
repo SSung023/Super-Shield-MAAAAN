@@ -9,8 +9,6 @@ public class CircleBullet : MonoBehaviour
     [HideInInspector] public CeilingEnemy mother;
     public LayerMask isLayer;
     private Rigidbody2D rigid;
-    private Vector3 targetPoint;
-    private Vector3 shootDirection;
     
     private RaycastHit2D raycast;
 
@@ -18,7 +16,7 @@ public class CircleBullet : MonoBehaviour
     public float distance;
     public int damage = 1;
 
-
+    private Vector2 shootDir;
 
     private void Awake()
     {
@@ -29,10 +27,7 @@ public class CircleBullet : MonoBehaviour
     {
         Invoke("DestroyBullet", 1f);
         
-        targetPoint = new Vector3(mother.collider2D.gameObject.transform.position.x,
-            mother.collider2D.gameObject.transform.position.y - 0.8f);
-
-        shootDirection = (targetPoint - mother.bulletGeneratePos.position).normalized;
+        shootDir = (GameManager.Player.transform.position - this.gameObject.transform.position).normalized;
     }
     
     
@@ -68,7 +63,7 @@ public class CircleBullet : MonoBehaviour
         else
         {
             //계속 이동 시키다가 땅을 만나면 destroy
-            transform.Translate(shootDirection * Time.deltaTime * speed);
+            transform.Translate(shootDir * Time.deltaTime * speed);
         }
     }
 

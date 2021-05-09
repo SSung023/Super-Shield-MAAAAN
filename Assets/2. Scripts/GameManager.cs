@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private State GameState = State.play;
     private int thisStage = 0;
     public ShieldManager shieldManager;
+    public static GameObject Player;
 
     private void Awake()
     {

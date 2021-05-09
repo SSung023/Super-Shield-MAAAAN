@@ -73,7 +73,7 @@ public class Enemy : ShieldMaterial
         }
         else if (debuffNum == 3)
         {
-            StartCoroutine(shieldDebuffGroggy());
+            shieldDebuffGroggy();
         }
 
         if (endHealth < 0)
@@ -157,16 +157,18 @@ public class Enemy : ShieldMaterial
         }
     }
 
-    protected virtual IEnumerator TurnGroggyMode(Transform _transform)
+    protected virtual IEnumerator TurnGroggyMode(Transform _transform, float time, bool isStern)
     {
         _transform.GetComponent<SpriteRenderer>().color = Color.yellow;
         gameObject.layer = LayerMask.NameToLayer("ShieldMaterial");
-        yield return new WaitForSeconds(maxStunTime);
+        yield return new WaitForSeconds(time);
         gameObject.layer = LayerMask.NameToLayer("Enemy");
-        
+
         isGroggy = false;
-        groggyCount++;
-        
+        if (!isStern)
+        {
+            groggyCount++;
+        }
         Debug.Log("그로기 상태에서 빠져나옴");
         _transform.GetComponent<SpriteRenderer>().color = Color.white;
     }
@@ -230,10 +232,9 @@ public class Enemy : ShieldMaterial
             yield return new WaitForSeconds(0.5f);
         }
     }
-    IEnumerator shieldDebuffGroggy()
+    private void shieldDebuffGroggy()
     {
-        isGroggy = true;
-        yield return new WaitForSeconds(GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num] * 0.1f);
-        isGroggy = false;
+        float sternTime = GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num] * 0.1f;
+        StartCoroutine(TurnGroggyMode(transform, sternTime, false));
     }
 }

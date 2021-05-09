@@ -9,13 +9,12 @@ public class Bullet : MonoBehaviour
     protected Rigidbody2D rigid;
 
     private bool isShooting;
-    private bool isSightLeft;
     
     public float speed;
     public float distance;
     public int damage = 1;
 
-
+    private Vector2 shootDir;
 
     private void Awake()
     {
@@ -26,7 +25,7 @@ public class Bullet : MonoBehaviour
     {
         Invoke("DestroyBullet", 1.5f);
         isShooting = false;
-        isSightLeft = mother.isSightLeft;
+        shootDir = (GameManager.Player.transform.position - this.gameObject.transform.position).normalized;
     }
     
     
@@ -62,20 +61,12 @@ public class Bullet : MonoBehaviour
 
     IEnumerator GoThrough()
     {
-        if (isShooting = true)
+        if (isShooting == true)
             yield return new WaitForSeconds(0.2f);
         
         isShooting = true;
-        if (isSightLeft)
-        {
-
-            rigid.AddForce(transform.right * -1f * speed * Time.deltaTime, ForceMode2D.Impulse);
-        }
-        else
-        {
-
-            rigid.AddForce(transform.right * speed * Time.deltaTime, ForceMode2D.Impulse);
-        }
+        rigid.AddForce(shootDir * speed * Time.deltaTime, ForceMode2D.Impulse);
+       
 
         yield return new WaitForSeconds(0.7f);
         isShooting = false;

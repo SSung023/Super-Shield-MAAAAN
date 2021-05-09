@@ -52,7 +52,7 @@ public class GroundEnemy : Enemy
             CheckBulletMode();
             if (isGroggy)
             {
-                StartCoroutine(TurnGroggyMode(transform));
+                StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
             }
             else
             {
