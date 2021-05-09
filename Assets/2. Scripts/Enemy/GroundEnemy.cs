@@ -34,9 +34,6 @@ public class GroundEnemy : Enemy
         isPause = false;
 
         bulletCoolTime = 1f;
-        
-        detectionDistance = 6f;
-        atkDistance = 5f;
 
         maxStunTime = 2f;
         stunHealth = 2;

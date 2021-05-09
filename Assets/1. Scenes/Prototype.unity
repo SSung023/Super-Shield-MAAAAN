@@ -4108,6 +4108,8 @@ MonoBehaviour:
   myItem: {fileID: 0}
   detectionPos: {fileID: 745819996731195038}
   detectionBoxSize: {x: 6.65, y: 4.57}
+  detectionDistance: 0
+  atkDistance: 0
   collider2D: {fileID: 0}
   isLayer:
     serializedVersion: 2
@@ -5498,7 +5500,7 @@ PrefabInstance:
       objectReference: {fileID: 1917309428}
     - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: detectionBoxSize.x
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: detectionBoxSize.y
@@ -5506,7 +5508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: explosionSize.x
-      value: 6.06
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: explosionSize.y
@@ -5516,6 +5518,14 @@ PrefabInstance:
       propertyPath: coin
       value: 
       objectReference: {fileID: 7360694575416504724, guid: 2573aa4911322c644a45f48f08735d37, type: 3}
+    - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
+      propertyPath: detectionDistance
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491055085, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
+      propertyPath: atkDistance
+      value: 7.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1568787863585218598, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.316576
@@ -5562,7 +5572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1568787863895581244, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.57
+      value: -15.35
       objectReference: {fileID: 0}
     - target: {fileID: 1568787863895581244, guid: 077ef0f264adb9344a6b02c94d3c39e3, type: 3}
       propertyPath: m_LocalPosition.y

@@ -14,6 +14,8 @@ public class Enemy : ShieldMaterial
     [Header("Range")]
     [SerializeField] protected Transform detectionPos; // OverlapBox 위치
     [SerializeField] protected Vector2 detectionBoxSize; // OverlapBox의 size
+    [SerializeField]protected float detectionDistance;
+    [SerializeField]protected float atkDistance;
     [HideInInspector] public Collider2D collider2D;
     [SerializeField] protected LayerMask isLayer; //OverlapBox가 적용될 Layer
     [SerializeField] protected Vector2 explosionSize; // OverlapBox의 size
@@ -44,9 +46,6 @@ public class Enemy : ShieldMaterial
     protected GameObject hpBarMother;
     public int maxHealth;
     protected int stunHealth;
-
-    protected float detectionDistance;
-    protected float atkDistance;
 
     protected float currentTime;
     protected float maxStunTime;
