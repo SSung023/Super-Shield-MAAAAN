@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class CeilingEnemy : Enemy
+public class CeilingEnemy : Roam
 {
-    
+    [SerializeField] protected float explosionDistance;
     private void Awake()
     {
         hpBarMother = mother.transform.GetChild(1).gameObject;
         bulletGeneratePos = transform.GetChild(0);
-        detectionPos = transform.GetChild(1);
     }
     
     private void Start()
@@ -18,38 +17,45 @@ public class CeilingEnemy : Enemy
         isGroggy = false;
 
         bulletCoolTime = 1f;
-        
-        detectionDistance = 4.5f;
-        atkDistance = 3f;
 
         maxStunTime = 2f;
         stunHealth = 2;
         maxHealth = 5;
         curHealth = maxHealth;
     }
-
     
     private void Update()
     {
-        Detect();
-        CheckBulletMode();
-        if (isGroggy)
+        // 쉴드 상태가 아니고 일시정지 모드가 아닌 경우
+        if (!isShield && !isPause)
         {
-            StartCoroutine(TurnGroggyMode(transform, 2.0f , false));
+            Detect(); // 플레이어가 범위 안에 있는지 확인
+            CheckBulletMode();
+            if (isGroggy)
+            {
+                StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
+            }
+            else
+            {
+                if (isDetected)
+                {
+                    Attack();
+                }
+                else
+                {
+                    Roaming();
+                }
+            }
         }
         else
         {
-            if (isDetected)
-            {
-                Attack();
-            }
+            hpBarMother.SetActive(false);
         }
     }
-    
     protected override void Detect()
     {
         // 특정 영역에 있는 Player 감지
-        collider2D = Physics2D.OverlapBox(detectionPos.position, detectionBoxSize, 0, isLayer);
+        collider2D = Physics2D.OverlapCircle(transform.position, detectionDistance, isLayer);
         if (collider2D != null)
         {
             isDetected = true;
@@ -64,27 +70,28 @@ public class CeilingEnemy : Enemy
     protected override void Attack()
     {
         // atkDistance 안에 있으면 bullet 생성
-        if (currentTime <= 0)
+        if (Vector2.Distance(transform.position, collider2D.transform.position) < atkDistance)
         {
-            CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.position, transform.rotation);
-            bulletCopy.mother = this;
-            currentTime = bulletCoolTime;
+            if (currentTime <= 0)
+            {
+                CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.position, transform.rotation);
+                bulletCopy.mother = this;
+                currentTime = bulletCoolTime;
+            }
         }
-        // if (Vector2.Distance(transform.position, collider2D.transform.position) < detectionDistance)
-        // {
-        //     if (currentTime <= 0)
-        //     {
-        //         CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.position, transform.rotation);
-        //         bulletCopy.mother = this;
-        //         currentTime = bulletCoolTime;
-        //     }
-        // }
+        else
+        {
+            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y);
+            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed * shield_debuff_speed);
+        }
         currentTime -= Time.deltaTime;
     }
     
-    protected void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube(detectionPos.position, detectionBoxSize);
+        Gizmos.DrawWireSphere(transform.position, detectionDistance);
+        Gizmos.DrawWireSphere(transform.position, atkDistance);
+        Gizmos.DrawWireSphere(transform.position, explosionDistance);
     }
 }

@@ -11,15 +11,6 @@ public enum Mode
 }
 public class Enemy : ShieldMaterial
 {
-    [Header("Range")]
-    [SerializeField] protected Transform detectionPos; // OverlapBox 위치
-    [SerializeField] protected Vector2 detectionBoxSize; // OverlapBox의 size
-    [SerializeField]protected float detectionDistance;
-    [SerializeField]protected float atkDistance;
-    [HideInInspector] public Collider2D collider2D;
-    [SerializeField] protected LayerMask isLayer; //OverlapBox가 적용될 Layer
-    [SerializeField] protected Vector2 explosionSize; // OverlapBox의 size
-    
     [Header("Bullet")]
     public Mode bulletMode;
     [HideInInspector] public Transform bulletGeneratePos; // bullet이 생성되는 지점
@@ -43,20 +34,28 @@ public class Enemy : ShieldMaterial
     [SerializeField] protected Image hpBar;
     [SerializeField] protected float speed;
     [HideInInspector] public int curHealth;
-    protected GameObject hpBarMother;
     public int maxHealth;
     protected int stunHealth;
+    public float shield_debuff_speed = 1f;
+    
+    [Header("Range")]
+    [SerializeField] protected LayerMask isLayer; //OverlapBox가 적용될 Layer
+    [SerializeField] protected Vector2 explosionSize; // OverlapBox의 size
+    [SerializeField] protected float detectionDistance;
+    [SerializeField] protected float atkDistance;
+    [HideInInspector] public Collider2D collider2D;
+    protected GameObject hpBarMother;
+    
 
     protected float currentTime;
     protected float maxStunTime;
-
     protected bool isPause = false; // 
     protected bool isDetected;
     protected bool isGroggy = false;
     protected int groggyCount = 0;
     [HideInInspector] public bool isSightLeft;
 
-    public float shield_debuff_speed = 1f;
+    
 
     public void TakeHit(int damage)
     {

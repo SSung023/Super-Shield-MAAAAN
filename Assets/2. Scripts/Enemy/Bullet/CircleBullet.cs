@@ -54,15 +54,14 @@ public class CircleBullet : MonoBehaviour
                     mother.TakeHit(damage);
                 }
             }
-            else if (raycast.collider.tag == "Ground")
-            {
-                DestroyBullet();
-            }
+            // else if (raycast.collider.tag == "Ground")
+            // {
+            //     DestroyBullet();
+            // }
             DestroyBullet();
         }
         else
         {
-            //계속 이동 시키다가 땅을 만나면 destroy
             transform.Translate(shootDir * Time.deltaTime * speed);
         }
     }
