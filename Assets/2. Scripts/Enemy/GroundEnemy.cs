@@ -34,6 +34,8 @@ public class GroundEnemy : Roam
         curHealth = maxHealth;
 
         detectionBoxSize.x = detectionDistance;
+
+        isCeiling = false;
     }
 
     private void Update()
@@ -43,11 +45,12 @@ public class GroundEnemy : Roam
         {
             Detect(); // 플레이어가 범위 안에 있는지 확인
             CheckBulletMode();
-            if (isGroggy)
+            if (groggyTrigger)
             {
+                groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
             }
-            else
+            if(!isGroggy)
             {
                 if (isDetected)
                 {

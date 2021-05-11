@@ -22,6 +22,8 @@ public class CeilingEnemy : Roam
         stunHealth = 2;
         maxHealth = 5;
         curHealth = maxHealth;
+
+        isCeiling = true;
     }
     
     private void Update()
@@ -31,11 +33,12 @@ public class CeilingEnemy : Roam
         {
             Detect(); // 플레이어가 범위 안에 있는지 확인
             CheckBulletMode();
-            if (isGroggy)
+            if (groggyTrigger)
             {
+                groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
             }
-            else
+            if(!isGroggy)
             {
                 if (isDetected)
                 {

@@ -52,10 +52,11 @@ public class Enemy : ShieldMaterial
     protected bool isPause = false; // 
     protected bool isDetected;
     protected bool isGroggy = false;
+    protected bool groggyTrigger = false;
     protected int groggyCount = 0;
     [HideInInspector] public bool isSightLeft;
 
-    
+    protected bool isCeiling;
 
     public void TakeHit(int damage)
     {
@@ -86,13 +87,13 @@ public class Enemy : ShieldMaterial
         {
             if (groggyCount == 0) // 그로기 모드는 한 번만 돌입 가능
             {
-                isGroggy = true; // 그로기 상태로 변환
+                groggyTrigger = true; // 그로기 상태로 변환
                 Debug.Log("그로기 상태로 전환");
             }
         }
         if(curHealth == 0)
         {
-            isGroggy = true;
+            groggyTrigger = true;
             Die();
         }
     }
@@ -109,7 +110,7 @@ public class Enemy : ShieldMaterial
         
         if (curHealth == 0)
         {
-            isGroggy = true;
+            groggyTrigger = true;
             Die();
         }
     }
@@ -160,7 +161,26 @@ public class Enemy : ShieldMaterial
     {
         _transform.GetComponent<SpriteRenderer>().color = Color.yellow;
         gameObject.layer = LayerMask.NameToLayer("ShieldMaterial");
-        yield return new WaitForSeconds(time);
+        isGroggy = true;
+        if (isCeiling)
+        {
+            Vector2 tempVec = this.gameObject.transform.position;
+            print(tempVec);
+
+            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
+            yield return new WaitForSeconds(4.0f);
+            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+
+            for(int i = 0; i <= 50; i++)
+            {
+                yield return new WaitForSeconds(0.02f);
+                transform.position = Vector2.Lerp(gameObject.transform.position, tempVec, 0.02f * i);
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(time);
+        }
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
         isGroggy = false;
@@ -234,6 +254,6 @@ public class Enemy : ShieldMaterial
     private void shieldDebuffGroggy()
     {
         float sternTime = GameManager.instance.shieldManager.level_bonus_table[GameManager.instance.shieldManager.shield_level_num] * 0.1f;
-        StartCoroutine(TurnGroggyMode(transform, sternTime, false));
+        StartCoroutine(TurnGroggyMode(transform, sternTime, true));
     }
 }

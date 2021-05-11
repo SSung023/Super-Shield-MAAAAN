@@ -43,7 +43,6 @@ public class Player : MonoBehaviour
         health = endHealth;
         if(health == 0)
         {
-            GetComponent<SpriteRenderer>().color = Color.black;
             //Time.timeScale = 0;
             myAnimator.SetTrigger("OnDeath");
             GameManager.instance.setGameState(GameManager.State.gameover);
