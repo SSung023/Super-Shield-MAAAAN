@@ -13,6 +13,7 @@ public class ShieldMaterial : MonoBehaviour
     private float _curMakingTime = 0f;
     private void FixedUpdate()
     {
+        
         if (!isMaking) return;
         _curMakingTime += Time.fixedDeltaTime;
         if (_curMakingTime >= makingTime)
@@ -30,12 +31,13 @@ public class ShieldMaterial : MonoBehaviour
             item.randomShieldSet(debuff, passive, level);
 
             Destroy(gameObject);
+            print("a");
         }
     }
 
     public void MakeShield()
     {
-        myAnimator.SetTrigger("MakeShield");
+       // myAnimator.SetTrigger("MakeShield");
         isMaking = true;
         isShield = true;
     }

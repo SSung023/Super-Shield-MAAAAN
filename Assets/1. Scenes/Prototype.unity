@@ -476,6 +476,36 @@ Transform:
   m_Father: {fileID: 1349720611}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
+--- !u!1 &281964884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 281964885}
+  m_Layer: 8
+  m_Name: GroundCheck (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &281964885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281964884}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.100419395, z: -0.034286004}
+  m_LocalScale: {x: 0.0305292, y: 0.050636485, z: 0.13314377}
+  m_Children: []
+  m_Father: {fileID: 1684468459}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &285416685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,6 +1162,7 @@ MonoBehaviour:
   isInvincible: 0
   shield_memory_barrier: 0
   shield_memory_maxhealth: 0
+  m_PlayerCenter: {fileID: 1706183728}
 --- !u!4 &470252335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4921365433844922831, guid: 12e5a7d63171262418099ca8aa5cc1f9, type: 3}
@@ -1497,6 +1528,7 @@ MonoBehaviour:
   isInvincible: 0
   shield_memory_barrier: 0
   shield_memory_maxhealth: 0
+  m_PlayerCenter: {fileID: 0}
 --- !u!82 &516218312
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4166,6 +4198,11 @@ MonoBehaviour:
   - {fileID: 967512342}
   - {fileID: 1792544068}
   explosionDistance: 2.4
+  m_GroundCheck: {fileID: 281964885}
+  groundColliders: []
+  m_WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!50 &1684468462
 Rigidbody2D:
   serializedVersion: 4
@@ -4206,6 +4243,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1684468464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684468458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47088d0ee91e29344a528e3f1f2439f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myAnimator: {fileID: 1684468463}
+  isMaking: 0
+  makingTime: 3.5
+  myItem: {fileID: 4303902023918710302, guid: 5815c45441646af4992ce729fa88fb46, type: 3}
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -4770,6 +4823,7 @@ MonoBehaviour:
   isInvincible: 0
   shield_memory_barrier: 0
   shield_memory_maxhealth: 0
+  m_PlayerCenter: {fileID: 0}
 --- !u!58 &1771715335
 CircleCollider2D:
   m_ObjectHideFlags: 0

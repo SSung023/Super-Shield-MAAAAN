@@ -14,12 +14,15 @@ public class Player : MonoBehaviour
 
     private Animator myAnimator;
 
+    [SerializeField] private Transform m_PlayerCenter;
+
     private void Awake()
     {
         health = maxHealth;
         invCor = GetInv(0);
         GameManager.instance.gameReset();//일단 임시로 여기에 게임 리셋을 넣어둠
         GameManager.Player = this.gameObject;
+        GameManager.PlayerCenter = m_PlayerCenter;
 
         myAnimator = GetComponent<Animator>();
     }

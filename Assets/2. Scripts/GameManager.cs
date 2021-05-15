@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     private int thisStage = 0;
     public ShieldManager shieldManager;
     public static GameObject Player;
+    public static Transform PlayerCenter;
 
     private void Awake()
     {

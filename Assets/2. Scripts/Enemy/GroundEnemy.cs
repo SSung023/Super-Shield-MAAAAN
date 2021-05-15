@@ -48,7 +48,7 @@ public class GroundEnemy : Roam
             if (groggyTrigger)
             {
                 groggyTrigger = false;
-                StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
+                StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
             if(!isGroggy)
             {

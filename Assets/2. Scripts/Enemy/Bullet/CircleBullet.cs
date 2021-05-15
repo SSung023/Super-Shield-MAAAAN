@@ -27,7 +27,7 @@ public class CircleBullet : MonoBehaviour
     {
         Invoke("DestroyBullet", 1f);
         
-        shootDir = (GameManager.Player.transform.position - this.gameObject.transform.position).normalized;
+        shootDir = (GameManager.PlayerCenter.transform.position - this.gameObject.transform.position).normalized;
     }
     
     

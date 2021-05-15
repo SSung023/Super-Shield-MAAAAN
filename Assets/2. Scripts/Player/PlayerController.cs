@@ -309,7 +309,7 @@ public class PlayerController : MonoBehaviour
         }
 
         GameObject[] items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
-                              where col.gameObject.CompareTag("Interactable")
+                              where col.gameObject.CompareTag("Interactable") || col.gameObject.CompareTag("Enemy")
                               select col.gameObject).ToArray();
 
         if (items.Length != 0)

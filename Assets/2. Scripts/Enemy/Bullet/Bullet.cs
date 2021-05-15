@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
     {
         Invoke("DestroyBullet", 1.5f);
         isShooting = false;
-        shootDir = (GameManager.Player.transform.position - this.gameObject.transform.position).normalized;
+        shootDir = (GameManager.PlayerCenter.transform.position - this.gameObject.transform.position).normalized;
     }
     
     
