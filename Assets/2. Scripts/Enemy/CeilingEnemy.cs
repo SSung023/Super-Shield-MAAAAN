@@ -61,9 +61,7 @@ public class CeilingEnemy : Roam
         {
             hpBarMother.SetActive(false);
         }
-    }
-    private void FixedUpdate()
-    {
+
         groundColliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
 
         for (int i = 0; i < groundColliders.Length; i++)

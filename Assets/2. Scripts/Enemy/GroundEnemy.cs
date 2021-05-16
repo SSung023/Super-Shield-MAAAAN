@@ -40,6 +40,7 @@ public class GroundEnemy : Roam
 
     private void Update()
     {
+
         // 쉴드 상태가 아니고 일시정지 모드가 아닌 경우
         if (!isShield && !isPause)
         {

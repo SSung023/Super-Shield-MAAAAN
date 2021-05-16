@@ -59,6 +59,7 @@ public class Enemy : ShieldMaterial
     protected bool isCeiling;
     protected bool isDown;
 
+    
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
@@ -166,12 +167,12 @@ public class Enemy : ShieldMaterial
         if (isCeiling)
         {
             Vector3 tempVec = this.gameObject.transform.position;
-            print(tempVec);
 
             this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
             this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
             isDown = true;
             gameObject.layer = 12;
+            gameObject.tag = "Interactable";
 
             yield return new WaitForSeconds(4.0f);
 
@@ -187,10 +188,17 @@ public class Enemy : ShieldMaterial
             
             this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             gameObject.layer = 10;
+            gameObject.tag = "Enemy";
         }
         else
         {
+            gameObject.layer = 12;
+            gameObject.tag = "Interactable";
+
             yield return new WaitForSeconds(time);
+
+            gameObject.layer = 10;
+            gameObject.tag = "Enemy";
         }
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 

@@ -5,17 +5,19 @@ using UnityEngine;
 public class ShieldMaterial : MonoBehaviour
 {
     [SerializeField] protected Animator myAnimator;
-    [SerializeField] private bool isMaking;
+    [SerializeField] protected bool isMaking;
     [SerializeField] public float makingTime= 3.5f;
     protected bool isShield = false;
 
     [SerializeField] private ShieldItem myItem;
     private float _curMakingTime = 0f;
+
     private void FixedUpdate()
     {
-        
         if (!isMaking) return;
-        _curMakingTime += Time.fixedDeltaTime;
+
+        StopAllCoroutines();
+        _curMakingTime += Time.deltaTime;
         if (_curMakingTime >= makingTime)
         {
             isMaking = false;
@@ -26,19 +28,23 @@ public class ShieldMaterial : MonoBehaviour
 
             var tmp = Instantiate(myItem, this.transform);
             tmp.transform.SetParent(null);
+            tmp.transform.localScale = new Vector3(0.1f, 0.3f, 1);
 
             ShieldItem item = tmp.GetComponent<ShieldItem>();
             item.randomShieldSet(debuff, passive, level);
 
+            if (gameObject.transform.parent != null)
+            {
+                Destroy(gameObject.transform.parent.gameObject);
+            }
             Destroy(gameObject);
-            print("a");
         }
     }
 
     public void MakeShield()
     {
-       // myAnimator.SetTrigger("MakeShield");
         isMaking = true;
         isShield = true;
+        myAnimator.SetTrigger("MakeShield");
     }
 }

@@ -265,6 +265,7 @@ public class PlayerController : MonoBehaviour
         mat.MakeShield();
         player.GetInvincibility(3.5f);
         _horizontalMove = 0;
+        myAnimator.SetBool("isWalking", false);
         // 애니메이션 변수
         yield return new WaitForSeconds(3.5f);
         // 애니메이션 변수
@@ -309,7 +310,7 @@ public class PlayerController : MonoBehaviour
         }
 
         GameObject[] items = (from col in Physics2D.OverlapCircleAll(itemCheck.position, 2f)
-                              where col.gameObject.CompareTag("Interactable") || col.gameObject.CompareTag("Enemy")
+                              where col.gameObject.CompareTag("Interactable")
                               select col.gameObject).ToArray();
 
         if (items.Length != 0)
