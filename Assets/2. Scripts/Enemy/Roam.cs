@@ -8,14 +8,16 @@ public class Roam : Enemy
     protected int nextRoamingIndex = 0;
     
     protected bool isRoaming;
-    protected bool isReached;
-    
+    protected bool isReached = true;
+
+    protected float remainDistance;
     
     protected void Roaming()
     {
         // 특정 지점을 배회하게 하는 코드
         if (!isRoaming)
         {
+            //Debug.Log("isRoaming을 true로 변환");
             isRoaming = true;
 
             if (isReached)
@@ -34,7 +36,7 @@ public class Roam : Enemy
     protected void Move(Vector3 point)
     {
         // point지점으로 이동하게하는 코드
-        float remainDistance = Vector2.Distance(transform.position, point);
+        remainDistance = Vector2.Distance(transform.position, point);
         
         if (point.x - transform.position.x < -0.01)
         {
@@ -50,6 +52,7 @@ public class Roam : Enemy
         }
         else if (-0.01 <= remainDistance && remainDistance <= 0.01) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
         {
+            // -0.01 <= remainDistance <= 0.01
             isReached = true;
         }
 
