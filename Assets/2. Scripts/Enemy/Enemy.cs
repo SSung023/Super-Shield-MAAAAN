@@ -167,17 +167,13 @@ public class Enemy : ShieldMaterial
         if (isCeiling)
         {
             Vector3 tempVec = this.gameObject.transform.position;
-
-            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1;
-            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
+            
             isDown = true;
             gameObject.layer = 12;
             gameObject.tag = "Interactable";
 
             yield return new WaitForSeconds(4.0f);
-
             
-            this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             isDown = false;
 
             for (int i = 0; i <= 50; i++)
@@ -186,7 +182,6 @@ public class Enemy : ShieldMaterial
                 transform.position = Vector3.Lerp(gameObject.transform.position, tempVec, 0.02f * i);
             }
             
-            this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
             gameObject.layer = 10;
             gameObject.tag = "Enemy";
         }

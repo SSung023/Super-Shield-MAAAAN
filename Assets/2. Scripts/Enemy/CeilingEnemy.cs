@@ -43,7 +43,7 @@ public class CeilingEnemy : Roam
             if (groggyTrigger)
             {
                 groggyTrigger = false;
-                StartCoroutine(TurnGroggyMode(transform, 2.0f, false));
+                StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
             if(!isGroggy)
             {
@@ -62,8 +62,13 @@ public class CeilingEnemy : Roam
             hpBarMother.SetActive(false);
         }
 
-        groundColliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        if(isDown)
+        {
+            transform.Translate(new Vector3(0, -5.0f, 0) * Time.deltaTime);
+        }
 
+        groundColliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        
         for (int i = 0; i < groundColliders.Length; i++)
         {
             if (groundColliders[i].gameObject.layer == 9)
@@ -71,19 +76,12 @@ public class CeilingEnemy : Roam
                 if (isDown)
                 {
                     this.gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
-                    this.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
                     isDown = false;
-                    StartCoroutine(triggerTrue());
                 }
             }
         }
     }
-    IEnumerator triggerTrue()
-    {
-        yield return new WaitForSeconds(0.05f);
-        this.gameObject.GetComponent<BoxCollider2D>().isTrigger = true;
-
-    }
+   
     protected override void Detect()
     {
         // 특정 영역에 있는 Player 감지
