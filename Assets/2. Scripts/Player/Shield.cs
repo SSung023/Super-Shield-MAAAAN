@@ -11,6 +11,7 @@ public class Shield : MonoBehaviour
     [SerializeField] private SpriteRenderer myRenderer;
     [SerializeField] private Collider2D myCollider;
     [SerializeField] private float throwingSpeed = 5.0f;
+    private bool isOnHand = true; // 플레이어의 손 안에 들려있을 때 true
     private bool isThrown = false;
     private bool isCollided = false;
     protected BoxCollider2D collider;
@@ -40,6 +41,7 @@ public class Shield : MonoBehaviour
     public void Throw()
     {
         isThrown = true;
+        isOnHand = false;
         transform.SetParent(null);
         Destroy(gameObject, 10f);
     }
@@ -65,7 +67,7 @@ public class Shield : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other);
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !isOnHand)
         {
             Debug.Log("Hit!");
             
