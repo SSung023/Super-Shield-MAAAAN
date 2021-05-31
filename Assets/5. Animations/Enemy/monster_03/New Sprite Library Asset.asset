@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf7c34a0dc4e6348bea04faa70406ee, type: 3}
+  m_Name: New Sprite Library Asset
+  m_EditorClassIdentifier: 
+  m_Labels:
+  - m_Name: body
+    m_Hash: -609743950
+    m_CategoryList:
+    - m_Name: a
+      m_Hash: -390611389
+      m_Sprite: {fileID: 6147020521981568049, guid: 4518c68d6a6131442be8c405934ef2b0, type: 3}
+    - m_Name: b
+      m_Hash: 1908338681
+      m_Sprite: {fileID: -1376044548217800055, guid: 96c379c14c1119a43a3fdf9e7d1f6d22, type: 3}
+  - m_Name: Right_wing_pro
+    m_Hash: -589251793
+    m_CategoryList:
+    - m_Name: a
+      m_Hash: -390611389
+      m_Sprite: {fileID: 5286884698101329374, guid: 4518c68d6a6131442be8c405934ef2b0, type: 3}
+    - m_Name: b
+      m_Hash: 1908338681
+      m_Sprite: {fileID: 6380278731936702196, guid: 96c379c14c1119a43a3fdf9e7d1f6d22, type: 3}
+  - m_Name: Right_wing
+    m_Hash: 2137681737
+    m_CategoryList:
+    - m_Name: a
+      m_Hash: -390611389
+      m_Sprite: {fileID: 3631637879142220437, guid: 4518c68d6a6131442be8c405934ef2b0, type: 3}
+    - m_Name: b
+      m_Hash: 1908338681
+      m_Sprite: {fileID: 8738881354897446412, guid: 96c379c14c1119a43a3fdf9e7d1f6d22, type: 3}
+  - m_Name: Left_wing_pro
+    m_Hash: -732510683
+    m_CategoryList:
+    - m_Name: a
+      m_Hash: -390611389
+      m_Sprite: {fileID: -4505525959570500579, guid: 4518c68d6a6131442be8c405934ef2b0, type: 3}
+    - m_Name: b
+      m_Hash: 1908338681
+      m_Sprite: {fileID: -6065275092236505199, guid: 96c379c14c1119a43a3fdf9e7d1f6d22, type: 3}
+  - m_Name: Left_wing
+    m_Hash: 494206504
+    m_CategoryList:
+    - m_Name: a
+      m_Hash: -390611389
+      m_Sprite: {fileID: -5527828366886757617, guid: 4518c68d6a6131442be8c405934ef2b0, type: 3}
+    - m_Name: b
+      m_Hash: 1908338681
+      m_Sprite: {fileID: 5580231912813880040, guid: 96c379c14c1119a43a3fdf9e7d1f6d22, type: 3}
+  - m_Name: leg
+    m_Hash: 1976598607
+    m_CategoryList:
+    - m_Name: 
+      m_Hash: 0
+      m_Sprite: {fileID: 0}
+    - m_Name: 
+      m_Hash: 0
+      m_Sprite: {fileID: 0}
