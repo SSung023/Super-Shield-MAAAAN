@@ -95,6 +95,8 @@ public class GroundEnemy : Roam
                 Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.position, transform.rotation);
                 bulletCopy.mother = this;
                 currentTime = bulletCoolTime;
+                
+                myAnimator.SetTrigger("attack");
             }
         }
         // atkDistance 밖에 있다면 플레이어에게 접근

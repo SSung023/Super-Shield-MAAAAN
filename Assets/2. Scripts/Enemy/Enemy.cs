@@ -31,9 +31,9 @@ public class Enemy : ShieldMaterial
     [Header("Variable")]
     [SerializeField] protected GameObject mother; // Hp bar, roaming point를 받기 위한 mother 오브젝트
     [SerializeField] protected GameObject coin; // hp=0일 때 드랍할 코인의 프리팹
-    [SerializeField] protected Image hpBar;
     [SerializeField] protected float speed;
     [HideInInspector] public int curHealth;
+    /*[SerializeField]*/ protected Image hpBar;
     public int maxHealth;
     protected int stunHealth;
     public float shield_debuff_speed = 1f;
@@ -49,7 +49,7 @@ public class Enemy : ShieldMaterial
 
     protected float currentTime;
     protected float maxStunTime;
-    protected bool isPause = false; // 
+    protected bool isPause = false;
     protected bool isDetected;
     protected bool isGroggy = false;
     protected bool groggyTrigger = false;
@@ -63,7 +63,7 @@ public class Enemy : ShieldMaterial
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
-
+        
         int debuffNum = GameManager.instance.shieldManager.shield_debuff_num;
         if(debuffNum == 1)
         {
@@ -82,7 +82,10 @@ public class Enemy : ShieldMaterial
         {
             endHealth = 0;
         }
+        
         curHealth = endHealth;
+        
+        
         UpdateHpBar();
 
         if (curHealth <= stunHealth)
@@ -97,6 +100,10 @@ public class Enemy : ShieldMaterial
         {
             groggyTrigger = true;
             Die();
+        }
+        else
+        {
+            myAnimator.SetTrigger("hit");
         }
     }
     private void dotHit(int damage)
@@ -119,6 +126,7 @@ public class Enemy : ShieldMaterial
 
     protected void Die()
     {
+        myAnimator.SetTrigger("onDeath");
         StartCoroutine(TurnDetonationMode());
         hpBarMother.SetActive(false);
     }
@@ -161,7 +169,7 @@ public class Enemy : ShieldMaterial
 
     protected virtual IEnumerator TurnGroggyMode(Transform _transform, float time, bool isStern)
     {
-        _transform.GetComponent<SpriteRenderer>().color = Color.yellow;
+        myAnimator.SetTrigger("Groggy");
         gameObject.layer = LayerMask.NameToLayer("ShieldMaterial");
         isGroggy = true;
         if (isCeiling)
@@ -203,7 +211,6 @@ public class Enemy : ShieldMaterial
             groggyCount++;
         }
         Debug.Log("그로기 상태에서 빠져나옴");
-        _transform.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     protected void switchBullet()
