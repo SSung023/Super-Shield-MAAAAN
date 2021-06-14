@@ -13,11 +13,7 @@ public class CeilingEnemy : Roam
     [SerializeField] private LayerMask m_WhatIsGround;
 
     const float k_GroundedRadius = .2f;
-    private void Awake()
-    {
-        hpBarMother = mother.transform.GetChild(1).gameObject;
-        bulletGeneratePos = transform.GetChild(0);
-    }
+   
     
     private void Start()
     {
@@ -56,10 +52,6 @@ public class CeilingEnemy : Roam
                     Roaming();
                 }
             }
-        }
-        else
-        {
-            hpBarMother.SetActive(false);
         }
 
         if(isDown)
@@ -104,7 +96,7 @@ public class CeilingEnemy : Roam
         {
             if (currentTime <= 0)
             {
-                CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.position, transform.rotation);
+                CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
                 currentTime = bulletCoolTime;
             }

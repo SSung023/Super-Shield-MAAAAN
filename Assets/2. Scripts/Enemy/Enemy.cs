@@ -13,8 +13,8 @@ public class Enemy : ShieldMaterial
 {
     [Header("Bullet")]
     public Mode bulletMode;
-    [HideInInspector] public Transform bulletGeneratePos; // bullet이 생성되는 지점
     protected Bullet bullet;
+    [SerializeField] protected GameObject bulletGeneratePos; // bullet이 생성되는 지점
     [SerializeField] protected Bullet shortBullet;
     [SerializeField] protected Bullet longBullet;
     [SerializeField] protected CircleBullet circleBullet;
@@ -44,7 +44,6 @@ public class Enemy : ShieldMaterial
     [SerializeField] protected float detectionDistance;
     [SerializeField] protected float atkDistance;
     [HideInInspector] public Collider2D collider2D;
-    protected GameObject hpBarMother;
     
 
     protected float currentTime;
@@ -86,7 +85,7 @@ public class Enemy : ShieldMaterial
         curHealth = endHealth;
         
         
-        UpdateHpBar();
+        //UpdateHpBar();
 
         if (curHealth <= stunHealth)
         {
@@ -115,7 +114,7 @@ public class Enemy : ShieldMaterial
             endHealth = 0;
         }
         curHealth = endHealth;
-        UpdateHpBar();
+       //UpdateHpBar();
         
         if (curHealth == 0)
         {
@@ -128,7 +127,6 @@ public class Enemy : ShieldMaterial
     {
         myAnimator.SetTrigger("onDeath");
         StartCoroutine(TurnDetonationMode());
-        hpBarMother.SetActive(false);
     }
 
     protected void dropGold()

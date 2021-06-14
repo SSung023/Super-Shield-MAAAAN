@@ -11,12 +11,7 @@ public class GroundEnemy : Roam
     
     [Header("Sound")]
     [SerializeField] private AudioSource enemyAudioSource;
-
-    private void Awake()
-    {
-        hpBarMother = mother.transform.GetChild(1).gameObject;
-        bulletGeneratePos = transform.GetChild(0);
-    }
+    
 
     private void Start()
     {
@@ -63,10 +58,6 @@ public class GroundEnemy : Roam
                 }
             }
         }
-        else
-        {
-            hpBarMother.SetActive(false);
-        }
     }
 
     protected override void Detect()
@@ -92,7 +83,7 @@ public class GroundEnemy : Roam
             {
                 switchBullet();
                 SoundManager._snd.SfxCall(enemyAudioSource,18); // 임시, 적이 총알 발사할 때 소리 재생
-                Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.position, transform.rotation);
+                Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
                 currentTime = bulletCoolTime;
                 
