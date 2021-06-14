@@ -33,7 +33,7 @@ public class Enemy : ShieldMaterial
     [SerializeField] protected GameObject coin; // hp=0일 때 드랍할 코인의 프리팹
     [SerializeField] protected float speed;
     [HideInInspector] public int curHealth;
-    /*[SerializeField]*/ protected Image hpBar;
+    [SerializeField] protected Image hpBar;
     public int maxHealth;
     protected int stunHealth;
     public float shield_debuff_speed = 1f;

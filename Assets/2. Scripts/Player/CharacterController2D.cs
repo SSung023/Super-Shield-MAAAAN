@@ -145,6 +145,7 @@ public class CharacterController2D : MonoBehaviour
             var a = col.GetComponent<Ground>();
             if (a != null && a.canDown)
             {
+                Debug.Log("11");
                 col.gameObject.layer = LayerMask.NameToLayer("DownGround");
             }
         }
