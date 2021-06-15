@@ -45,6 +45,10 @@ public class Enemy : ShieldMaterial
     [SerializeField] protected float atkDistance;
     [HideInInspector] public Collider2D collider2D;
     
+    
+    //애니메이션 관련
+    protected float scale_x;
+    protected float scale_y;
 
     protected float currentTime;
     protected float maxStunTime;

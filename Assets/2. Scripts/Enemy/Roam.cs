@@ -39,19 +39,19 @@ public class Roam : Enemy
         // point지점으로 이동하게하는 코드
         remainDistance = Vector2.Distance(transform.position, point);
         
-        if (point.x - transform.position.x < -0.01)
+        if (point.x - transform.position.x < -0.02)
         {
             isSightLeft = true;
             transform.Translate(Vector3.left * speed * Time.deltaTime * shield_debuff_speed);
         }
-        else if(point.x - transform.position.x > 0.01)
+        else if(point.x - transform.position.x > 0.02)
         {
             isSightLeft = false;
             transform.Translate(Vector3.right * speed * Time.deltaTime * shield_debuff_speed);
         }
-        else if (-0.01 <= remainDistance && remainDistance <= 0.01) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
+        else if (-0.02 <= remainDistance && remainDistance <= 0.02) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
         {
-            // -0.01 <= remainDistance <= 0.01
+            // -0.02 <= remainDistance <= 0.02
             isReached = true;
             Flip();
         }
@@ -64,12 +64,12 @@ public class Roam : Enemy
         // 오른쪽을 보고 있을 때
         if (facingLeft)
         {
-            transform.localScale = new Vector3(-0.16f, 0.16f, transform.position.z);
+            transform.localScale = new Vector3(-scale_x, scale_y);
         }
         // 왼쪽을 보고 있을 때
         else
         {
-            transform.localScale = new Vector3(0.16f, 0.16f, transform.position.z);
+            transform.localScale = new Vector3(scale_x, scale_y);
         }
 
         facingLeft = !facingLeft;

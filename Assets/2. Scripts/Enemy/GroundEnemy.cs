@@ -15,6 +15,9 @@ public class GroundEnemy : Roam
 
     private void Start()
     {
+        scale_x = transform.localScale.x;
+        scale_y = transform.localScale.y;
+        
         isDetected = false;
         isRoaming = false;
         isReached = false;
