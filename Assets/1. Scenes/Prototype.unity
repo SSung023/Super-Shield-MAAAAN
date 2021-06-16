@@ -529,6 +529,7 @@ MonoBehaviour:
   minGold: 1
   maxGold: 50
   getGold: 0
+  roam: 1
   mother: {fileID: 506301004}
   coin: {fileID: 7360694575416504724, guid: 2573aa4911322c644a45f48f08735d37, type: 3}
   speed: 1
@@ -4617,6 +4618,7 @@ MonoBehaviour:
   minGold: 1
   maxGold: 50
   getGold: 0
+  roam: 1
   mother: {fileID: 1421891799}
   coin: {fileID: 7360694575416504724, guid: 2573aa4911322c644a45f48f08735d37, type: 3}
   speed: 1
@@ -5631,6 +5633,7 @@ MonoBehaviour:
   minGold: 1
   maxGold: 50
   getGold: 0
+  roam: 1
   mother: {fileID: 988248310}
   coin: {fileID: 7360694575416504724, guid: 2573aa4911322c644a45f48f08735d37, type: 3}
   speed: 1

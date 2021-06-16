@@ -57,7 +57,15 @@ public class GroundEnemy : Roam
                 }
                 else
                 {
-                    Roaming();
+                    if (roam)
+                    {
+                        myAnimator.SetBool("isWalking", true);
+                        Roaming();
+                    }
+                    else
+                    {
+                        myAnimator.SetBool("isWalking", false);
+                    }
                 }
             }
         }

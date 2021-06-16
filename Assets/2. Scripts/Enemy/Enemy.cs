@@ -27,8 +27,9 @@ public class Enemy : ShieldMaterial
     [Range(1, 50)]
     [SerializeField] protected int maxGold = 50; // 드랍할 수 있는 최대 골드의 수
     [HideInInspector] public int getGold;
-    
+
     [Header("Variable")]
+    [SerializeField] protected bool roam = true; // true일 때에만 roaming 가능
     [SerializeField] protected GameObject mother; // Hp bar, roaming point를 받기 위한 mother 오브젝트
     [SerializeField] protected GameObject coin; // hp=0일 때 드랍할 코인의 프리팹
     [SerializeField] protected float speed;
