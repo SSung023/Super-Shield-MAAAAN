@@ -42,12 +42,12 @@ public class Roam : Enemy
         if (point.x - transform.position.x < -0.02)
         {
             isSightLeft = true;
-            transform.Translate(Vector3.left * speed * Time.deltaTime * shield_debuff_speed);
+            transform.Translate(Vector3.left * enemyData.Speed * Time.deltaTime * shield_debuff_speed);
         }
         else if(point.x - transform.position.x > 0.02)
         {
             isSightLeft = false;
-            transform.Translate(Vector3.right * speed * Time.deltaTime * shield_debuff_speed);
+            transform.Translate(Vector3.right * enemyData.Speed * Time.deltaTime * shield_debuff_speed);
         }
         else if (-0.02 <= remainDistance && remainDistance <= 0.02) // 해당 포인트에 도착 했다면 다음 포인트로 움직이게 한다
         {

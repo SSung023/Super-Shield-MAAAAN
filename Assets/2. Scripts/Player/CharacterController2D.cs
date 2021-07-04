@@ -178,7 +178,6 @@ public class CharacterController2D : MonoBehaviour
 
         Collider2D[] overlap_coliders = Physics2D.OverlapCircleAll(m_PlayerCenter.position, 1f, m_WhatIsDownGround);
         int len_coliders = overlap_coliders.Length;
-        Debug.Log(len_coliders);
 
         for (int i = 0; i < 10; i++)
         {

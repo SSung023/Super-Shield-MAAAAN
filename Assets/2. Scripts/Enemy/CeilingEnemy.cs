@@ -21,13 +21,10 @@ public class CeilingEnemy : Roam
         scale_y = transform.localScale.y;
         
         isGroggy = false;
-
-        bulletCoolTime = 1f;
-
+        
         maxStunTime = 2f;
         stunHealth = 2;
-        maxHealth = 5;
-        curHealth = maxHealth;
+        curHealth = enemyData.MaxHealth;
 
         isCeiling = true;
     }
@@ -88,7 +85,7 @@ public class CeilingEnemy : Roam
     protected override void Detect()
     {
         // 특정 영역에 있는 Player 감지
-        collider2D = Physics2D.OverlapCircle(transform.position, detectionDistance, isLayer);
+        collider2D = Physics2D.OverlapCircle(transform.position, enemyData.DetectionDistance, isLayer);
         if (collider2D != null)
         {
             isDetected = true;
@@ -103,19 +100,19 @@ public class CeilingEnemy : Roam
     protected override void Attack()
     {
         // atkDistance 안에 있으면 bullet 생성
-        if (Vector2.Distance(transform.position, collider2D.transform.position) < atkDistance)
+        if (Vector2.Distance(transform.position, collider2D.transform.position) < enemyData.AtkDistance)
         {
             if (currentTime <= 0)
             {
                 CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
-                currentTime = bulletCoolTime;
+                currentTime = enemyData.BulletCoolTime;
             }
         }
         else
         {
-            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y);
-            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed * shield_debuff_speed);
+            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * enemyData.Speed * shield_debuff_speed);
         }
         currentTime -= Time.deltaTime;
     }
@@ -123,8 +120,8 @@ public class CeilingEnemy : Roam
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, detectionDistance);
-        Gizmos.DrawWireSphere(transform.position, atkDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyData.DetectionDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyData.AtkDistance);
         Gizmos.DrawWireSphere(transform.position, explosionDistance);
     }
 }
