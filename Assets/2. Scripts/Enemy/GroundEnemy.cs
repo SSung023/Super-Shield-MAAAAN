@@ -46,7 +46,7 @@ public class GroundEnemy : Roam
                 groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
-            if(!isGroggy)
+            if(!isGroggy && !isBeaten)
             {
                 if (isDetected)
                 {
@@ -115,16 +115,16 @@ public class GroundEnemy : Roam
 
         Gizmos.DrawWireCube(transform.position, explosionSize);
 
-        if (isSightLeft)
-        {
-            Debug.DrawRay(transform.position, Vector3.left * enemyData.DetectionDistance, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.left * enemyData.AtkDistance, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, Vector3.right * enemyData.DetectionDistance, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.right * enemyData.AtkDistance, Color.red);
-        }
+        // if (isSightLeft)
+        // {
+        //     Debug.DrawRay(transform.position, Vector3.left * enemyData.DetectionDistance, Color.blue);
+        //     Debug.DrawRay(transform.position, Vector3.left * enemyData.AtkDistance, Color.red);
+        // }
+        // else
+        // {
+        //     Debug.DrawRay(transform.position, Vector3.right * enemyData.DetectionDistance, Color.blue);
+        //     Debug.DrawRay(transform.position, Vector3.right * enemyData.AtkDistance, Color.red);
+        // }
         
     }
 }

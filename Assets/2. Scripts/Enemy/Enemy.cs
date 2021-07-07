@@ -55,6 +55,9 @@ public class Enemy : ShieldMaterial
     protected float maxStunTime;
     protected bool isPause = false;
     protected bool isDetected;
+
+    protected bool isBeaten; // 플레이어가 방패로 총알을 막았을 때 잠시 활성화
+    
     protected bool isGroggy = false;
     protected bool groggyTrigger = false;
     protected int groggyCount = 0;
@@ -107,7 +110,7 @@ public class Enemy : ShieldMaterial
         }
         else
         {
-            myAnimator.SetTrigger("hit");
+            StartCoroutine(TurnBeatenMode());
         }
     }
     private void dotHit(int damage)
@@ -141,6 +144,14 @@ public class Enemy : ShieldMaterial
         Debug.Log(getGold + " 드랍함");
     }
 
+    private IEnumerator TurnBeatenMode()
+    {
+        isBeaten = true;
+        myAnimator.SetTrigger("hit");
+        yield return new WaitForSeconds(0.55f);
+        isBeaten = false;
+    }
+
     protected IEnumerator TurnDetonationMode()
     {
         // 일정시간동안 모든 행동 일시정지
@@ -172,9 +183,10 @@ public class Enemy : ShieldMaterial
 
     protected virtual IEnumerator TurnGroggyMode(Transform _transform, float time, bool isStern)
     {
-        myAnimator.SetTrigger("Groggy");
         gameObject.layer = LayerMask.NameToLayer("ShieldMaterial");
+        myAnimator.SetBool("isStunned", true);
         isGroggy = true;
+        
         if (isCeiling)
         {
             Vector3 tempVec = this.gameObject.transform.position;
@@ -208,7 +220,9 @@ public class Enemy : ShieldMaterial
         }
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
+        myAnimator.SetBool("isStunned", false);
         isGroggy = false;
+        
         if (!isStern)
         {
             groggyCount++;

@@ -41,7 +41,7 @@ public class CeilingEnemy : Roam
                 groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
-            if(!isGroggy)
+            if(!isGroggy && !isBeaten)
             {
                 if (isDetected)
                 {
