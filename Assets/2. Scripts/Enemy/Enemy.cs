@@ -15,9 +15,9 @@ public class Enemy : ShieldMaterial
     public Mode bulletMode;
     protected Bullet bullet;
     [SerializeField] protected GameObject bulletGeneratePos; // bullet이 생성되는 지점
-    [SerializeField] protected Bullet shortBullet;
-    [SerializeField] protected Bullet longBullet;
-    [SerializeField] protected CircleBullet circleBullet;
+    // [SerializeField] protected Bullet shortBullet;
+    // [SerializeField] protected Bullet longBullet;
+    // [SerializeField] protected CircleBullet circleBullet;
    // [SerializeField] protected float bulletCoolTime;
     protected int bulletCount = -1; // temp variable
 
@@ -240,11 +240,11 @@ public class Enemy : ShieldMaterial
         
         if (bulletCount == 0)
         {
-            bullet = shortBullet;
+            bullet = enemyData.ShortBullet;
         }
         else if (bulletCount == 1)
         {
-            bullet = longBullet;
+            bullet = enemyData.LongBullet;
         }
     }
     
@@ -254,10 +254,10 @@ public class Enemy : ShieldMaterial
         switch (bulletMode)
         {
             case Mode.Long:
-                bullet = longBullet;
+                bullet = enemyData.LongBullet;
                 break;
             case Mode.Short:
-                bullet = shortBullet;
+                bullet = enemyData.ShortBullet;
                 break;
         }
     }

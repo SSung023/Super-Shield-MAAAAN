@@ -104,7 +104,7 @@ public class CeilingEnemy : Roam
         {
             if (currentTime <= 0)
             {
-                CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.transform.position, transform.rotation);
+                CircleBullet bulletCopy = Instantiate(enemyData.CircleBullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
                 currentTime = enemyData.BulletCoolTime;
             }

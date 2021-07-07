@@ -16,6 +16,9 @@ MonoBehaviour:
   minGold: 1
   maxGold: 50
   coin: {fileID: 7360694575416504724, guid: 2573aa4911322c644a45f48f08735d37, type: 3}
+  shortBullet: {fileID: -831489398384555232, guid: 4d21d7091228cf34391f25ec63116a28, type: 3}
+  longBullet: {fileID: 8479538267793687012, guid: e39c69c8bd272734abc1827654d561bb, type: 3}
+  circleBullet: {fileID: 7028331563414327806, guid: 1b17f4ccb93b4f340a403cd8fd48625a, type: 3}
   speed: 1
   maxHealth: 5
   detectionDistance: 7.2

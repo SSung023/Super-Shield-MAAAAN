@@ -21,6 +21,18 @@ public class EnemyData : ScriptableObject
     private GameObject coin;
     public GameObject Coin { get { return coin; } }
 
+    [SerializeField] 
+    private Bullet shortBullet;
+    public Bullet ShortBullet { get { return shortBullet; } }
+    
+    [SerializeField] 
+    private Bullet longBullet;
+    public Bullet LongBullet { get { return longBullet; } }
+    
+    [SerializeField] 
+    private CircleBullet circleBullet;
+    public CircleBullet CircleBullet { get { return circleBullet; } }
+
     [SerializeField]
     private float speed;
     public float Speed { get { return speed; } }

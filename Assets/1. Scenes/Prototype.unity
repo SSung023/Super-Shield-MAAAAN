@@ -602,9 +602,6 @@ MonoBehaviour:
   myItem: {fileID: 4303902023918710302, guid: 5815c45441646af4992ce729fa88fb46, type: 3}
   bulletMode: 1
   bulletGeneratePos: {fileID: 947867088}
-  shortBullet: {fileID: -831489398384555232, guid: 4d21d7091228cf34391f25ec63116a28, type: 3}
-  longBullet: {fileID: 8479538267793687012, guid: e39c69c8bd272734abc1827654d561bb, type: 3}
-  circleBullet: {fileID: 7028331563414327806, guid: 1b17f4ccb93b4f340a403cd8fd48625a, type: 3}
   getGold: 0
   roam: 1
   mother: {fileID: 506301004}
@@ -99290,9 +99287,6 @@ MonoBehaviour:
   myItem: {fileID: 4303902023918710302, guid: 5815c45441646af4992ce729fa88fb46, type: 3}
   bulletMode: 1
   bulletGeneratePos: {fileID: 0}
-  shortBullet: {fileID: -831489398384555232, guid: 4d21d7091228cf34391f25ec63116a28, type: 3}
-  longBullet: {fileID: 8479538267793687012, guid: e39c69c8bd272734abc1827654d561bb, type: 3}
-  circleBullet: {fileID: 7028331563414327806, guid: 1b17f4ccb93b4f340a403cd8fd48625a, type: 3}
   getGold: 0
   roam: 1
   mother: {fileID: 1421891799}
@@ -100398,9 +100392,6 @@ MonoBehaviour:
   myItem: {fileID: 437453264583926389, guid: 45c26df99ac73624e9cb6fabc32937b1, type: 3}
   bulletMode: 1
   bulletGeneratePos: {fileID: 581849811}
-  shortBullet: {fileID: -831489398384555232, guid: 4d21d7091228cf34391f25ec63116a28, type: 3}
-  longBullet: {fileID: 8479538267793687012, guid: e39c69c8bd272734abc1827654d561bb, type: 3}
-  circleBullet: {fileID: 7028331563414327806, guid: 1b17f4ccb93b4f340a403cd8fd48625a, type: 3}
   getGold: 0
   roam: 1
   mother: {fileID: 988248310}
