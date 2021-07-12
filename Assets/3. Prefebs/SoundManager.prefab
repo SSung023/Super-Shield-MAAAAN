@@ -49,6 +49,7 @@ MonoBehaviour:
   musClips:
   - {fileID: 8300000, guid: b187fc7e1fae4cf4fbb48c862788501f, type: 3}
   - {fileID: 8300000, guid: fc00c5bde7dd6b847a0f59732ef75593, type: 3}
+  - {fileID: 8300000, guid: d6b827b554f098044935a673abe361d4, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 89202bdbde0e92844bb5b9397711e8c3, type: 3}
   - {fileID: 8300000, guid: 2e568f4c3d9f451478de5b9dd653ed04, type: 3}
@@ -69,7 +70,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6694d55790f31b044997773da58d2117, type: 3}
   - {fileID: 8300000, guid: 7e8c21883fa682745987c8693c7e22e7, type: 3}
   - {fileID: 8300000, guid: 5d90adaa5e29c194ca26af01986511a9, type: 3}
-  ambClips: []
+  ambClips:
+  - {fileID: 0}
+  - {fileID: 0}
+  adptTrackClips:
+  - {fileID: 8300000, guid: 3be5e477dcd832d45876483774c36da6, type: 3}
+  - {fileID: 8300000, guid: 812ec463c41857244ad800d212f95f8c, type: 3}
+  - {fileID: 8300000, guid: 14e51f90788bb7e4fb227e5fa1459521, type: 3}
+  - {fileID: 8300000, guid: 9320eb8ec154ddf4e9430acd8c418492, type: 3}
+  - {fileID: 8300000, guid: 327da9ae26ed41540b8d66d2ff6338e4, type: 3}
+  - {fileID: 8300000, guid: 0f43b69d0daa74d428480262d50954ee, type: 3}
+  - {fileID: 8300000, guid: 75521eb16d9f68940a9d14c96f7dcf2e, type: 3}
+  - {fileID: 8300000, guid: f0cfcae9697c16d46a75fd970ca0e222, type: 3}
+  - {fileID: 8300000, guid: a983f3c9c66aec64bbdcd73850c67972, type: 3}
 --- !u!82 &5425930666670080989
 AudioSource:
   m_ObjectHideFlags: 0

@@ -13,13 +13,15 @@ public class SoundManager : MonoBehaviour
     private AudioSource     ambSource;
     private AudioSource[]   audSources;
 
+    private AudioListener listener;
+
     // sfxCall로 효과음을 사용할 때, sfxMuted가 true면 sfxCall로 효과음을 재생하지 않는다.
     private bool sfxMuted = false;
 
+    // 배경음악 재생 시 사용하는 현재 트랙넘버
     private int currentTrackNo = 0;
 
-    private AudioListener   listener;
-
+    // 볼륨 필드
     private float _masVol = 1.0f;
     private float _musVol = 1.0f;
     private float _sfxVol = 1.0f;
@@ -97,7 +99,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void SfxCall(AudioSource caller, int number)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             caller.volume = caller.volume * SfxVol;
@@ -118,7 +120,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void InstantSfxCall(AudioSource caller, int number)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
@@ -138,7 +140,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume">효과음 음량(0.0f ~ 1.0f)</param>
     public void InstantSfxCall(AudioSource caller, int number, float volume)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
@@ -260,7 +262,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void SfxPlay(int number)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.clip = sfxClips[number];
@@ -281,7 +283,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="loop"> 루프 여부 </param>
     public void SfxPlay(int number, bool loop)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.clip = sfxClips[number];
@@ -339,7 +341,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void InstantSfxPlay(int number)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.PlayOneShot(sfxClips[number]);
@@ -357,7 +359,7 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"> 효과음 음량(0.0f ~ 1.0f) </param>
     public void InstantSfxPlay(int number, float volume)
     {
-        if (!sfxMuted) return;
+        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.PlayOneShot(sfxClips[number], volume);
@@ -494,6 +496,8 @@ public class SoundManager : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Alpha5)) { ToggleMute(KeyCode.Alpha5); }
             else if (Input.GetKeyDown(KeyCode.Q))      { SongChange(-1); }
             else if (Input.GetKeyDown(KeyCode.E))      { SongChange(1); }
+            else if (Input.GetKeyDown(KeyCode.Alpha6)) { adptTrackIsPlaying = true; AdptMusPlay(0); } //임시 메서드, 적응형 사운드트랙용
+            else if (Input.GetKeyDown(KeyCode.Alpha7)) { adptTrackTransitionIs = true; Debug.Log(adptTrackTransitionIs); }
             else                                       { return; }
         }
     }
@@ -546,4 +550,159 @@ public class SoundManager : MonoBehaviour
                 break;
         }
     }
+
+    // 적응형 사운드트랙 구현을 위한 스크립트 (더럽다, 보수 필요)
+
+    //적응형 사운드트랙의 큰 번호(곡 별로 하나씩 할당)
+    private int adptTrackNo = 0;
+
+    private bool adptTrackIsPlaying = false;
+    private bool adptTrackTransitionIs = false;
+
+    private int adptMeasureForceSet = -1; // -1일 경우 비활성화, 0부터는 마디 번호 지정
+
+    private MeasureType[] currentAdptTracks = new MeasureType[10]; // 현재 적응형 트랙의 마디별 특성을 저장하는 배열
+
+    [SerializeField]
+    private AudioClip[][] adptTracks; // 적응형 트랙별 마디 특성을 저장하는 배열?
+
+    [SerializeField]
+    private AudioClip[] adptTrackClips; // 현재 적응형 트랙의 마디 클립을 저장하는 배열
+
+    // 마디 별 성질 
+    // NEXT : 다음 마디로 이동한다.
+    // LOOP : 스스로 루프한다.             TransitionOn일 경우 다음 마디로 이동한다.
+    // MOVE : 특정 마디로 이동시킨다.      TransitionOn일 경우 다음 마디로 이동한다.
+    // 이 모든 성질은 1순위 강제 뮤트 > 2순위 강제 다음 마디 설정 > 3순위로 적용된다.
+    public enum MeasureType : int { NEXT, LOOP, MOVE, END };
+
+    public void AdptMusPlay(int trackNo)
+    {
+        if (adptTrackIsPlaying)
+        {
+            //currentAdptTracks의 length는 adptTrackNo 에 해당하는 adptTrackClips 의 length로 결정됨
+
+            // 임시로 강제 할당, 나중에 할당 매커니즘을 만들어야 할듯
+            currentAdptTracks[0] = MeasureType.NEXT;
+            currentAdptTracks[1] = MeasureType.LOOP;
+            currentAdptTracks[2] = MeasureType.NEXT;
+            currentAdptTracks[3] = MeasureType.NEXT;
+            currentAdptTracks[4] = MeasureType.NEXT;
+            currentAdptTracks[5] = MeasureType.NEXT;
+            currentAdptTracks[6] = MeasureType.NEXT;
+            currentAdptTracks[7] = MeasureType.NEXT;
+            currentAdptTracks[8] = MeasureType.MOVE; // 3으로
+            currentAdptTracks[9] = MeasureType.END;
+
+            StartCoroutine(TMT(0, false));
+        }
+    }
+
+    IEnumerator TMT(int inputMeasure, bool scoreEnd)
+    {
+        if (scoreEnd == true)
+        {
+            adptTrackIsPlaying = false;
+            yield return null;
+        }
+
+        musSource.loop = false;
+        musSource.clip = adptTrackClips[inputMeasure];
+        Debug.Log(adptTrackClips[inputMeasure]);
+        musSource.Play();
+
+
+
+        while (adptTrackIsPlaying)
+        {
+            yield return new WaitForFixedUpdate();
+            if(!musSource.isPlaying)
+            {
+
+                var addMeasure = 0;
+
+                switch (currentAdptTracks[inputMeasure])
+                {
+                    case MeasureType.NEXT:
+                        addMeasure = addMeasure + 1;
+                        break;
+                    case MeasureType.LOOP:
+                        addMeasure = adptTrackTransitionIs == true ? addMeasure + 1 : addMeasure;
+                        adptTrackTransitionIs = false;
+                        break;
+                    case MeasureType.MOVE:
+                        addMeasure = adptTrackTransitionIs == true ? addMeasure + 1 : addMeasure -5; // -5는 임시로 할당
+                        adptTrackTransitionIs = false;
+                        break;
+                    case MeasureType.END:
+                        scoreEnd = true;
+                        Debug.Log("적응형 트랙 마지막 마디입니다.");
+                        adptTrackTransitionIs = false;
+                        break;
+                    default:
+                        Debug.Log("할당되지 않은 MeasureType입니다.");
+                        break;
+                }
+
+
+                var nextMeasure = inputMeasure + addMeasure;
+                string trackStatus = "inputMeasure : " + inputMeasure.ToString() + " / nextMeasure : " + nextMeasure.ToString();
+                Debug.Log(trackStatus);
+
+                if (adptMeasureForceSet > 0)
+                {
+                    if (!scoreEnd)
+                    {
+                        nextMeasure = adptMeasureForceSet;
+                        adptMeasureForceSet = -1;
+                    }
+                }
+
+                StartCoroutine(TMT(nextMeasure, scoreEnd));
+            }
+        }
+
+        
+    }
+    /*
+    // 곡 내에서 한 마디의 재생과 종료 이후 다음 마디 재생을 담당하는 메서드
+    private void TrackMeasureTransition(int measureTo)
+    {
+        if(adptTrackIsPlaying == true)
+        {
+            musSource.loop = false;
+            
+            musSource.clip = adptTrackClips[measureTo];
+            Debug.Log(adptTrackClips[measureTo]);
+            var clipLength = musSource.clip.length;
+            musSource.Play();
+
+            bool scoreEnd = false;
+            if(adptTrackClips.Length == measureTo + 1)
+            {
+                scoreEnd = true;
+                Debug.Log("적응형 트랙 마지막 마디입니다.");
+            }
+
+            StartCoroutine(AdaptiveNextTrack(measureTo, clipLength, scoreEnd));
+        }
+        return;
+    }
+
+    // 마디 재생 종료 후 다음 재생할 마디를 선택해주는 코루틴
+    IEnumerator AdaptiveNextTrack(int nextMeasure, float delayedTime, bool scoreEnd)
+    {
+        if (scoreEnd == true) adptTrackIsPlaying = false; // 만약 scoreEnd가 참이면 적응형트랙 재생을 멈춘다
+        yield return new WaitForSeconds(delayedTime);
+
+        var addMeasure = 0; // 다음 마디로 넘어갈 준비가 안되었다면 이전 마디를 반복한다.
+        if(adptTrackTransitionIs && !scoreEnd) // 다음 마디로 넘어갈 준비가 되었다면 넘긴다.
+        {
+            addMeasure = 1;
+            adptTrackTransitionIs = false;
+        } 
+
+        TrackMeasureTransition(nextMeasure + addMeasure);
+    }
+   */
 }

@@ -60972,15 +60972,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4336732472388389365, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.53960145
+      value: 0.52048147
       objectReference: {fileID: 0}
     - target: {fileID: 4336732472388389365, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.84192055
+      value: 0.853873
       objectReference: {fileID: 0}
     - target: {fileID: 4336732472388389365, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 65.313
+      value: 62.729
       objectReference: {fileID: 0}
     - target: {fileID: 6239384062558953194, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_PlayerCenter
@@ -61004,15 +61004,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6990198254636418162, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5322658
+      value: 0.08093028
       objectReference: {fileID: 0}
     - target: {fileID: 6990198254636418162, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.8465773
+      value: 0.9967198
       objectReference: {fileID: 0}
     - target: {fileID: 6990198254636418162, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 64.317
+      value: 9.284
       objectReference: {fileID: 0}
     - target: {fileID: 7074364297053020743, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_LocalRotation.z
@@ -81024,6 +81024,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 445987878370791983, guid: 93a7f193318916447bb8da69ebc2db6f, type: 3}
+      propertyPath: adptTrackClips.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 445987878370791983, guid: 93a7f193318916447bb8da69ebc2db6f, type: 3}
+      propertyPath: adptTrackClips.Array.data[9]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4db97997aa5e291499a6f4c5e3596787, type: 3}
     - target: {fileID: 6743342535568992954, guid: 93a7f193318916447bb8da69ebc2db6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
