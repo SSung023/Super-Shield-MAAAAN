@@ -15,26 +15,16 @@ public class Enemy : ShieldMaterial
     public Mode bulletMode;
     protected Bullet bullet;
     [SerializeField] protected GameObject bulletGeneratePos; // bullet이 생성되는 지점
-    // [SerializeField] protected Bullet shortBullet;
-    // [SerializeField] protected Bullet longBullet;
-    // [SerializeField] protected CircleBullet circleBullet;
-   // [SerializeField] protected float bulletCoolTime;
     protected int bulletCount = -1; // temp variable
-
-    //[Header("Gold")]
-    //[Range(1, 50)]
-    //[SerializeField] protected int minGold = 1; // 드랍할 수 있는 최대 골드의 수
-    //[Range(1, 50)]
-    //[SerializeField] protected int maxGold = 50; // 드랍할 수 있는 최대 골드의 수
+    
     [HideInInspector] public int getGold;
 
     [Header("Variable")]
     [SerializeField] protected bool roam = true; // true일 때에만 roaming 가능
     [SerializeField] protected GameObject mother; // Hp bar, roaming point를 받기 위한 mother 오브젝트
-    //[SerializeField] protected GameObject coin; // hp=0일 때 드랍할 코인의 프리팹
-    //[SerializeField] protected float speed;
     [HideInInspector] public int curHealth;
-    //public int maxHealth;
+
+    
     protected int stunHealth;
     public float shield_debuff_speed = 1f;
     [SerializeField] protected EnemyData enemyData;
@@ -42,8 +32,6 @@ public class Enemy : ShieldMaterial
     [Header("Range")]
     [SerializeField] protected LayerMask isLayer; //OverlapBox가 적용될 Layer
     [SerializeField] protected Vector2 explosionSize; // OverlapBox의 size
-    //[SerializeField] protected float detectionDistance;
-    //[SerializeField] protected float atkDistance;
     [HideInInspector] public Collider2D collider2D;
     
     
