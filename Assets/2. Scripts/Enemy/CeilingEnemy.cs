@@ -27,6 +27,7 @@ public class CeilingEnemy : Roam
         curHealth = enemyData.MaxHealth;
 
         isCeiling = true;
+        iscurrent = true;
     }
     
     private void Update()
@@ -102,11 +103,12 @@ public class CeilingEnemy : Roam
         // atkDistance 안에 있으면 bullet 생성
         if (Vector2.Distance(transform.position, collider2D.transform.position) < enemyData.AtkDistance)
         {
-            if (currentTime <= 0)
+            if (iscurrent)
             {
                 CircleBullet bulletCopy = Instantiate(enemyData.CircleBullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
-                currentTime = enemyData.BulletCoolTime;
+                iscurrent = false;
+                StartCoroutine(currentTimer(enemyData.BulletCoolTime));
             }
         }
         else
@@ -114,7 +116,6 @@ public class CeilingEnemy : Roam
             Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * enemyData.Speed * shield_debuff_speed);
         }
-        currentTime -= Time.deltaTime;
     }
     
     void OnDrawGizmos()

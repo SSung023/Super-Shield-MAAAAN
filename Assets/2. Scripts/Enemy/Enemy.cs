@@ -38,8 +38,7 @@ public class Enemy : ShieldMaterial
     //애니메이션 관련
     protected float scale_x;
     protected float scale_y;
-
-    protected float currentTime;
+    
     protected float maxStunTime;
     protected bool isPause = false;
     protected bool isDetected;
@@ -54,7 +53,9 @@ public class Enemy : ShieldMaterial
     protected bool isCeiling;
     protected bool isDown;
 
-    
+    protected bool iscurrent;
+
+
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
@@ -279,4 +280,9 @@ public class Enemy : ShieldMaterial
         StartCoroutine(TurnGroggyMode(transform, sternTime, true));
     }
 
+    protected IEnumerator currentTimer(float currentTime)
+    {
+        yield return new WaitForSeconds(currentTime);
+        iscurrent = true;
+    }
 }

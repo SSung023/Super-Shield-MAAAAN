@@ -17,11 +17,11 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private float m_dashDistance = 5f;
     [SerializeField] public int maxJumpCount = 2;
 
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
+    public bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = 0.2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
-    private CircleCollider2D m_CircleCollider2D;
+    private CapsuleCollider2D m_CapsuleCollider2D;
     private BoxCollider2D m_BoxCollider2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
@@ -48,7 +48,7 @@ public class CharacterController2D : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        m_CircleCollider2D = GetComponent<CircleCollider2D>();
+        m_CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         m_BoxCollider2D = GetComponent<BoxCollider2D>();
 
         if (OnLandEvent == null)
@@ -74,18 +74,13 @@ public class CharacterController2D : MonoBehaviour
                 if (jumpCount > 0)
                 {
                     jumpCount = 0;
+                 //   m_BoxCollider2D.isTrigger = false;
                     OnLandEvent.Invoke();
+                    print("asdasdas");
                 }
             }
         }
-
-        for (int i = 0; i < ceilingColliders.Length; i++)
-        {
-            if (ceilingColliders[i].gameObject != gameObject)
-            {
-                StartCoroutine(Ceiling());
-            }
-        }
+        
     }
 
     public void Dash()
@@ -120,7 +115,7 @@ public class CharacterController2D : MonoBehaviour
         }
         if (m_Grounded && jump && downJump)
         {
-            StartCoroutine(controlDownGround());
+            controlDownGround();
         }
         // If the player should jump...
         else if (jump && jumpCount < (maxJumpCount + shield_passive_jumpbonus))
@@ -137,89 +132,13 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         jumpCount++;
     }
-    IEnumerator controlDownGround()
+    private void controlDownGround()
     {
-        Collider2D[] cols = groundColliders;
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null && a.canDown)
-            {
-                Debug.Log("11");
-                col.gameObject.layer = LayerMask.NameToLayer("DownGround");
-            }
-        }
-        yield return new WaitForSeconds(0.5f);
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null && a.canDown)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("Ground");
-            }
-        }
+        m_BoxCollider2D.isTrigger = true;
+        jumpCount++;
     }
 
-    IEnumerator Ceiling()
-    {
-        bool grounded = false; 
 
-        Collider2D[] cols = ceilingColliders;
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("DownGround");
-            }
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        Collider2D[] overlap_coliders = Physics2D.OverlapCircleAll(m_PlayerCenter.position, 1f, m_WhatIsDownGround);
-        int len_coliders = overlap_coliders.Length;
-
-        for (int i = 0; i < 10; i++)
-        {
-
-            foreach (Collider2D col in cols)
-            {
-                var a = col.GetComponent<Ground>();
-                if (a != null && len_coliders == 0)
-                {
-                    col.gameObject.layer = LayerMask.NameToLayer("Ground");
-                    grounded = true;
-                }
-            }
-
-            if (grounded) break;
-            else
-            {
-                yield return new WaitForSeconds(0.1f);
-                overlap_coliders = Physics2D.OverlapCircleAll(m_PlayerCenter.position, 1f, m_WhatIsDownGround);
-
-                len_coliders = overlap_coliders.Length;
-                Debug.Log(len_coliders);
-            }
-
-
-        }
-
-        /*
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("Ground");
-            }
-        }
-        */
-
-
-
-
-    }
 
     private void Flip()
     {
@@ -235,10 +154,7 @@ public class CharacterController2D : MonoBehaviour
         shieldScale.x *= -1;
         shieldT.localScale = shieldScale;
     }
+    
 
-    private void Wall_inviciblity(bool val)
-    {
-        m_CircleCollider2D.isTrigger = val;
-        m_BoxCollider2D.isTrigger = val;
-    }
+   
 }

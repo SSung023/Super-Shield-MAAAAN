@@ -11,7 +11,6 @@ public class GroundEnemy : Roam
     
     [Header("Sound")]
     [SerializeField] private AudioSource enemyAudioSource;
-    
 
     private void Start()
     {
@@ -23,7 +22,8 @@ public class GroundEnemy : Roam
         isReached = false;
         isGroggy = false;
         isPause = false;
-       
+        iscurrent = true;
+
         maxStunTime = 2f;
         stunHealth = 2;
         curHealth = enemyData.MaxHealth;
@@ -87,13 +87,14 @@ public class GroundEnemy : Roam
         // 만일 atkDistance 안에 들어오면 공격
         if (Vector2.Distance(transform.position, collider2D.transform.position) < enemyData.AtkDistance)
         {
-            if (currentTime <= 0)
+            if (iscurrent)
             {
                 switchBullet();
                 SoundManager._snd.SfxCall(enemyAudioSource,18); // 임시, 적이 총알 발사할 때 소리 재생
                 Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
-                currentTime = enemyData.BulletCoolTime;
+                iscurrent = false;
+                StartCoroutine(currentTimer(enemyData.BulletCoolTime));
                 
                 myAnimator.SetTrigger("attack");
             }
@@ -104,9 +105,7 @@ public class GroundEnemy : Roam
             Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y, transform.position.z);
             transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * enemyData.Speed * shield_debuff_speed);
         }
-        currentTime -= Time.deltaTime;
     }
-    
     
     protected void OnDrawGizmos()
     {
