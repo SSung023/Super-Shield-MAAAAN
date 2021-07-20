@@ -147,6 +147,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 1.33
       objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4110397466218679966, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.69
@@ -60869,6 +60877,14 @@ PrefabInstance:
       propertyPath: roam
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4110397466906054108, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.7862
@@ -61158,6 +61174,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.086002
@@ -61224,6 +61244,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 753597833}
     m_Modifications:
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01 (3)
@@ -81053,7 +81081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &753597833
 Transform:
   m_ObjectHideFlags: 0
@@ -81222,6 +81250,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.493998
@@ -81298,6 +81330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: -14.598675
@@ -81449,6 +81485,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.2960014
@@ -81515,6 +81555,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 753597833}
     m_Modifications:
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01 (2)
@@ -81823,6 +81871,14 @@ PrefabInstance:
       propertyPath: roam
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01 (4)
@@ -81894,6 +81950,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.456001
@@ -82342,6 +82402,14 @@ PrefabInstance:
       propertyPath: roam
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01 (5)
@@ -82405,6 +82473,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: canMake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617218, guid: a74907657d90f944ea99dfdf36590538, type: 3}
@@ -82597,6 +82669,14 @@ PrefabInstance:
       propertyPath: roam
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4110397466906054108, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.5860023
@@ -82682,6 +82762,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1972641684}
     m_Modifications:
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617220, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.896004
@@ -82753,6 +82837,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 753597833}
     m_Modifications:
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01 (1)
@@ -82830,7 +82922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1972641684
 Transform:
   m_ObjectHideFlags: 0
@@ -82883,6 +82975,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: roam
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4110397466906054108, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
@@ -83042,7 +83142,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.3077e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 3.5683e-41, z: 0, w: 2.7273042e+11}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -83070,6 +83170,14 @@ PrefabInstance:
     - target: {fileID: 460444050566311385, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.836339
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4110397466906054108, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83168,6 +83276,10 @@ PrefabInstance:
       propertyPath: canMake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3535682640246353236, guid: a74907657d90f944ea99dfdf36590538, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617218, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_GravityScale
       value: 0
@@ -83261,6 +83373,14 @@ PrefabInstance:
       propertyPath: m_Solvers.Array.data[1]
       value: 
       objectReference: {fileID: 1355050322}
+    - target: {fileID: 7660826204076164358, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7660826204076164363, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7660826204170599376, guid: 6a2245f7008410e4bb365293e28c41b9, type: 3}
       propertyPath: m_Name
       value: Flying monster_01

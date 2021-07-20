@@ -285,4 +285,14 @@ public class Enemy : ShieldMaterial
         yield return new WaitForSeconds(currentTime);
         iscurrent = true;
     }
+    public void OnBecameVisible()
+    {
+        this.enabled = true;
+        this.gameObject.GetComponent<Animator>().enabled = true;
+    }
+    public void OnBecameInvisible()
+    {
+        this.enabled = false;
+        this.gameObject.GetComponent<Animator>().enabled = false;
+    }
 }
