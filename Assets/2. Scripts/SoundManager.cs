@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource     musSource;
     private AudioSource     sfxSource;
     private AudioSource     ambSource;
+    private AudioSource     uixSource;
     private AudioSource[]   audSources;
 
     private AudioListener listener;
@@ -22,7 +24,6 @@ public class SoundManager : MonoBehaviour
     private int currentTrackNo = 0;
 
     // 볼륨 필드
-    private float _masVol = 1.0f;
     private float _musVol = 1.0f;
     private float _sfxVol = 1.0f;
     private float _ambVol = 1.0f;
@@ -43,14 +44,6 @@ public class SoundManager : MonoBehaviour
     private AudioClip[] ambClips;
 
     // 볼륨 값은 0.0f ~ 1.0f로 적용
-    public float MasterVol
-    {
-        get { return _masVol; }
-        set
-        {
-            _masVol = Mathf.Clamp(value, 0.0f, 1.0f);
-        }
-    }
 
     public float MusVol
     {
@@ -84,7 +77,6 @@ public class SoundManager : MonoBehaviour
     /// </summary>
     private void VolumeAdjustment()
     {
-        AudioListener.volume = MasterVol;
         musSource.volume = MusVol;
         sfxSource.volume = SfxVol;
         ambSource.volume = AmbVol;
@@ -456,19 +448,37 @@ public class SoundManager : MonoBehaviour
 
         audSources = GetComponents<AudioSource>();
 
-        //Debug.Log(audSources.Length);
+        var count = 0;
 
-        musSource = audSources[0];
-        sfxSource = audSources[1];
-        ambSource = audSources[2];
+        while (count < audSources.Length)
+        {
+            switch (audSources[count].outputAudioMixerGroup.name)
+            {
+                case "Music":
+                    musSource = audSources[count];
+                    break;
+                case "Direct":
+                    sfxSource = audSources[count];
+                    break;
+                case "Ambient":
+                    ambSource = audSources[count];
+                    break;
+                case "Interface":
+                    uixSource = audSources[count];
+                    break;
+            }
+            count++;
+        }
+
+
 
         listener = GetComponent<AudioListener>();
 
-        MasterVol = 1.0f;
         MusVol = 1.0f;
         SfxVol = 1.0f;
         AmbVol = 1.0f;
 
+        //AdaptavieTrackScores();
     }
 
 
@@ -554,17 +564,14 @@ public class SoundManager : MonoBehaviour
     // 적응형 사운드트랙 구현을 위한 스크립트 (더럽다, 보수 필요)
 
     //적응형 사운드트랙의 큰 번호(곡 별로 하나씩 할당)
-    private int adptTrackNo = 0;
-
     private bool adptTrackIsPlaying = false;
     private bool adptTrackTransitionIs = false;
 
     private int adptMeasureForceSet = -1; // -1일 경우 비활성화, 0부터는 마디 번호 지정
 
-    private MeasureType[] currentAdptTracks = new MeasureType[10]; // 현재 적응형 트랙의 마디별 특성을 저장하는 배열
+    private MeasureType[] currentAdptTracks; // 현재 적응형 트랙의 마디별 특성을 저장하는 배열
 
-    [SerializeField]
-    private AudioClip[][] adptTracks; // 적응형 트랙별 마디 특성을 저장하는 배열?
+    private MeasureType[][] adptTracks; // 적응형 트랙별 마디 특성을 저장하는 배열?
 
     [SerializeField]
     private AudioClip[] adptTrackClips; // 현재 적응형 트랙의 마디 클립을 저장하는 배열
@@ -576,13 +583,21 @@ public class SoundManager : MonoBehaviour
     // 이 모든 성질은 1순위 강제 뮤트 > 2순위 강제 다음 마디 설정 > 3순위로 적용된다.
     public enum MeasureType : int { NEXT, LOOP, MOVE, END };
 
+    private void AdaptavieTrackScores()
+    {
+        adptTracks[0] = new MeasureType[10] { MeasureType.NEXT, MeasureType.LOOP, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT , MeasureType.NEXT , MeasureType.MOVE, MeasureType.END };
+
+        //{ 0, (MeasureType)1, 0, 0, 0, 0, 0, 0, (MeasureType)2, (MeasureType)3 };
+    }
+
     public void AdptMusPlay(int trackNo)
     {
+        currentAdptTracks = new MeasureType[10];
+        //currentAdptTracks = adptTracks[trackNo];
+
         if (adptTrackIsPlaying)
         {
-            //currentAdptTracks의 length는 adptTrackNo 에 해당하는 adptTrackClips 의 length로 결정됨
-
-            // 임시로 강제 할당, 나중에 할당 매커니즘을 만들어야 할듯
+            
             currentAdptTracks[0] = MeasureType.NEXT;
             currentAdptTracks[1] = MeasureType.LOOP;
             currentAdptTracks[2] = MeasureType.NEXT;
@@ -593,7 +608,7 @@ public class SoundManager : MonoBehaviour
             currentAdptTracks[7] = MeasureType.NEXT;
             currentAdptTracks[8] = MeasureType.MOVE; // 3으로
             currentAdptTracks[9] = MeasureType.END;
-
+            
             StartCoroutine(TMT(0, false));
         }
     }
@@ -610,8 +625,6 @@ public class SoundManager : MonoBehaviour
         musSource.clip = adptTrackClips[inputMeasure];
         Debug.Log(adptTrackClips[inputMeasure]);
         musSource.Play();
-
-
 
         while (adptTrackIsPlaying)
         {
