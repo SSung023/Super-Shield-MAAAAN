@@ -585,12 +585,14 @@ public class SoundManager : MonoBehaviour
     // 이 모든 성질은 1순위 강제 뮤트 > 2순위 강제 다음 마디 설정 > 3순위로 적용된다.
     public enum MeasureType : int { NEXT, LOOP, MOVE, END };
 
+    /*
     private void AdaptavieTrackScores()
     {
         adptTracks[0] = new MeasureType[10] { MeasureType.NEXT, MeasureType.LOOP, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT, MeasureType.NEXT , MeasureType.NEXT , MeasureType.MOVE, MeasureType.END };
 
         //{ 0, (MeasureType)1, 0, 0, 0, 0, 0, 0, (MeasureType)2, (MeasureType)3 };
     }
+    */
 
     public void AdptMusPlay(int trackNo)
     {
@@ -624,11 +626,19 @@ public class SoundManager : MonoBehaviour
         musSource.loop = false;
         musSource.clip = adptTrackClips[inputMeasure];
         Debug.Log(musSource.clip);
+        musSource.time = 0;
         musSource.Play();
 
         while (adptTrackIsPlaying)
         {
             yield return new WaitForSeconds(0.1f);
+
+            if(Input.GetKey(KeyCode.BackQuote) && Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                musSource.time = musSource.clip.length - 2.0f;
+                Debug.Log("skipped!");
+            }
+
             if(!musSource.isPlaying)
             {
 
