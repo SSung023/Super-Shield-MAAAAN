@@ -100,7 +100,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("InstantSfxCall : 잘못된 효과음 번호입니다.");
+            Debug.Log("SfxCall : 잘못된 효과음 번호입니다.");
         }
     }
 
@@ -470,7 +470,9 @@ public class SoundManager : MonoBehaviour
             count++;
         }
 
+        audSources = new AudioSource[] { musSource, sfxSource, ambSource, uixSource };
 
+        count = 0;
 
         listener = GetComponent<AudioListener>();
 
@@ -506,7 +508,7 @@ public class SoundManager : MonoBehaviour
             else if (Input.GetKeyDown(KeyCode.Alpha5)) { ToggleMute(KeyCode.Alpha5); }
             else if (Input.GetKeyDown(KeyCode.Q))      { SongChange(-1); }
             else if (Input.GetKeyDown(KeyCode.E))      { SongChange(1); }
-            else if (Input.GetKeyDown(KeyCode.Alpha6)) { adptTrackIsPlaying = true; AdptMusPlay(0); } //임시 메서드, 적응형 사운드트랙용
+            else if (Input.GetKeyDown(KeyCode.Alpha6)) { AdptMusPlay(0); } //임시 메서드, 적응형 사운드트랙용
             else if (Input.GetKeyDown(KeyCode.Alpha7)) { adptTrackTransitionIs = true; Debug.Log(adptTrackTransitionIs); }
             else                                       { return; }
         }
@@ -595,22 +597,20 @@ public class SoundManager : MonoBehaviour
         currentAdptTracks = new MeasureType[10];
         //currentAdptTracks = adptTracks[trackNo];
 
-        if (adptTrackIsPlaying)
-        {
+        adptTrackIsPlaying = true;
+
+        currentAdptTracks[0] = MeasureType.NEXT;
+        currentAdptTracks[1] = MeasureType.LOOP;
+        currentAdptTracks[2] = MeasureType.NEXT;
+        currentAdptTracks[3] = MeasureType.NEXT;
+        currentAdptTracks[4] = MeasureType.NEXT;
+        currentAdptTracks[5] = MeasureType.NEXT;
+        currentAdptTracks[6] = MeasureType.NEXT;
+        currentAdptTracks[7] = MeasureType.NEXT;
+        currentAdptTracks[8] = MeasureType.MOVE; // 3으로
+        currentAdptTracks[9] = MeasureType.END;
             
-            currentAdptTracks[0] = MeasureType.NEXT;
-            currentAdptTracks[1] = MeasureType.LOOP;
-            currentAdptTracks[2] = MeasureType.NEXT;
-            currentAdptTracks[3] = MeasureType.NEXT;
-            currentAdptTracks[4] = MeasureType.NEXT;
-            currentAdptTracks[5] = MeasureType.NEXT;
-            currentAdptTracks[6] = MeasureType.NEXT;
-            currentAdptTracks[7] = MeasureType.NEXT;
-            currentAdptTracks[8] = MeasureType.MOVE; // 3으로
-            currentAdptTracks[9] = MeasureType.END;
-            
-            StartCoroutine(TMT(0, false));
-        }
+        StartCoroutine(TMT(0, false));
     }
 
     IEnumerator TMT(int inputMeasure, bool scoreEnd)
@@ -623,16 +623,17 @@ public class SoundManager : MonoBehaviour
 
         musSource.loop = false;
         musSource.clip = adptTrackClips[inputMeasure];
-        Debug.Log(adptTrackClips[inputMeasure]);
+        Debug.Log(musSource.clip);
         musSource.Play();
 
         while (adptTrackIsPlaying)
         {
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.1f);
             if(!musSource.isPlaying)
             {
 
                 var addMeasure = 0;
+                var nextMeasure = 0;
 
                 switch (currentAdptTracks[inputMeasure])
                 {
@@ -657,8 +658,8 @@ public class SoundManager : MonoBehaviour
                         break;
                 }
 
+                nextMeasure = inputMeasure + addMeasure;
 
-                var nextMeasure = inputMeasure + addMeasure;
                 string trackStatus = "inputMeasure : " + inputMeasure.ToString() + " / nextMeasure : " + nextMeasure.ToString();
                 Debug.Log(trackStatus);
 

@@ -730,9 +730,9 @@ AudioSource:
   m_GameObject: {fileID: 3324574983098411604}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8537215760019005880, guid: 49cb883cfc8e83a4f8a88a2ffe9fe018, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -891,6 +891,7 @@ MonoBehaviour:
   m_PlayerCenter: {fileID: 6239384062184286708}
   m_dashDistance: 15
   maxJumpCount: 2
+  m_Grounded: 0
   shieldT: {fileID: 6239384061425172455}
   OnLandEvent:
     m_PersistentCalls:
