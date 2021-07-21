@@ -611,7 +611,6 @@ GameObject:
   - component: {fileID: 7864818257742977235}
   - component: {fileID: 6239384062558953198}
   - component: {fileID: 6239384062558953197}
-  - component: {fileID: 6239384062558953199}
   - component: {fileID: 6239384062558953204}
   - component: {fileID: 6239384062558953196}
   - component: {fileID: 6239384062558953192}
@@ -705,22 +704,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.48, y: 9.43}
   m_EdgeRadius: 0
---- !u!58 &6239384062558953199
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3324574983098411604}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9d1b129076e76ad47aafe0c95736937e, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.8, y: 6.93}
-  serializedVersion: 2
-  m_Radius: 3.02
 --- !u!82 &6239384062558953204
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2653,6 +2636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
+--- !u!4 &6571956746034685096 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 982621894700252576, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
+  m_PrefabInstance: {fileID: 6239384061459044616}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4701286354089032059 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1704873837153099891, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
@@ -2664,8 +2652,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9416c5bcc7601446b0bf805ccd78402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &6571956746034685096 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 982621894700252576, guid: b90dd2f0f87ed3b4dac10fb9dcbab883, type: 3}
-  m_PrefabInstance: {fileID: 6239384061459044616}
-  m_PrefabAsset: {fileID: 0}
