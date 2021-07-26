@@ -55,7 +55,16 @@ public class Enemy : ShieldMaterial
 
     protected bool iscurrent;
 
+    public void Awake()
+    {
+        StartCoroutine(animatorInit());
+    }
 
+    IEnumerator animatorInit()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.gameObject.GetComponent<Animator>().enabled = false;
+    }
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
