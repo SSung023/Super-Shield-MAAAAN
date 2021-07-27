@@ -61032,7 +61032,7 @@ PrefabInstance:
       objectReference: {fileID: 608963196}
     - target: {fileID: 6239384062558953197, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_EdgeRadius
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6239384062558953197, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
       propertyPath: m_Size.x
@@ -61150,22 +61150,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3324574983098411604, guid: 91588eaf93b9e9e479ec6edb9fec6c6a, type: 3}
   m_PrefabInstance: {fileID: 608963195}
   m_PrefabAsset: {fileID: 0}
---- !u!70 &608963198
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 608963197}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.8, y: 7}
-  m_Size: {x: 8, y: 3}
-  m_Direction: 1
 --- !u!1001 &643858834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82536,7 +82520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_Color.a
@@ -83141,7 +83125,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3.5683e-41, z: 0, w: 2.7273042e+11}
+  m_BoundingSphereOverride: {x: 0, y: 3.001e-41, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -83337,7 +83321,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_SortingLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7131391761961617221, guid: a74907657d90f944ea99dfdf36590538, type: 3}
       propertyPath: m_Color.a
