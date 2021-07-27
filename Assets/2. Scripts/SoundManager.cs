@@ -13,25 +13,23 @@ public class SoundManager : MonoBehaviour
     private AudioSource     sfxSource;
     private AudioSource     ambSource;
     private AudioSource     uixSource;
-    private AudioSource[]   audSources;
 
     private AudioListener listener;
 
-    // sfxCall로 효과음을 사용할 때, sfxMuted가 true면 sfxCall로 효과음을 재생하지 않는다.
-    private bool sfxMuted = false;
+    [SerializeField]
+    private AudioMixer masterMix;
+
+    // 믹서 뮤트 관련 필드
+
+    private bool masMute = false, musMute = false, sfxMute = false, ambMute = false, uixMute = false;
+
+    private float masVol, musVol, sfxVol, ambVol, uixVol;
 
     // 배경음악 재생 시 사용하는 현재 트랙넘버
     private int currentTrackNo = 0;
 
-    // 볼륨 필드
-    private float _musVol = 1.0f;
-    private float _sfxVol = 1.0f;
-    private float _ambVol = 1.0f;
-
-    // 다른 스크립트에서 효과음을 재생할 때 거쳐가는 필드
-    //private AudioSource     receivedSource;
-
     public enum SoundType : int { MUSIC, SFX, AMBIENT, INSTANTSFX, ERROR };
+    public enum MixerType : int { MASTER, MUSIC, DIRECT, AMBIENT, INTERFACE };
 
     //음악, 효과음, 환경음 클립이 저장되는 필드
     [SerializeField]
@@ -43,45 +41,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioClip[] ambClips;
 
-    // 볼륨 값은 0.0f ~ 1.0f로 적용
-
-    public float MusVol
-    {
-        get { return _musVol; }
-        set
-        {
-            _musVol = Mathf.Clamp(value, 0.0f, 1.0f);
-        }
-    }
-
-    public float SfxVol
-    {
-        get { return _sfxVol; }
-        set
-        {
-            _sfxVol = Mathf.Clamp(value, 0.0f, 1.0f);
-        }
-    }
-
-    public float AmbVol
-    {
-        get { return _ambVol; }
-        set
-        {
-            _ambVol = Mathf.Clamp(value, 0.0f, 1.0f);
-        }
-    }
-
-    /// <summary>
-    /// 옵션에서 음량을 바꿀 때마다 실행되는 볼륨 갱신 메서드 
-    /// </summary>
-    private void VolumeAdjustment()
-    {
-        musSource.volume = MusVol;
-        sfxSource.volume = SfxVol;
-        ambSource.volume = AmbVol;
-    }
-
     // 다른 스크립트에서 효과음을 불러올 때 거쳐가는 메서드 -> 검수 필요, 다른 오디오 소스에서 효과음을 재생 할 때 SoundManager의 sfxVol을 참고할 수 있도록 만드려고 함.
     /// <summary>
     /// 지정한 AudioSource에서 로컬 효과음이 나도록 합니다.
@@ -91,10 +50,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void SfxCall(AudioSource caller, int number)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
-            caller.volume = caller.volume * SfxVol;
             caller.clip = sfxClips[number];
             caller.Play();
         }
@@ -112,10 +69,9 @@ public class SoundManager : MonoBehaviour
     /// <param name="number">효과음 번호</param>
     public void InstantSfxCall(AudioSource caller, int number)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
-            caller.PlayOneShot(sfxClips[number], caller.volume * SfxVol);
+            caller.PlayOneShot(sfxClips[number], caller.volume);
         }
         else
         {
@@ -132,10 +88,9 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume">효과음 음량(0.0f ~ 1.0f)</param>
     public void InstantSfxCall(AudioSource caller, int number, float volume)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
-            caller.PlayOneShot(sfxClips[number], caller.volume * volume * SfxVol);
+            caller.PlayOneShot(sfxClips[number], caller.volume * volume);
         }
         else
         {
@@ -178,7 +133,7 @@ public class SoundManager : MonoBehaviour
     /// SoundManager 게임오브젝트의 AudioSource를 통해 직접 사운드를 출력합니다. bool 값을 통해 루프 여부를 설정할 수 있습니다.
     /// <para> enum SoundType은 int값입니다. </para> 
     /// </summary>
-    /// <param name="sndType">0 = 배경음 / 1 = 효과음 / 2 = 환경음 / 3 = 인스턴트 효과음</param>
+    /// <param name="sndType">= 배경음 / 1 = 효과음 / 2 = 환경음 / 3 = 인스턴트 효과음</param>
     /// <param name="number">재생할 클립 번호</param>
     /// <param name="loop">루프 여부</param>
     public void SndPlay(SoundType sndType, int number, bool loop)
@@ -254,7 +209,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void SfxPlay(int number)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.clip = sfxClips[number];
@@ -275,7 +229,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="loop"> 루프 여부 </param>
     public void SfxPlay(int number, bool loop)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.clip = sfxClips[number];
@@ -333,7 +286,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 효과음 번호 </param>
     public void InstantSfxPlay(int number)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.PlayOneShot(sfxClips[number]);
@@ -351,7 +303,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="volume"> 효과음 음량(0.0f ~ 1.0f) </param>
     public void InstantSfxPlay(int number, float volume)
     {
-        if (sfxMuted) return;
         if (number < sfxClips.Length && number >= 0)
         {
             sfxSource.PlayOneShot(sfxClips[number], volume);
@@ -370,7 +321,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="instant"> True 일 경우 인스턴트로 재생 </param>
     public void RandomSfxPlay(int rangeStart, int rangeEnd, bool instant)
     {
-        if (sfxMuted) return;
 
         var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
 
@@ -391,7 +341,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="rangeEnd"> 효과음 범위 종료 번호(포함) </param>
     public void RandomSfxPlay(int rangeStart, int rangeEnd)
     {
-        if (sfxMuted) return;
         var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
         SfxPlay(sfxOutput);
     }
@@ -405,7 +354,6 @@ public class SoundManager : MonoBehaviour
     /// <param name="instant"> True 일 경우 인스턴트로 재생 </param>
     public void RandomSfxCall(AudioSource caller, int rangeStart, int rangeEnd, bool instant)
     {
-        if (sfxMuted) return;
 
         var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
 
@@ -427,10 +375,11 @@ public class SoundManager : MonoBehaviour
     /// <param name="caller"> 효과음을 출력할 AudioSource </param>
     public void RandomSfxCall(AudioSource caller, int rangeStart, int rangeEnd)
     {
-        if (sfxMuted) return;
         var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
         SfxCall(caller, sfxOutput);
     }
+
+    // ---------------------------------------------------- Awake 메서드 -----------------------------------------------
 
     // 씬 시작 직전에 스태틱 필드에 _snd를 넣고, AudioSource, AudioListener를 찾고 할당함
     private void Awake()
@@ -446,7 +395,7 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        audSources = GetComponents<AudioSource>();
+        AudioSource[] audSources = GetComponents<AudioSource>();
 
         var count = 0;
 
@@ -470,15 +419,14 @@ public class SoundManager : MonoBehaviour
             count++;
         }
 
-        audSources = new AudioSource[] { musSource, sfxSource, ambSource, uixSource };
-
-        count = 0;
+        // 시작 직후의 믹서 볼륨을 저장한다.
+        masterMix.GetFloat("MasterMixerVol", out masVol);
+        musSource.outputAudioMixerGroup.audioMixer.GetFloat("MusicMixerVol", out musVol);
+        sfxSource.outputAudioMixerGroup.audioMixer.GetFloat("DirectMixerVol", out sfxVol);
+        ambSource.outputAudioMixerGroup.audioMixer.GetFloat("AmbientMixerVol", out ambVol);
+        uixSource.outputAudioMixerGroup.audioMixer.GetFloat("InterfaceMixerVol", out uixVol);
 
         listener = GetComponent<AudioListener>();
-
-        MusVol = 1.0f;
-        SfxVol = 1.0f;
-        AmbVol = 1.0f;
 
         //AdaptavieTrackScores();
     }
@@ -501,11 +449,11 @@ public class SoundManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.BackQuote))
         {
-                 if (Input.GetKeyDown(KeyCode.Alpha1)) { ToggleMute(KeyCode.Alpha1); }
-            else if (Input.GetKeyDown(KeyCode.Alpha2)) { ToggleMute(KeyCode.Alpha2); }
-            else if (Input.GetKeyDown(KeyCode.Alpha3)) { ToggleMute(KeyCode.Alpha3); }
-            else if (Input.GetKeyDown(KeyCode.Alpha4)) { ToggleMute(KeyCode.Alpha4); }
-            else if (Input.GetKeyDown(KeyCode.Alpha5)) { ToggleMute(KeyCode.Alpha5); }
+                 if (Input.GetKeyDown(KeyCode.Alpha1)) { MuteMixer(MixerType.MASTER); }
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) { MuteMixer(MixerType.MUSIC); }
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) { MuteMixer(MixerType.DIRECT); }
+            else if (Input.GetKeyDown(KeyCode.Alpha4)) { MuteMixer(MixerType.AMBIENT); }
+            else if (Input.GetKeyDown(KeyCode.Alpha5)) { MuteMixer(MixerType.INTERFACE); }
             else if (Input.GetKeyDown(KeyCode.Q))      { SongChange(-1); }
             else if (Input.GetKeyDown(KeyCode.E))      { SongChange(1); }
             else if (Input.GetKeyDown(KeyCode.Alpha6)) { AdptMusPlay(0); } //임시 메서드, 적응형 사운드트랙용
@@ -513,6 +461,83 @@ public class SoundManager : MonoBehaviour
             else                                       { return; }
         }
     }
+
+    // --------------------------------- 음소거 관련 메서드 --------------------------------
+
+    private void MuteMixer(MixerType type)
+    {
+        switch (type)
+        {
+            case MixerType.MASTER:
+                if (!masMute)
+                {
+                    masterMix.GetFloat("MasterMixerVol", out masVol);
+                    masterMix.SetFloat("MasterMixerVol", -80.0f);
+                    masMute = true;
+                }
+                else
+                {
+                    masterMix.SetFloat("MasterMixerVol", masVol);
+                    masMute = false;
+                }
+                break;
+            case MixerType.MUSIC:
+                if (!musMute)
+                {
+                    musSource.outputAudioMixerGroup.audioMixer.GetFloat("MusicMixerVol", out musVol);
+                    musSource.outputAudioMixerGroup.audioMixer.SetFloat("MusicMixerVol", -80.0f);
+                    musMute = true;
+                }
+                else
+                {
+                    musSource.outputAudioMixerGroup.audioMixer.SetFloat("MusicMixerVol", musVol);
+                    musMute = false;
+                }
+                break;
+            case MixerType.DIRECT:
+                if (!sfxMute)
+                {
+                    sfxSource.outputAudioMixerGroup.audioMixer.GetFloat("DirectMixerVol", out sfxVol);
+                    sfxSource.outputAudioMixerGroup.audioMixer.SetFloat("DirectMixerVol", -80.0f);
+                    sfxMute = true;
+                }
+                else
+                {
+                    sfxSource.outputAudioMixerGroup.audioMixer.SetFloat("DirectMixerVol", sfxVol);
+                    sfxMute = false;
+                }
+                break;
+            case MixerType.AMBIENT:
+                if (!ambMute)
+                {
+                    ambSource.outputAudioMixerGroup.audioMixer.GetFloat("AmbientMixerVol", out ambVol);
+                    ambSource.outputAudioMixerGroup.audioMixer.SetFloat("AmbientMixerVol", -80.0f);
+                    ambMute = true;
+                }
+                else
+                {
+                    ambSource.outputAudioMixerGroup.audioMixer.SetFloat("AmbientMixerVol", ambVol);
+                    ambMute = false;
+                }
+                break;
+            case MixerType.INTERFACE:
+                if (!uixMute)
+                {
+                    uixSource.outputAudioMixerGroup.audioMixer.GetFloat("InterfaceMixerVol", out uixVol);
+                    uixSource.outputAudioMixerGroup.audioMixer.SetFloat("InterfaceMixerVol", -80.0f);
+                    uixMute = true;
+                }
+                else
+                {
+                    uixSource.outputAudioMixerGroup.audioMixer.SetFloat("InterfaceMixerVol", uixVol);
+                    uixMute = false;
+                }
+                break;
+        }
+    }
+
+
+    // --------------------------------- BGM 재생 관련 메서드 ---------------------------------
 
     // 임시로 트랙 변경을 담당하는 메서드
     private void SongChange(int trackTo)
@@ -525,43 +550,7 @@ public class SoundManager : MonoBehaviour
         MusPlay(currentTrackNo, true);
     }
 
-    // 파트별 음소거를 담당하는 메서드
-    private void ToggleMute(KeyCode inputKey)
-    {
-        switch (inputKey)
-        {
-            case KeyCode.Alpha1:
-                AudioListener.pause = AudioListener.pause == true ? false : true;
-                sfxMuted = AudioListener.pause;
-                Debug.Log("AudioListener 음소거 상태 : " + AudioListener.pause.ToString());
-                break;
-            case KeyCode.Alpha2:
-                musSource.mute = musSource.mute == true ? false : true;
-                Debug.Log("배경음 음소거 상태 : " + musSource.mute.ToString());
-                break;
-            case KeyCode.Alpha3:
-                sfxSource.mute = sfxSource.mute == true ? false : true;
-                sfxMuted = sfxMuted == true ? false : true;
-                Debug.Log("효과음 음소거 상태 : " + sfxSource.mute.ToString());
-                if(sfxSource.mute != sfxMuted) { Debug.Log("ERROR : ToggleMute : sfxSource와 SfxMuted 가 일치하지 않습니다."); }
-                break;
-            case KeyCode.Alpha4:
-                ambSource.mute = ambSource.mute == true ? false : true;
-                Debug.Log("환경음 음소거 상태 : " + ambSource.mute.ToString());
-                break;
-            case KeyCode.Alpha5:
-                string soundStatus =
-                    "현재 음소거 상태 / AudioListener : " + AudioListener.pause.ToString() +
-                    " / 배경음 : " + musSource.mute.ToString() +
-                    " / 효과음 : " + sfxSource.mute.ToString() +
-                    " / 환경음 : " + ambSource.mute.ToString();
-                Debug.Log(soundStatus);
-                break;
-            default:
-                Debug.Log("ToggleMute 메서드가 잘못 사용되었습니다.");
-                break;
-        }
-    }
+    // --------------------------------- 적응형 사운드트랙 메서드 ---------------------------------
 
     // 적응형 사운드트랙 구현을 위한 스크립트 (더럽다, 보수 필요)
 

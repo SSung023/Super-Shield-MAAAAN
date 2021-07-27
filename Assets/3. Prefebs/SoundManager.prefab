@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a474749b3b56e2b45a2217e80c455856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterMix: {fileID: 24100000, guid: 49cb883cfc8e83a4f8a88a2ffe9fe018, type: 2}
   musClips:
   - {fileID: 8300000, guid: b187fc7e1fae4cf4fbb48c862788501f, type: 3}
   - {fileID: 8300000, guid: fc00c5bde7dd6b847a0f59732ef75593, type: 3}
@@ -75,10 +76,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   adptTrackClips:
-  - {fileID: 8300000, guid: 3be5e477dcd832d45876483774c36da6, type: 3}
-  - {fileID: 8300000, guid: 812ec463c41857244ad800d212f95f8c, type: 3}
-  - {fileID: 8300000, guid: 14e51f90788bb7e4fb227e5fa1459521, type: 3}
-  - {fileID: 8300000, guid: 9320eb8ec154ddf4e9430acd8c418492, type: 3}
+  - {fileID: 8300000, guid: c6bebd80dbaff38448ed34deadf650d8, type: 3}
+  - {fileID: 8300000, guid: 4b9e91dcf8db67142a97f581e8298f90, type: 3}
+  - {fileID: 8300000, guid: c6bebd80dbaff38448ed34deadf650d8, type: 3}
+  - {fileID: 8300000, guid: 4b9e91dcf8db67142a97f581e8298f90, type: 3}
   - {fileID: 8300000, guid: 327da9ae26ed41540b8d66d2ff6338e4, type: 3}
   - {fileID: 8300000, guid: 0f43b69d0daa74d428480262d50954ee, type: 3}
   - {fileID: 8300000, guid: 75521eb16d9f68940a9d14c96f7dcf2e, type: 3}
@@ -102,7 +103,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 100
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -198,7 +199,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 80
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -390,7 +391,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 200
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
