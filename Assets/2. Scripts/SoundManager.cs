@@ -393,7 +393,7 @@ public class SoundManager : MonoBehaviour
 
     // ---------------------------------------------------- Awake 메서드 -----------------------------------------------
 
-    // 씬 시작 직전에 스태틱 필드에 _snd를 넣고, AudioSource, AudioListener를 찾고 할당함
+    // 씬 시작 직전에 스태틱 필드에 _snd를 넣고, AudioListener를 찾고 할당함
     private void Awake()
     {
         if(_snd == null)
@@ -407,37 +407,11 @@ public class SoundManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        AudioSource[] audSources = GetComponents<AudioSource>();
+        InitializeAudiosources();
 
-        var count = 0;
+        InitializeMixers();
 
-        while (count < audSources.Length)
-        {
-            switch (audSources[count].outputAudioMixerGroup.name)
-            {
-                case "Music":
-                    if (musSource == null) { musSource = audSources[count]; }
-                    else                   { adpSource = audSources[count]; }
-                    break;
-                case "Direct":
-                    sfxSource = audSources[count];
-                    break;
-                case "Ambient":
-                    ambSource = audSources[count];
-                    break;
-                case "Interface":
-                    uixSource = audSources[count];
-                    break;
-            }
-            count++;
-        }
-
-        // 적응형 사운드트랙때 사용할 두 개의 배경음악 오디오소스를 저장
-        bgmSource[0] = musSource;
-        bgmSource[1] = adpSource;
-
-        // 시작 직후의 믹서 볼륨을 저장한다.
-        SaveCurrentMixerStatus();
+        SaveMixerStatusAll();
 
         listener = GetComponent<AudioListener>();
     }
@@ -457,11 +431,11 @@ public class SoundManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.BackQuote))
         {
-                 if (Input.GetKeyDown(KeyCode.Alpha1)) { MuteMixer(MixerType.MASTER); }
-            else if (Input.GetKeyDown(KeyCode.Alpha2)) { MuteMixer(MixerType.MUSIC); }
-            else if (Input.GetKeyDown(KeyCode.Alpha3)) { MuteMixer(MixerType.DIRECT); }
-            else if (Input.GetKeyDown(KeyCode.Alpha4)) { MuteMixer(MixerType.AMBIENT); }
-            else if (Input.GetKeyDown(KeyCode.Alpha5)) { MuteMixer(MixerType.INTERFACE); }
+                 if (Input.GetKeyDown(KeyCode.Alpha1)) { ToggleMuteMixer(MixerType.MASTER); }
+            else if (Input.GetKeyDown(KeyCode.Alpha2)) { ToggleMuteMixer(MixerType.MUSIC); }
+            else if (Input.GetKeyDown(KeyCode.Alpha3)) { ToggleMuteMixer(MixerType.DIRECT); }
+            else if (Input.GetKeyDown(KeyCode.Alpha4)) { ToggleMuteMixer(MixerType.AMBIENT); }
+            else if (Input.GetKeyDown(KeyCode.Alpha5)) { ToggleMuteMixer(MixerType.INTERFACE); }
             else if (Input.GetKeyDown(KeyCode.Q))      { SongChange(-1); }
             else if (Input.GetKeyDown(KeyCode.E))      { SongChange(1);  }
             else if (Input.GetKeyDown(KeyCode.Alpha6)) { AdptTrackStart(0); }
@@ -471,15 +445,46 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // --------------------------------- 공용 초기화 메서드 ------------------------------
+    
+    // 오디오소스를 필드에 할당하는 초기화 메서드
+    private void InitializeAudiosources()
+    {
+        AudioSource[] audSources = GetComponents<AudioSource>();
+
+        var count = 0;
+
+        while (count < audSources.Length)
+        {
+            switch (audSources[count].outputAudioMixerGroup.name)
+            {
+                case "Music":
+                    if (musSource == null) { musSource = audSources[count]; }
+                    else { adpSource = audSources[count]; }
+                    break;
+                case "Direct":
+                    sfxSource = audSources[count];
+                    break;
+                case "Ambient":
+                    ambSource = audSources[count];
+                    break;
+                case "Interface":
+                    uixSource = audSources[count];
+                    break;
+            }
+            count++;
+        }
+
+        // 적응형 사운드트랙때 사용할 두 개의 배경음악 오디오소스를 저장
+        bgmSource[0] = musSource;
+        bgmSource[1] = adpSource;
+    }
+
     // --------------------------------- 믹서 관련 메서드 --------------------------------
 
-    /// <summary>
-    /// 현재 믹서의 볼륨 상태를 저장하는 메서드
-    /// </summary>
-    private void SaveCurrentMixerStatus()
+     // 최상위 믹서들을 필드에 할당하는 초기화 메서드
+    private void InitializeMixers()
     {
-        masterMix.GetFloat("MasterMixerVol", out masVol);
-
         AudioMixerGroup[] mixers = masterMix.FindMatchingGroups("Top");
 
         var count = 0;
@@ -490,44 +495,71 @@ public class SoundManager : MonoBehaviour
             {
                 case "TopMusic":
                     topMusic = mixers[count].audioMixer;
-                    topMusic.GetFloat("MusicMixerVol", out musVol);
                     break;
                 case "TopDirect":
                     topDirect = mixers[count].audioMixer;
-                    topDirect.GetFloat("DirectMixerVol", out sfxVol);
                     break;
                 case "TopAmbient":
                     topAmbient = mixers[count].audioMixer;
-                    topAmbient.GetFloat("AmbientMixerVol", out ambVol);
                     break;
                 case "TopInterface":
                     topInterface = mixers[count].audioMixer;
-                    topInterface.GetFloat("InterfaceMixerVol", out uixVol);
                     break;
             }
             count++;
         }
+    }
 
-        /*
-        musSource.outputAudioMixerGroup.audioMixer.GetFloat("MusicMixerVol", out musVol);
-        sfxSource.outputAudioMixerGroup.audioMixer.GetFloat("DirectMixerVol", out sfxVol);
-        ambSource.outputAudioMixerGroup.audioMixer.GetFloat("AmbientMixerVol", out ambVol);
-        uixSource.outputAudioMixerGroup.audioMixer.GetFloat("InterfaceMixerVol", out uixVol);
-        */
+    /// <summary>
+    /// 현재 믹서의 볼륨 상태를 저장하는 메서드
+    /// </summary>
+    private void SaveMixerStatusAll()
+    {
+        if (!masMute) masterMix.GetFloat("MasterMixerVol", out masVol);
+        if (!musMute) topMusic.GetFloat("MusicMixerVol", out musVol);
+        if (!sfxMute) topDirect.GetFloat("DirectMixerVol", out sfxVol);
+        if (!ambMute) topAmbient.GetFloat("AmbientMixerVol", out ambVol);
+        if (!uixMute) topInterface.GetFloat("InterfaceMixerVol", out uixVol);
+    }
+
+    /// <summary>
+    /// 특정 믹서의 볼륨 상태만 저장하는 메서드
+    /// </summary>
+    /// <param name="type">믹서타입 Master, Music, Direct, Ambient, Interface</param>
+    private void SaveMixerStatus(MixerType type)
+    {
+        switch (type)
+        {
+            case MixerType.MASTER:
+                if (!masMute) masterMix.GetFloat("MasterMixerVol", out masVol);
+                break;
+            case MixerType.MUSIC:
+                if (!musMute) topMusic.GetFloat("MusicMixerVol", out musVol);
+                break;
+            case MixerType.DIRECT:
+                if (!sfxMute) topDirect.GetFloat("DirectMixerVol", out sfxVol);
+                break;
+            case MixerType.AMBIENT:
+                if (!ambMute) topAmbient.GetFloat("AmbientMixerVol", out ambVol);
+                break;
+            case MixerType.INTERFACE:
+                if (!uixMute) topInterface.GetFloat("InterfaceMixerVol", out uixVol);
+                break;
+        }
     }
 
     /// <summary>
     /// 지정된 믹서의 볼륨을 0으로 만들거나 이전 값으로 복구하는 메서드
     /// </summary>
     /// <param name="type">믹서타입 Master, Music, Direct, Ambient, Interface</param>
-    private void MuteMixer(MixerType type)
+    private void ToggleMuteMixer(MixerType type)
     {
         switch (type)
         {
             case MixerType.MASTER:
                 if (!masMute)
                 {
-                    masterMix.GetFloat("MasterMixerVol", out masVol);
+                    SaveMixerStatus(MixerType.MASTER);
                     masterMix.SetFloat("MasterMixerVol", -80.0f);
                     masMute = true;
                 }
@@ -540,7 +572,7 @@ public class SoundManager : MonoBehaviour
             case MixerType.MUSIC:
                 if (!musMute)
                 {
-                    topMusic.GetFloat("MusicMixerVol", out musVol);
+                    SaveMixerStatus(MixerType.MUSIC);
                     topMusic.SetFloat("MusicMixerVol", -80.0f);
                     musMute = true;
                 }
@@ -553,7 +585,7 @@ public class SoundManager : MonoBehaviour
             case MixerType.DIRECT:
                 if (!sfxMute)
                 {
-                    topDirect.GetFloat("DirectMixerVol", out sfxVol);
+                    SaveMixerStatus(MixerType.DIRECT);
                     topDirect.SetFloat("DirectMixerVol", -80.0f);
                     sfxMute = true;
                 }
@@ -566,7 +598,7 @@ public class SoundManager : MonoBehaviour
             case MixerType.AMBIENT:
                 if (!ambMute)
                 {
-                    topAmbient.GetFloat("AmbientMixerVol", out ambVol);
+                    SaveMixerStatus(MixerType.AMBIENT);
                     topAmbient.SetFloat("AmbientMixerVol", -80.0f);
                     ambMute = true;
                 }
@@ -579,7 +611,7 @@ public class SoundManager : MonoBehaviour
             case MixerType.INTERFACE:
                 if (!uixMute)
                 {
-                    topInterface.GetFloat("InterfaceMixerVol", out uixVol);
+                    SaveMixerStatus(MixerType.INTERFACE);
                     topInterface.SetFloat("InterfaceMixerVol", -80.0f);
                     uixMute = true;
                 }
@@ -737,7 +769,7 @@ public class SoundManager : MonoBehaviour
         }
         else
         {
-            int adjust = Mathf.Clamp(adptMeasureForceSet, 0, currentAdaptiveTrack.clips.Length - 1);
+            int adjust = Mathf.Clamp(adptMeasureForceSet, 0, currentAdaptiveTrack.clips.Length - 1); // 강제로 마디를 지정했을 때 범위를 벗어나지 않도록 제한을 둠
             nextClip = adjust;
 
             transitionOn = false;
@@ -747,13 +779,13 @@ public class SoundManager : MonoBehaviour
         StartCoroutine(AdptTrackClipStarter(nextClip));
     }
 
-    MeasureType[] GetMeasureTypes()
+    private MeasureType[] GetMeasureTypes()
     {
         MeasureType[] types = currentAdaptiveTrack.RecordInfo.types;
         return types;
     }
 
-    int[] GetMeasureAllocation()
+    private int[] GetMeasureAllocation()
     {
         int[] allocates = currentAdaptiveTrack.RecordInfo.allocatedNextMeasures;
         return allocates;
