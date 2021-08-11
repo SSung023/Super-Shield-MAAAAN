@@ -24,7 +24,7 @@ public class SoundManager : MonoBehaviour
     // 플레이어가 옵션에서 조절할 수 있는 최상위 믹서
     AudioMixer topMusic, topDirect, topAmbient, topInterface;
 
-    // 믹서 뮤트 관련 필드
+    // 믹서 설정 관련 필드
     private bool masMute = false, musMute = false, sfxMute = false, ambMute = false, uixMute = false;
     private float masVol, musVol, sfxVol, ambVol, uixVol;
 
@@ -182,6 +182,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="number"> 배경음악 번호 </param>
     public void MusPlay(int number)
     {
+        StopMusic();
+
         if (number < musClips.Length && number >= 0)
         {
             musSource.clip = musClips[number];
@@ -202,7 +204,9 @@ public class SoundManager : MonoBehaviour
     /// <param name="loop"> 루프 여부 </param>
     public void MusPlay(int number, bool loop)
     {
-        if(number < musClips.Length && number >= 0)
+        StopMusic();
+
+        if (number < musClips.Length && number >= 0)
         {
             musSource.clip = musClips[number];
             musSource.loop = loop;
@@ -235,7 +239,7 @@ public class SoundManager : MonoBehaviour
 
     // 효과음을 메인 카메라에 있는 AudioSource로 재생하는 메서드, loop 여부 설정 가능
     /// <summary>
-    /// 글로벌 효과음을 재생합니다. 루프 설정 여부를 선택 가능합니다. (주의해서 사용해 주세요!)
+    /// 글로벌 효과음을 재생합니다. 루프 설정 여부를 선택 가능합니다. (루프 주의해서 사용)
     /// </summary>
     /// <param name="number"> 효과음 번호 </param>
     /// <param name="loop"> 루프 여부 </param>
@@ -389,6 +393,55 @@ public class SoundManager : MonoBehaviour
     {
         var sfxOutput = Random.Range(rangeStart, rangeEnd + 1);
         SfxCall(caller, sfxOutput);
+    }
+
+    // ----------------------------------- 배경음악 정지 관련 메서드 -------------------------------------
+
+    /// <summary>
+    /// 모든 배경음악을 즉시 종료합니다.
+    /// </summary>
+    public void StopMusic()
+    {
+        StopCoroutine("AdptTrackClipStarter");
+
+        musSource.Stop();
+        adpSource.Stop();
+
+        musSource.clip = null;
+        adpSource.clip = null;
+
+        adptTrackIsPlaying = false;
+        toggle = 0;
+        AdptTransition = false;
+        AdptNextMeasureForceSet = -1;
+    }
+
+    /// <summary>
+    /// 모든 배경음악을 천천히 종료합니다.
+    /// </summary>
+    /// <param name="now">현재 재생중인 클립이 종료되기를 기다리지 않고 즉시 트랙을 종료합니다.</param>
+    /// <param name="fadeout">현재 재생중인 클립을 페이드아웃해서 종료시킬지 결정합니다. now == false 일 경우 적용되지 않습니다.</param>
+    public void StopMusic(bool now, bool fadeout)
+    {
+        if (now)
+        {
+            if (fadeout)
+            {
+
+            }
+            musSource.Stop();
+            adpSource.Stop();
+
+            musSource.clip = null;
+            adpSource.clip = null;
+        }
+
+        adptTrackIsPlaying = false;
+        toggle = 0;
+        AdptTransition = false;
+        AdptNextMeasureForceSet = -1;
+
+        //StopCoroutine("AdptTrackClipStarter");
     }
 
     // ---------------------------------------------------- Awake 메서드 -----------------------------------------------
@@ -629,12 +682,11 @@ public class SoundManager : MonoBehaviour
     // 임시로 트랙 변경을 담당하는 메서드
     private void SongChange(int trackTo)
     {
-        currentTrackNo = currentTrackNo + trackTo;
-        currentTrackNo = Mathf.Clamp(currentTrackNo, 0, musClips.Length - 1);
-        Debug.Log("현재 곡 번호는 " + currentTrackNo.ToString() + " 번입니다.");
+            currentTrackNo = currentTrackNo + trackTo;
+            currentTrackNo = Mathf.Clamp(currentTrackNo, 0, musClips.Length - 1);
+            Debug.Log("현재 곡 번호는 " + currentTrackNo.ToString() + " 번입니다.");
 
-        musSource.Pause(); // 이 메서드 잘 작동하는지 모르겠는데 나중에 검토해봐야 할 듯, 정확한 용도는 무엇인지?
-        MusPlay(currentTrackNo, true);
+            MusPlay(currentTrackNo, true);
     }
 
     // --------------------------------- 적응형 사운드트랙 구현 요소 선언 ---------------------------------
@@ -677,6 +729,8 @@ public class SoundManager : MonoBehaviour
     /// <param name="trackNo">재생할 트랙 넘버</param>
     public void AdptTrackStart(int trackNo)
     {
+        StopMusic();
+
         adptTrackIsPlaying = true;
         toggle = 0;
 
@@ -713,15 +767,15 @@ public class SoundManager : MonoBehaviour
     {
         if (adptTrackIsPlaying)
         {
-            bgmSource[toggle].clip = currentAdaptiveTrack.clips[startClip];
+            bgmSource[toggle].clip = currentAdaptiveTrack.clips[startClip];     // 선택된 오디오소스에 클립을 넣는다
 
-            bgmSource[toggle].PlayScheduled(measureStartTime);
+            bgmSource[toggle].PlayScheduled(measureStartTime);                  // 지정된 시작 시간에 클립을 재생한다.
 
-            measureDuration = (double)bgmSource[toggle].clip.samples / bgmSource[toggle].clip.frequency;
-            measureStartTime = measureStartTime + measureDuration;
-            measureCheckTime = measureStartTime - adaptiveTrackStartOffset;
+            measureDuration = (double)bgmSource[toggle].clip.samples / bgmSource[toggle].clip.frequency; // 한 클립의 길이는 샘플/주파수로 계산 가능하다.
+            measureStartTime = measureStartTime + measureDuration;                                       // 다음 클립의 시작 시간은 지정 시작 시간 + 한 클립을 연주하는데 걸리는 시간이다.
+            measureCheckTime = measureStartTime - adaptiveTrackStartOffset;                              // 다음 클립의 시작 시간 - offset이 되면, 다음에 어떤 클립을 연주해야 할 지 선택해야한다.
 
-            yield return new WaitUntil(() => AudioSettings.dspTime > measureCheckTime);
+            yield return new WaitUntil(() => AudioSettings.dspTime > measureCheckTime);                 // 다음 클립의 시작 시간 - offset이 될 때까지 기다린다.
 
             QueueMeasure(startClip);
         }
@@ -763,7 +817,7 @@ public class SoundManager : MonoBehaviour
                     transitionOn = false;
                     break;
                 case MeasureType.END:
-                    StopAdaptiveSoundtrack(false, false);
+                    StopMusic(false, false); // 마지막 클립을 페이드아웃 없이 끝날 때까지 연주한다.
                     break;
             }
         }
@@ -789,32 +843,6 @@ public class SoundManager : MonoBehaviour
     {
         int[] allocates = currentAdaptiveTrack.RecordInfo.allocatedNextMeasures;
         return allocates;
-    }
-
-    /// <summary>
-    /// 현재 진행중인 적응형 사운드트랙을 종료합니다.
-    /// </summary>
-    /// <param name="now">현재 재생중인 클립이 종료되기를 기다리지 않고 즉시 트랙을 종료합니다.</param>
-    /// <param name="fadeout">현재 재생중인 클립을 페이드아웃해서 종료시킬지 결정합니다. now == false 일 경우 적용되지 않습니다.</param>
-    private void StopAdaptiveSoundtrack(bool now, bool fadeout)
-    {
-        if (now)
-        {
-            if (fadeout)
-            {
-
-            }
-            musSource.Stop();
-            adpSource.Stop();
-
-            musSource.clip = null;
-            adpSource.clip = null;
-        }
-
-        adptTrackIsPlaying = false;
-        toggle = 0;
-        AdptTransition = false;
-        AdptNextMeasureForceSet = -1;
     }
 
     // ------------------------------ 적응형 사운드트랙 관련 외부에서 호출가능한 프로퍼티/메서드 ----------------------
