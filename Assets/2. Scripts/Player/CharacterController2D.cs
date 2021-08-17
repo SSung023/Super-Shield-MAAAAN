@@ -27,6 +27,7 @@ public class CharacterController2D : MonoBehaviour
     private Vector3 m_Velocity = Vector3.zero;
     private int jumpCount = 0;
     private bool jumpOverlapping = false;
+    private bool isDashing = false;
 
 
     [Header("Test")]
@@ -58,6 +59,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("m_velocity : " + m_Velocity);
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -92,14 +94,18 @@ public class CharacterController2D : MonoBehaviour
             Vector3 targetVelocity = new Vector2((m_FacingRight ? 1 : -1) * m_dashDistance * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            StartCoroutine(CountDashTime(0.4f));
         }
     }
     public void Move(float move, bool jump, bool downJump, bool isShieldOn)
     {
-
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
         {
+            if (isDashing)
+            {
+                move = 0f;
+            }
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
@@ -112,6 +118,7 @@ public class CharacterController2D : MonoBehaviour
             {
                 Flip();
             }
+
         }
         if (m_Grounded && jump && downJump)
         {
@@ -138,7 +145,12 @@ public class CharacterController2D : MonoBehaviour
         jumpCount++;
     }
 
-
+    IEnumerator CountDashTime(float dashDuration)
+    {
+        isDashing = true;
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
+    }
 
     private void Flip()
     {
