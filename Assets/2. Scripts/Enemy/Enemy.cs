@@ -13,44 +13,38 @@ public class Enemy : ShieldMaterial
 {
     [Header("Bullet")]
     public Mode bulletMode;
-    [HideInInspector] public Transform bulletGeneratePos; // bullet이 생성되는 지점
     protected Bullet bullet;
-    [SerializeField] protected Bullet shortBullet;
-    [SerializeField] protected Bullet longBullet;
-    [SerializeField] protected CircleBullet circleBullet;
-    [SerializeField] protected float bulletCoolTime;
+    [SerializeField] protected GameObject bulletGeneratePos; // bullet이 생성되는 지점
     protected int bulletCount = -1; // temp variable
-
-    [Header("Gold")]
-    [Range(1, 50)]
-    [SerializeField] protected int minGold = 1; // 드랍할 수 있는 최대 골드의 수
-    [Range(1, 50)]
-    [SerializeField] protected int maxGold = 50; // 드랍할 수 있는 최대 골드의 수
-    [HideInInspector] public int getGold;
     
+    [HideInInspector] public int getGold;
+
     [Header("Variable")]
+    [SerializeField] protected bool roam = true; // true일 때에만 roaming 가능
     [SerializeField] protected GameObject mother; // Hp bar, roaming point를 받기 위한 mother 오브젝트
-    [SerializeField] protected GameObject coin; // hp=0일 때 드랍할 코인의 프리팹
-    [SerializeField] protected Image hpBar;
-    [SerializeField] protected float speed;
     [HideInInspector] public int curHealth;
-    public int maxHealth;
+
+    
     protected int stunHealth;
     public float shield_debuff_speed = 1f;
+    [SerializeField] protected EnemyData enemyData;
     
     [Header("Range")]
     [SerializeField] protected LayerMask isLayer; //OverlapBox가 적용될 Layer
     [SerializeField] protected Vector2 explosionSize; // OverlapBox의 size
-    [SerializeField] protected float detectionDistance;
-    [SerializeField] protected float atkDistance;
     [HideInInspector] public Collider2D collider2D;
-    protected GameObject hpBarMother;
     
-
-    protected float currentTime;
+    
+    //애니메이션 관련
+    protected float scale_x;
+    protected float scale_y;
+    
     protected float maxStunTime;
-    protected bool isPause = false; // 
+    protected bool isPause = false;
     protected bool isDetected;
+
+    protected bool isBeaten; // 플레이어가 방패로 총알을 막았을 때 잠시 활성화
+    
     protected bool isGroggy = false;
     protected bool groggyTrigger = false;
     protected int groggyCount = 0;
@@ -59,11 +53,22 @@ public class Enemy : ShieldMaterial
     protected bool isCeiling;
     protected bool isDown;
 
-    
+    protected bool iscurrent;
+
+    public void Awake()
+    {
+        StartCoroutine(animatorInit());
+    }
+
+    IEnumerator animatorInit()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.gameObject.GetComponent<Animator>().enabled = false;
+    }
     public void TakeHit(int damage)
     {
         int endHealth = curHealth - damage;
-
+        
         int debuffNum = GameManager.instance.shieldManager.shield_debuff_num;
         if(debuffNum == 1)
         {
@@ -82,8 +87,11 @@ public class Enemy : ShieldMaterial
         {
             endHealth = 0;
         }
+        
         curHealth = endHealth;
-        UpdateHpBar();
+        
+        
+        //UpdateHpBar();
 
         if (curHealth <= stunHealth)
         {
@@ -98,6 +106,10 @@ public class Enemy : ShieldMaterial
             groggyTrigger = true;
             Die();
         }
+        else
+        {
+            StartCoroutine(TurnBeatenMode());
+        }
     }
     private void dotHit(int damage)
     {
@@ -108,7 +120,7 @@ public class Enemy : ShieldMaterial
             endHealth = 0;
         }
         curHealth = endHealth;
-        UpdateHpBar();
+       //UpdateHpBar();
         
         if (curHealth == 0)
         {
@@ -119,15 +131,23 @@ public class Enemy : ShieldMaterial
 
     protected void Die()
     {
+        myAnimator.SetTrigger("onDeath");
         StartCoroutine(TurnDetonationMode());
-        hpBarMother.SetActive(false);
     }
 
     protected void dropGold()
     {
-        getGold = Random.Range(minGold, maxGold);
-        Instantiate(coin, transform.position, transform.rotation);
+        getGold = Random.Range(enemyData.MinGold, enemyData.MaxGold);
+        Instantiate(enemyData.Coin, transform.position, transform.rotation);
         Debug.Log(getGold + " 드랍함");
+    }
+
+    private IEnumerator TurnBeatenMode()
+    {
+        isBeaten = true;
+        myAnimator.SetTrigger("hit");
+        yield return new WaitForSeconds(0.55f);
+        isBeaten = false;
     }
 
     protected IEnumerator TurnDetonationMode()
@@ -161,9 +181,10 @@ public class Enemy : ShieldMaterial
 
     protected virtual IEnumerator TurnGroggyMode(Transform _transform, float time, bool isStern)
     {
-        _transform.GetComponent<SpriteRenderer>().color = Color.yellow;
         gameObject.layer = LayerMask.NameToLayer("ShieldMaterial");
+        myAnimator.SetBool("isStunned", true);
         isGroggy = true;
+        
         if (isCeiling)
         {
             Vector3 tempVec = this.gameObject.transform.position;
@@ -197,13 +218,14 @@ public class Enemy : ShieldMaterial
         }
         gameObject.layer = LayerMask.NameToLayer("Enemy");
 
+        myAnimator.SetBool("isStunned", false);
         isGroggy = false;
+        
         if (!isStern)
         {
             groggyCount++;
         }
         Debug.Log("그로기 상태에서 빠져나옴");
-        _transform.GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     protected void switchBullet()
@@ -216,28 +238,24 @@ public class Enemy : ShieldMaterial
         
         if (bulletCount == 0)
         {
-            bullet = shortBullet;
+            bullet = enemyData.ShortBullet;
         }
         else if (bulletCount == 1)
         {
-            bullet = longBullet;
+            bullet = enemyData.LongBullet;
         }
     }
     
-    private void UpdateHpBar()
-    {
-        hpBar.rectTransform.localScale = new Vector3((1f /(float)maxHealth) * (float)curHealth, 1f, 1f);
-    }
     
     protected void CheckBulletMode()
     {
         switch (bulletMode)
         {
             case Mode.Long:
-                bullet = longBullet;
+                bullet = enemyData.LongBullet;
                 break;
             case Mode.Short:
-                bullet = shortBullet;
+                bullet = enemyData.ShortBullet;
                 break;
         }
     }
@@ -271,4 +289,19 @@ public class Enemy : ShieldMaterial
         StartCoroutine(TurnGroggyMode(transform, sternTime, true));
     }
 
+    protected IEnumerator currentTimer(float currentTime)
+    {
+        yield return new WaitForSeconds(currentTime);
+        iscurrent = true;
+    }
+    public void OnBecameVisible()
+    {
+        this.enabled = true;
+        this.gameObject.GetComponent<Animator>().enabled = true;
+    }
+    public void OnBecameInvisible()
+    {
+        this.enabled = false;
+        this.gameObject.GetComponent<Animator>().enabled = false;
+    }
 }

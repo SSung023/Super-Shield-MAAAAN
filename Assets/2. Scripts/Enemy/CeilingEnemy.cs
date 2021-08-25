@@ -13,24 +13,21 @@ public class CeilingEnemy : Roam
     [SerializeField] private LayerMask m_WhatIsGround;
 
     const float k_GroundedRadius = .2f;
-    private void Awake()
-    {
-        hpBarMother = mother.transform.GetChild(1).gameObject;
-        bulletGeneratePos = transform.GetChild(0);
-    }
+   
     
     private void Start()
     {
+        scale_x = transform.localScale.x;
+        scale_y = transform.localScale.y;
+        
         isGroggy = false;
-
-        bulletCoolTime = 1f;
-
+        
         maxStunTime = 2f;
         stunHealth = 2;
-        maxHealth = 5;
-        curHealth = maxHealth;
+        curHealth = enemyData.MaxHealth;
 
         isCeiling = true;
+        iscurrent = true;
     }
     
     private void Update()
@@ -45,7 +42,7 @@ public class CeilingEnemy : Roam
                 groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
-            if(!isGroggy)
+            if(!isGroggy && !isBeaten)
             {
                 if (isDetected)
                 {
@@ -53,13 +50,17 @@ public class CeilingEnemy : Roam
                 }
                 else
                 {
-                    Roaming();
+                    if (roam)
+                    {
+                        myAnimator.SetBool("isWalking", true);
+                        Roaming();
+                    }
+                    else
+                    {
+                        myAnimator.SetBool("isWalking", false);
+                    }
                 }
             }
-        }
-        else
-        {
-            hpBarMother.SetActive(false);
         }
 
         if(isDown)
@@ -85,7 +86,7 @@ public class CeilingEnemy : Roam
     protected override void Detect()
     {
         // 특정 영역에 있는 Player 감지
-        collider2D = Physics2D.OverlapCircle(transform.position, detectionDistance, isLayer);
+        collider2D = Physics2D.OverlapCircle(transform.position, enemyData.DetectionDistance, isLayer);
         if (collider2D != null)
         {
             isDetected = true;
@@ -100,28 +101,28 @@ public class CeilingEnemy : Roam
     protected override void Attack()
     {
         // atkDistance 안에 있으면 bullet 생성
-        if (Vector2.Distance(transform.position, collider2D.transform.position) < atkDistance)
+        if (Vector2.Distance(transform.position, collider2D.transform.position) < enemyData.AtkDistance)
         {
-            if (currentTime <= 0)
+            if (iscurrent)
             {
-                CircleBullet bulletCopy = Instantiate(circleBullet, bulletGeneratePos.position, transform.rotation);
+                CircleBullet bulletCopy = Instantiate(enemyData.CircleBullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
-                currentTime = bulletCoolTime;
+                iscurrent = false;
+                StartCoroutine(currentTimer(enemyData.BulletCoolTime));
             }
         }
         else
         {
-            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y);
-            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed * shield_debuff_speed);
+            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * enemyData.Speed * shield_debuff_speed);
         }
-        currentTime -= Time.deltaTime;
     }
     
     void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(transform.position, detectionDistance);
-        Gizmos.DrawWireSphere(transform.position, atkDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyData.DetectionDistance);
+        Gizmos.DrawWireSphere(transform.position, enemyData.AtkDistance);
         Gizmos.DrawWireSphere(transform.position, explosionDistance);
     }
 }
