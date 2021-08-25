@@ -23,7 +23,7 @@ public class Bullet : MonoBehaviour
     
     private void Start()
     {
-        Invoke("DestroyBullet", 1.5f);
+        Invoke("DestroyBullet", 2.5f);
         isShooting = false;
         shootDir = (GameManager.PlayerCenter.transform.position - this.gameObject.transform.position).normalized;
     }

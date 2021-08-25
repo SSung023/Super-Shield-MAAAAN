@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Ground
   - Interactable
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Shield
   - 
   - DownGround
-  - 
-  - 
+  - Wall
+  - WallChecker
   - 
   - 
   - 
@@ -44,6 +45,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Tilemap
+    uniqueID: 1023043881
     locked: 0
   - name: Object
     uniqueID: 1907681449

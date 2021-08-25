@@ -39,9 +39,14 @@ public class PlayerController : MonoBehaviour
 
     private GameObject overlapObject;
 
+    private CapsuleCollider2D m_CapsuleCollider2D;
+    private BoxCollider2D m_BoxCollider2D;
+
     private void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        m_CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        m_BoxCollider2D = GetComponent<BoxCollider2D>();
     }
     private void Update()
     {
@@ -293,6 +298,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag.Equals("Ground") && !controller.m_Grounded)
+        {
+            m_BoxCollider2D.isTrigger = true;
+            StopCoroutine("triggerFalse");
+        }
+    }
     public void OnTriggerStay2D(Collider2D other)
     {
 
@@ -358,6 +371,16 @@ public class PlayerController : MonoBehaviour
             spr.material.color = color;
         }
         overlapObject = null;
-        
+
+        if (other.gameObject.tag.Equals("Ground"))
+        {
+            m_BoxCollider2D.isTrigger = false;
+        }
+    }
+    IEnumerator triggerFalse()
+    {
+        yield return new WaitForSeconds(0f);
+        m_BoxCollider2D.isTrigger = false;
+
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
-    [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [SerializeField] private float m_JumpForce = 500f;                          // Amount of force added when the player jumps.
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;							// A mask determining what is ground to the character
@@ -17,16 +17,17 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private float m_dashDistance = 5f;
     [SerializeField] public int maxJumpCount = 2;
 
-    const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
+    public bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = 0.2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
-    private CircleCollider2D m_CircleCollider2D;
+    private CapsuleCollider2D m_CapsuleCollider2D;
     private BoxCollider2D m_BoxCollider2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
     private int jumpCount = 0;
     private bool jumpOverlapping = false;
+    private bool isDashing = false;
 
 
     [Header("Test")]
@@ -48,7 +49,7 @@ public class CharacterController2D : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-        m_CircleCollider2D = GetComponent<CircleCollider2D>();
+        m_CapsuleCollider2D = GetComponent<CapsuleCollider2D>();
         m_BoxCollider2D = GetComponent<BoxCollider2D>();
 
         if (OnLandEvent == null)
@@ -58,6 +59,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log("m_velocity : " + m_Velocity);
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -74,18 +76,13 @@ public class CharacterController2D : MonoBehaviour
                 if (jumpCount > 0)
                 {
                     jumpCount = 0;
+                 //   m_BoxCollider2D.isTrigger = false;
                     OnLandEvent.Invoke();
+                    print("asdasdas");
                 }
             }
         }
-
-        for (int i = 0; i < ceilingColliders.Length; i++)
-        {
-            if (ceilingColliders[i].gameObject != gameObject)
-            {
-                StartCoroutine(Ceiling());
-            }
-        }
+        
     }
 
     public void Dash()
@@ -97,14 +94,18 @@ public class CharacterController2D : MonoBehaviour
             Vector3 targetVelocity = new Vector2((m_FacingRight ? 1 : -1) * m_dashDistance * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            StartCoroutine(CountDashTime(0.4f));
         }
     }
     public void Move(float move, bool jump, bool downJump, bool isShieldOn)
     {
-
         //only control the player if grounded or airControl is turned on
         if (m_Grounded || m_AirControl)
         {
+            if (isDashing)
+            {
+                move = 0f;
+            }
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
@@ -117,10 +118,11 @@ public class CharacterController2D : MonoBehaviour
             {
                 Flip();
             }
+
         }
         if (m_Grounded && jump && downJump)
         {
-            StartCoroutine(controlDownGround());
+            controlDownGround();
         }
         // If the player should jump...
         else if (jump && jumpCount < (maxJumpCount + shield_passive_jumpbonus))
@@ -137,93 +139,18 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
         jumpCount++;
     }
-    IEnumerator controlDownGround()
+    private void controlDownGround()
     {
-        Collider2D[] cols = groundColliders;
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null && a.canDown)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("DownGround");
-            }
-        }
-        yield return new WaitForSeconds(0.5f);
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null && a.canDown)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("Ground");
-            }
-        }
+        m_BoxCollider2D.isTrigger = true;
+        jumpCount++;
     }
 
-<<<<<<< HEAD
-    IEnumerator Ceiling()
+    IEnumerator CountDashTime(float dashDuration)
     {
-        bool grounded = false; 
-
-        Collider2D[] cols = ceilingColliders;
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("DownGround");
-            }
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        Collider2D[] overlap_coliders = Physics2D.OverlapCircleAll(m_PlayerCenter.position, 1f, m_WhatIsDownGround);
-        int len_coliders = overlap_coliders.Length;
-        Debug.Log(len_coliders);
-
-        for (int i = 0; i < 10; i++)
-        {
-
-            foreach (Collider2D col in cols)
-            {
-                var a = col.GetComponent<Ground>();
-                if (a != null && len_coliders == 0)
-                {
-                    col.gameObject.layer = LayerMask.NameToLayer("Ground");
-                    grounded = true;
-                }
-            }
-
-            if (grounded) break;
-            else
-            {
-                yield return new WaitForSeconds(0.1f);
-                overlap_coliders = Physics2D.OverlapCircleAll(m_PlayerCenter.position, 1f, m_WhatIsDownGround);
-
-                len_coliders = overlap_coliders.Length;
-                Debug.Log(len_coliders);
-            }
-
-
-        }
-
-        /*
-        foreach (Collider2D col in cols)
-        {
-            var a = col.GetComponent<Ground>();
-            if (a != null)
-            {
-                col.gameObject.layer = LayerMask.NameToLayer("Ground");
-            }
-        }
-        */
-
-
-
-
+        isDashing = true;
+        yield return new WaitForSeconds(dashDuration);
+        isDashing = false;
     }
-=======
-
->>>>>>> parent of 7b44999 (08.11_04번)
 
     private void Flip()
     {
@@ -239,10 +166,7 @@ public class CharacterController2D : MonoBehaviour
         shieldScale.x *= -1;
         shieldT.localScale = shieldScale;
     }
+    
 
-    private void Wall_inviciblity(bool val)
-    {
-        m_CircleCollider2D.isTrigger = val;
-        m_BoxCollider2D.isTrigger = val;
-    }
+   
 }

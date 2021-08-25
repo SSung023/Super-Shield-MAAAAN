@@ -12,28 +12,23 @@ public class GroundEnemy : Roam
     [Header("Sound")]
     [SerializeField] private AudioSource enemyAudioSource;
 
-    private void Awake()
-    {
-        hpBarMother = mother.transform.GetChild(1).gameObject;
-        bulletGeneratePos = transform.GetChild(0);
-    }
-
     private void Start()
     {
+        scale_x = transform.localScale.x;
+        scale_y = transform.localScale.y;
+        
         isDetected = false;
         isRoaming = false;
         isReached = false;
         isGroggy = false;
         isPause = false;
-
-        bulletCoolTime = 1f;
+        iscurrent = true;
 
         maxStunTime = 2f;
         stunHealth = 2;
-        maxHealth = 5;
-        curHealth = maxHealth;
+        curHealth = enemyData.MaxHealth;
 
-        detectionBoxSize.x = detectionDistance;
+        detectionBoxSize.x = enemyData.DetectionDistance;
 
         isCeiling = false;
     }
@@ -51,7 +46,7 @@ public class GroundEnemy : Roam
                 groggyTrigger = false;
                 StartCoroutine(TurnGroggyMode(transform, 4.0f, false));
             }
-            if(!isGroggy)
+            if(!isGroggy && !isBeaten)
             {
                 if (isDetected)
                 {
@@ -59,13 +54,17 @@ public class GroundEnemy : Roam
                 }
                 else
                 {
-                    Roaming();
+                    if (roam)
+                    {
+                        myAnimator.SetBool("isWalking", true);
+                        Roaming();
+                    }
+                    else
+                    {
+                        myAnimator.SetBool("isWalking", false);
+                    }
                 }
             }
-        }
-        else
-        {
-            hpBarMother.SetActive(false);
         }
     }
 
@@ -86,26 +85,27 @@ public class GroundEnemy : Roam
     protected override void Attack()
     {
         // 만일 atkDistance 안에 들어오면 공격
-        if (Vector2.Distance(transform.position, collider2D.transform.position) < atkDistance)
+        if (Vector2.Distance(transform.position, collider2D.transform.position) < enemyData.AtkDistance)
         {
-            if (currentTime <= 0)
+            if (iscurrent)
             {
                 switchBullet();
                 SoundManager._snd.SfxCall(enemyAudioSource,18); // 임시, 적이 총알 발사할 때 소리 재생
-                Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.position, transform.rotation);
+                Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
-                currentTime = bulletCoolTime;
+                iscurrent = false;
+                StartCoroutine(currentTimer(enemyData.BulletCoolTime));
+                
+                myAnimator.SetTrigger("attack");
             }
         }
         // atkDistance 밖에 있다면 플레이어에게 접근
         else
         {
-            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y);
-            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * speed * shield_debuff_speed);
+            Vector3 vector3 = new Vector3(collider2D.transform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(transform.position, vector3, Time.deltaTime * enemyData.Speed * shield_debuff_speed);
         }
-        currentTime -= Time.deltaTime;
     }
-    
     
     protected void OnDrawGizmos()
     {
@@ -114,16 +114,16 @@ public class GroundEnemy : Roam
 
         Gizmos.DrawWireCube(transform.position, explosionSize);
 
-        if (isSightLeft)
-        {
-            Debug.DrawRay(transform.position, Vector3.left * detectionDistance, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.left * atkDistance, Color.red);
-        }
-        else
-        {
-            Debug.DrawRay(transform.position, Vector3.right * detectionDistance, Color.blue);
-            Debug.DrawRay(transform.position, Vector3.right * atkDistance, Color.red);
-        }
+        // if (isSightLeft)
+        // {
+        //     Debug.DrawRay(transform.position, Vector3.left * enemyData.DetectionDistance, Color.blue);
+        //     Debug.DrawRay(transform.position, Vector3.left * enemyData.AtkDistance, Color.red);
+        // }
+        // else
+        // {
+        //     Debug.DrawRay(transform.position, Vector3.right * enemyData.DetectionDistance, Color.blue);
+        //     Debug.DrawRay(transform.position, Vector3.right * enemyData.AtkDistance, Color.red);
+        // }
         
     }
 }
