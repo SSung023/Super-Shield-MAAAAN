@@ -96,8 +96,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 1118
+      x: 1014
+      y: 1120
       width: 388
       height: 530
     spriteID: e431e9d099a8fc0478e7842cc8ae2da4
@@ -2320,7 +2320,7 @@ ScriptedImporter:
     - {x: 0, y: 164}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -306, y: -1431}
+    uvTransform: {x: -303, y: -1428}
   - name: body
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5916,7 +5916,7 @@ ScriptedImporter:
     - {x: 0, y: 273}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -972, y: -994}
+    uvTransform: {x: -971, y: -993}
   - name: L_t_shoulder
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -5924,8 +5924,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 2627
+      x: 1412
+      y: 3015
       width: 296
       height: 368
     spriteID: 7392d103cedcf114cac0eef98fdb2d1e
@@ -7841,7 +7841,7 @@ ScriptedImporter:
     - {x: 0, y: 117}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -290, y: 486}
+    uvTransform: {x: -287, y: 875}
   - name: L_t_arm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -7849,8 +7849,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 1521
+      x: 1412
+      y: 1524
       width: 522
       height: 210
     spriteID: 362b78b04da716b4fbacde361ec0c38b
@@ -9380,7 +9380,7 @@ ScriptedImporter:
     - {x: 86, y: 82}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -349, y: -850}
+    uvTransform: {x: -344, y: -846}
   - name: L_t_hand
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -9388,8 +9388,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 3379
+      x: 1412
+      y: 3653
       width: 149
       height: 347
     spriteID: 588e6b6e229e2654688056382958333a
@@ -11597,7 +11597,7 @@ ScriptedImporter:
     - {x: 0, y: 89}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -889, y: 815}
+    uvTransform: {x: -884, y: 1090}
   - name: L_t_thumb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -11605,8 +11605,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 3903
+      x: 4
+      y: 1871
       width: 179
       height: 173
     spriteID: 16ba9ce8e9d065740b0d85b03b7d490c
@@ -14448,7 +14448,7 @@ ScriptedImporter:
     - {x: 271, y: 24}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -355, y: 1116}
+    uvTransform: {x: -2063, y: -916}
   - name: L_t_figner_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -14456,8 +14456,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 349
-      y: 1093
+      x: 1755
+      y: 2480
       width: 195
       height: 115
     spriteID: a114ae1fa5319fa4c8bf5714840ac36e
@@ -18610,7 +18610,7 @@ ScriptedImporter:
     - {x: 401, y: 56}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1718, y: -1777}
+    uvTransform: {x: -312, y: -389}
   - name: L_t_figner_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -18618,8 +18618,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1903
-      y: 1345
+      x: 192
+      y: 1871
       width: 140
       height: 126
     spriteID: 3112733fe5209cb489bd35d2c1a6a941
@@ -22370,7 +22370,7 @@ ScriptedImporter:
     - {x: 362, y: 10}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -297, y: -1576}
+    uvTransform: {x: -2007, y: -1049}
   - name: R_t_shoulder
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -22378,8 +22378,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 3003
+      x: 1412
+      y: 2638
       width: 296
       height: 368
     spriteID: c09692b8234ced44e995492a836f607f
@@ -24294,7 +24294,7 @@ ScriptedImporter:
     - {x: 0, y: 116}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 286, y: 849}
+    uvTransform: {x: 290, y: 484}
   - name: R_t_arm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -24302,8 +24302,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 1739
+      x: 1412
+      y: 1744
       width: 522
       height: 210
     spriteID: 99528fc8e35af0748a2d30149e3e8e61
@@ -25833,7 +25833,7 @@ ScriptedImporter:
     - {x: 82, y: 86}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 571, y: -645}
+    uvTransform: {x: 575, y: -639}
   - name: R_t_hand
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -25841,8 +25841,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 3734
+      x: 1716
+      y: 2638
       width: 149
       height: 347
     spriteID: d41b1fc7d5558a0489cdcc2e55b377f9
@@ -28070,7 +28070,7 @@ ScriptedImporter:
     - {x: 0, y: 89}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 738, y: 1157}
+    uvTransform: {x: 1047, y: 61}
   - name: R_t_thumb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -28079,7 +28079,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 1271
+      y: 2053
       width: 179
       height: 173
     spriteID: 4066f1cb4ca73374d9f82131d170ef57
@@ -30908,7 +30908,7 @@ ScriptedImporter:
     - {x: 270, y: 11}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -866, y: -1529}
+    uvTransform: {x: -866, y: -746}
   - name: R_t_figner_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -30916,8 +30916,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 349
-      y: 1216
+      x: 1755
+      y: 2143
       width: 195
       height: 115
     spriteID: 07609d37f35fb8f4ba1b0ed73afd546a
@@ -34479,7 +34479,7 @@ ScriptedImporter:
     - {x: 45, y: 342}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -505, y: -1667}
+    uvTransform: {x: 902, y: -740}
   - name: R_t_figner_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -34487,8 +34487,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1899
-      y: 3903
+      x: 1716
+      y: 2994
       width: 140
       height: 126
     spriteID: 8f5892470b11c5d45ba619b675f0b61b
@@ -38197,7 +38197,7 @@ ScriptedImporter:
     - {x: 48, y: 358}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1123, y: 969}
+    uvTransform: {x: 941, y: 60}
   - name: R_m_shoulder
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -38205,8 +38205,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 3403
+      x: 1014
+      y: 3406
       width: 285
       height: 409
     spriteID: 84be26b99736c764eacb6a00c6b87b4e
@@ -40205,7 +40205,7 @@ ScriptedImporter:
     - {x: 0, y: 120}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 373, y: 1873}
+    uvTransform: {x: 374, y: 1876}
   - name: R_m_arm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -40213,8 +40213,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 2997
+      x: 1014
+      y: 3000
       width: 315
       height: 398
     spriteID: 4fe114554370f304c80d45f603e41701
@@ -41840,7 +41840,7 @@ ScriptedImporter:
     - {x: 0, y: 87}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 740, y: 1378}
+    uvTransform: {x: 743, y: 1380}
   - name: R_m_hand
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -41848,8 +41848,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 2548
+      x: 1014
+      y: 2550
       width: 335
       height: 441
     spriteID: 56da84c6c47fc7643ae8ae0ebabd5d99
@@ -44034,7 +44034,7 @@ ScriptedImporter:
     - {x: 0, y: 126}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 954, y: 705}
+    uvTransform: {x: 957, y: 707}
   - name: R_m_thumb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -44042,8 +44042,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1884
-      y: 2983
+      x: 1874
+      y: 3141
       width: 155
       height: 218
     spriteID: 4d201341372d9a441ab578300c945dab
@@ -46506,7 +46506,7 @@ ScriptedImporter:
     - {x: 236, y: 6}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1521, y: 867}
+    uvTransform: {x: 1511, y: 1025}
   - name: R_m_figner_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -46514,8 +46514,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 2983
+      x: 1874
+      y: 2890
       width: 164
       height: 244
     spriteID: 3d8243245e82eb142bda842b0b1ccc3b
@@ -48696,7 +48696,7 @@ ScriptedImporter:
     - {x: 37, y: 77}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1474, y: 680}
+    uvTransform: {x: 1637, y: 586}
   - name: R_m_figner_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -48704,8 +48704,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 3235
+      x: 1874
+      y: 2638
       width: 164
       height: 244
     spriteID: 44555f23225c94b4ca8f1b854e31cd3f
@@ -50986,7 +50986,7 @@ ScriptedImporter:
     - {x: 37, y: 77}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1621, y: 930}
+    uvTransform: {x: 1784, y: 333}
   - name: R_b_shoulder
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -50994,8 +50994,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 1957
+      x: 1412
+      y: 1964
       width: 334
       height: 327
     spriteID: 0a065aad9364a1247aba0767c3bbb81d
@@ -53398,7 +53398,7 @@ ScriptedImporter:
     - {x: 0, y: 104}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -423, y: 743}
+    uvTransform: {x: -419, y: 751}
   - name: R_b_hand
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -53406,7 +53406,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
+      x: 1014
       y: 4
       width: 1009
       height: 549
@@ -56616,7 +56616,7 @@ ScriptedImporter:
     - {x: 0, y: 140}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -931, y: -748}
+    uvTransform: {x: -928, y: -747}
   - name: R_b_arm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -56624,8 +56624,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1750
-      y: 1957
+      x: 1412
+      y: 3393
       width: 290
       height: 252
     spriteID: cdc6e015b0707654a9bced047d7d81a8
@@ -58899,7 +58899,7 @@ ScriptedImporter:
     - {x: 0, y: 85}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -268, y: 1021}
+    uvTransform: {x: -605, y: 2457}
   - name: R_b_thumb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -58907,8 +58907,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1891
-      y: 3487
+      x: 185
+      y: 1662
       width: 140
       height: 193
     spriteID: 52b0eacfd9c2c8f42a53c236d4e1420b
@@ -60811,7 +60811,7 @@ ScriptedImporter:
     - {x: 180, y: 65}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -787, y: 2295}
+    uvTransform: {x: -2494, y: 471}
   - name: R_b_figner_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -60819,8 +60819,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1903
-      y: 1118
+      x: 1874
+      y: 3608
       width: 109
       height: 219
     spriteID: c949a6eaf061a5346a7dd72af4f3545e
@@ -64148,7 +64148,7 @@ ScriptedImporter:
     - {x: 318, y: 30}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -874, y: -36}
+    uvTransform: {x: -902, y: 2455}
   - name: R_b_figner_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -64156,8 +64156,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 3487
+      x: 4
+      y: 1662
       width: 171
       height: 200
     spriteID: df618d4149d4af0438d8e9b680135b6b
@@ -68060,7 +68060,7 @@ ScriptedImporter:
     - {x: 373, y: 32}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1040, y: 2419}
+    uvTransform: {x: -2747, y: 594}
   - name: R_b_shoulder_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -68068,8 +68068,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 2292
+      x: 1412
+      y: 2301
       width: 334
       height: 327
     spriteID: b23864e2876730f4b9d0a36353a545b4
@@ -70252,7 +70252,7 @@ ScriptedImporter:
     - {x: 0, y: 104}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 621, y: 1138}
+    uvTransform: {x: 626, y: 1148}
   - name: R_b_hand_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -70260,8 +70260,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 561
+      x: 1014
+      y: 563
       width: 1009
       height: 549
     spriteID: 00ec0bae71fb46747a4c29b85ef8024b
@@ -73520,7 +73520,7 @@ ScriptedImporter:
     - {x: 0, y: 140}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 954, y: -162}
+    uvTransform: {x: 957, y: -160}
   - name: R_b_arm_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -73528,8 +73528,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1750
-      y: 2292
+      x: 1014
+      y: 3824
       width: 290
       height: 252
     spriteID: 6d582c3b17b615d42847bc16f20e6209
@@ -75743,7 +75743,7 @@ ScriptedImporter:
     - {x: 0, y: 85}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1049, y: 1390}
+    uvTransform: {x: 314, y: 2923}
   - name: R_b_thumb_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -75751,8 +75751,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1891
-      y: 3695
+      x: 185
+      y: 1452
       width: 140
       height: 193
     spriteID: 2ab7e8fda0bcc1d4b880bcab41b3ec76
@@ -77667,7 +77667,7 @@ ScriptedImporter:
     - {x: 181, y: 66}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1695, y: 2483}
+    uvTransform: {x: -10, y: 240}
   - name: R_b_figner_1_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -77675,8 +77675,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 1452
+      x: 1874
+      y: 3837
       width: 109
       height: 219
     spriteID: 93ac5f98d743215468e610576df1e7f7
@@ -81075,7 +81075,7 @@ ScriptedImporter:
     - {x: 325, y: 43}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -124, y: 278}
+    uvTransform: {x: 1747, y: 2664}
   - name: R_b_figner_2_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -81083,8 +81083,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 3695
+      x: 4
+      y: 1452
       width: 171
       height: 200
     spriteID: cda910d2af001ed40a8b9a041a293c9d
@@ -85237,7 +85237,7 @@ ScriptedImporter:
     - {x: 398, y: 21}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 1621, y: 2607}
+    uvTransform: {x: -86, y: 365}
   - name: L_m_shoulder
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -85245,8 +85245,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 1649
+      x: 1014
+      y: 1652
       width: 334
       height: 465
     spriteID: 41e0d4ad1d562f045b9cad535d6c5327
@@ -87794,7 +87794,7 @@ ScriptedImporter:
     - {x: 0, y: 129}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1006, y: 82}
+    uvTransform: {x: -1005, y: 85}
   - name: L_m_arm
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -87802,8 +87802,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1408
-      y: 1118
+      x: 1412
+      y: 1120
       width: 487
       height: 395
     spriteID: 1a48fd867169ca14fa2e8ac42ded870c
@@ -89879,7 +89879,7 @@ ScriptedImporter:
     - {x: 137, y: 132}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -906, y: -410}
+    uvTransform: {x: -901, y: -407}
   - name: L_m_hand
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -89887,8 +89887,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 2122
+      x: 1014
+      y: 2126
       width: 364
       height: 418
     spriteID: 1a1a52357ee099c49a21f978b1f74047
@@ -92143,7 +92143,7 @@ ScriptedImporter:
     - {x: 126, y: 0}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1555, y: 303}
+    uvTransform: {x: -1552, y: 305}
   - name: L_m_thumb
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -92151,8 +92151,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1884
-      y: 3235
+      x: 1874
+      y: 3367
       width: 131
       height: 234
     spriteID: 52aca33f901c9e642a5902355a166de0
@@ -95474,7 +95474,7 @@ ScriptedImporter:
     - {x: 5, y: 320}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -633, y: 1077}
+    uvTransform: {x: -643, y: 1209}
   - name: L_m_figner_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -95482,8 +95482,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1565
-      y: 3379
+      x: 1571
+      y: 3653
       width: 129
       height: 255
     spriteID: a3906f6a203231f48a8d4706fbddcf19
@@ -97634,7 +97634,7 @@ ScriptedImporter:
     - {x: 37, y: 77}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1135, y: 1070}
+    uvTransform: {x: -1129, y: 1343}
   - name: L_m_figner_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -97642,8 +97642,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1565
-      y: 3734
+      x: 1909
+      y: 1120
       width: 129
       height: 254
     spriteID: dc3839d287add5f42bc0a4300f25be0a
@@ -99975,7 +99975,7 @@ ScriptedImporter:
     - {x: 38, y: 78}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -1277, y: 1463}
+    uvTransform: {x: -933, y: -1152}
   - name: L_leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -99983,8 +99983,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1012
-      y: 3820
+      x: 4
+      y: 1094
       width: 392
       height: 276
     spriteID: 3414d2a8da35f95438b4ef3d5d4c8ff3
@@ -103069,7 +103069,7 @@ ScriptedImporter:
     - {x: 0, y: 86}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -572, y: 2902}
+    uvTransform: {x: -1580, y: 176}
   - name: R_leg
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -103078,7 +103078,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 3
-      y: 1085
+      y: 1265
       width: 345
       height: 185
     spriteID: 0790d77d5e88cc8489c218fe33e69cf7
@@ -106094,7 +106094,7 @@ ScriptedImporter:
     - {x: 0, y: 87}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: -968, y: 175}
+    uvTransform: {x: -968, y: 355}
   - name: L_leg_02
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -106102,8 +106102,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 2627
+      x: 1755
+      y: 1964
       width: 260
       height: 170
     spriteID: 6789cf0c07ef6e840a305a58f4229972
@@ -108796,7 +108796,7 @@ ScriptedImporter:
     - {x: 0, y: 79}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 51, y: 1904}
+    uvTransform: {x: 95, y: 1241}
   - name: R_leg_02
     originalName: 
     pivot: {x: 0.5, y: 0.5}
@@ -108804,8 +108804,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 1712
-      y: 2805
+      x: 1755
+      y: 2301
       width: 260
       height: 170
     spriteID: b6bfb0ab527e55540902e993f6792549
@@ -111259,7 +111259,7 @@ ScriptedImporter:
     - {x: 0, y: 80}
     tessellationDetail: 0
     parentGroupIndex: -1
-    uvTransform: {x: 758, y: 2082}
+    uvTransform: {x: 801, y: 1578}
   platformSettings: []
   mosaicLayers: 1
   documentPivot: {x: 0, y: 0}
@@ -111285,7 +111285,7 @@ ScriptedImporter:
     parentIndex: -1
     spriteID: e431e9d099a8fc0478e7842cc8ae2da4
     layerID: 4
-    mosaicPosition: {x: 1012, y: 1118}
+    mosaicPosition: {x: 1014, y: 1120}
   - name: body
     spriteName: body
     isGroup: 0
@@ -111306,42 +111306,42 @@ ScriptedImporter:
     parentIndex: 2
     spriteID: 7392d103cedcf114cac0eef98fdb2d1e
     layerID: 102
-    mosaicPosition: {x: 1408, y: 2627}
+    mosaicPosition: {x: 1412, y: 3015}
   - name: L_t_hand
     spriteName: L_t_hand
     isGroup: 0
     parentIndex: 2
     spriteID: 588e6b6e229e2654688056382958333a
     layerID: 100
-    mosaicPosition: {x: 1408, y: 3379}
+    mosaicPosition: {x: 1412, y: 3653}
   - name: L_t_thumb
     spriteName: L_t_thumb
     isGroup: 0
     parentIndex: 2
     spriteID: 16ba9ce8e9d065740b0d85b03b7d490c
     layerID: 99
-    mosaicPosition: {x: 1712, y: 3903}
+    mosaicPosition: {x: 4, y: 1871}
   - name: L_t_figner_1
     spriteName: L_t_figner_1
     isGroup: 0
     parentIndex: 2
     spriteID: a114ae1fa5319fa4c8bf5714840ac36e
     layerID: 98
-    mosaicPosition: {x: 349, y: 1093}
+    mosaicPosition: {x: 1755, y: 2480}
   - name: L_t_figner_2
     spriteName: L_t_figner_2
     isGroup: 0
     parentIndex: 2
     spriteID: 3112733fe5209cb489bd35d2c1a6a941
     layerID: 97
-    mosaicPosition: {x: 1903, y: 1345}
+    mosaicPosition: {x: 192, y: 1871}
   - name: L_t_arm
     spriteName: L_t_arm
     isGroup: 0
     parentIndex: 2
     spriteID: 362b78b04da716b4fbacde361ec0c38b
     layerID: 101
-    mosaicPosition: {x: 1408, y: 1521}
+    mosaicPosition: {x: 1412, y: 1524}
   - name: R_t
     spriteName: 
     isGroup: 1
@@ -111355,42 +111355,42 @@ ScriptedImporter:
     parentIndex: 9
     spriteID: c09692b8234ced44e995492a836f607f
     layerID: 37
-    mosaicPosition: {x: 1408, y: 3003}
+    mosaicPosition: {x: 1412, y: 2638}
   - name: R_t_hand
     spriteName: R_t_hand
     isGroup: 0
     parentIndex: 9
     spriteID: d41b1fc7d5558a0489cdcc2e55b377f9
     layerID: 35
-    mosaicPosition: {x: 1408, y: 3734}
+    mosaicPosition: {x: 1716, y: 2638}
   - name: R_t_thumb
     spriteName: R_t_thumb
     isGroup: 0
     parentIndex: 9
     spriteID: 4066f1cb4ca73374d9f82131d170ef57
     layerID: 34
-    mosaicPosition: {x: 4, y: 1271}
+    mosaicPosition: {x: 4, y: 2053}
   - name: R_t_figner_1
     spriteName: R_t_figner_1
     isGroup: 0
     parentIndex: 9
     spriteID: 07609d37f35fb8f4ba1b0ed73afd546a
     layerID: 33
-    mosaicPosition: {x: 349, y: 1216}
+    mosaicPosition: {x: 1755, y: 2143}
   - name: R_t_figner_2
     spriteName: R_t_figner_2
     isGroup: 0
     parentIndex: 9
     spriteID: 8f5892470b11c5d45ba619b675f0b61b
     layerID: 32
-    mosaicPosition: {x: 1899, y: 3903}
+    mosaicPosition: {x: 1716, y: 2994}
   - name: R_t_arm
     spriteName: R_t_arm
     isGroup: 0
     parentIndex: 9
     spriteID: 99528fc8e35af0748a2d30149e3e8e61
     layerID: 36
-    mosaicPosition: {x: 1408, y: 1739}
+    mosaicPosition: {x: 1412, y: 1744}
   - name: R_m
     spriteName: 
     isGroup: 1
@@ -111404,42 +111404,42 @@ ScriptedImporter:
     parentIndex: 16
     spriteID: 84be26b99736c764eacb6a00c6b87b4e
     layerID: 19
-    mosaicPosition: {x: 1012, y: 3403}
+    mosaicPosition: {x: 1014, y: 3406}
   - name: R_m_arm
     spriteName: R_m_arm
     isGroup: 0
     parentIndex: 16
     spriteID: 4fe114554370f304c80d45f603e41701
     layerID: 18
-    mosaicPosition: {x: 1012, y: 2997}
+    mosaicPosition: {x: 1014, y: 3000}
   - name: R_m_hand
     spriteName: R_m_hand
     isGroup: 0
     parentIndex: 16
     spriteID: 56da84c6c47fc7643ae8ae0ebabd5d99
     layerID: 22
-    mosaicPosition: {x: 1012, y: 2548}
+    mosaicPosition: {x: 1014, y: 2550}
   - name: R_m_thumb
     spriteName: R_m_thumb
     isGroup: 0
     parentIndex: 16
     spriteID: 4d201341372d9a441ab578300c945dab
     layerID: 15
-    mosaicPosition: {x: 1884, y: 2983}
+    mosaicPosition: {x: 1874, y: 3141}
   - name: R_m_figner_1
     spriteName: R_m_figner_1
     isGroup: 0
     parentIndex: 16
     spriteID: 3d8243245e82eb142bda842b0b1ccc3b
     layerID: 16
-    mosaicPosition: {x: 1712, y: 2983}
+    mosaicPosition: {x: 1874, y: 2890}
   - name: R_m_figner_2
     spriteName: R_m_figner_2
     isGroup: 0
     parentIndex: 16
     spriteID: 44555f23225c94b4ca8f1b854e31cd3f
     layerID: 14
-    mosaicPosition: {x: 1712, y: 3235}
+    mosaicPosition: {x: 1874, y: 2638}
   - name: L_m
     spriteName: 
     isGroup: 1
@@ -111453,42 +111453,42 @@ ScriptedImporter:
     parentIndex: 23
     spriteID: 41e0d4ad1d562f045b9cad535d6c5327
     layerID: 11
-    mosaicPosition: {x: 1012, y: 1649}
+    mosaicPosition: {x: 1014, y: 1652}
   - name: L_m_arm
     spriteName: L_m_arm
     isGroup: 0
     parentIndex: 23
     spriteID: 1a48fd867169ca14fa2e8ac42ded870c
     layerID: 10
-    mosaicPosition: {x: 1408, y: 1118}
+    mosaicPosition: {x: 1412, y: 1120}
   - name: L_m_hand
     spriteName: L_m_hand
     isGroup: 0
     parentIndex: 23
     spriteID: 1a1a52357ee099c49a21f978b1f74047
     layerID: 9
-    mosaicPosition: {x: 1012, y: 2122}
+    mosaicPosition: {x: 1014, y: 2126}
   - name: L_m_thumb
     spriteName: L_m_thumb
     isGroup: 0
     parentIndex: 23
     spriteID: 52aca33f901c9e642a5902355a166de0
     layerID: 7
-    mosaicPosition: {x: 1884, y: 3235}
+    mosaicPosition: {x: 1874, y: 3367}
   - name: L_m_figner_1
     spriteName: L_m_figner_1
     isGroup: 0
     parentIndex: 23
     spriteID: a3906f6a203231f48a8d4706fbddcf19
     layerID: 8
-    mosaicPosition: {x: 1565, y: 3379}
+    mosaicPosition: {x: 1571, y: 3653}
   - name: L_m_figner_2
     spriteName: L_m_figner_2
     isGroup: 0
     parentIndex: 23
     spriteID: dc3839d287add5f42bc0a4300f25be0a
     layerID: 6
-    mosaicPosition: {x: 1565, y: 3734}
+    mosaicPosition: {x: 1909, y: 1120}
   - name: L_b
     spriteName: 
     isGroup: 1
@@ -111502,42 +111502,42 @@ ScriptedImporter:
     parentIndex: 30
     spriteID: 0a065aad9364a1247aba0767c3bbb81d
     layerID: 116
-    mosaicPosition: {x: 1408, y: 1957}
+    mosaicPosition: {x: 1412, y: 1964}
   - name: R_b_hand
     spriteName: R_b_hand
     isGroup: 0
     parentIndex: 30
     spriteID: 12009ef4e9604104d9938a088f6c4655
     layerID: 115
-    mosaicPosition: {x: 1012, y: 4}
+    mosaicPosition: {x: 1014, y: 4}
   - name: R_b_arm
     spriteName: R_b_arm
     isGroup: 0
     parentIndex: 30
     spriteID: cdc6e015b0707654a9bced047d7d81a8
     layerID: 114
-    mosaicPosition: {x: 1750, y: 1957}
+    mosaicPosition: {x: 1412, y: 3393}
   - name: R_b_thumb
     spriteName: R_b_thumb
     isGroup: 0
     parentIndex: 30
     spriteID: 52b0eacfd9c2c8f42a53c236d4e1420b
     layerID: 113
-    mosaicPosition: {x: 1891, y: 3487}
+    mosaicPosition: {x: 185, y: 1662}
   - name: R_b_figner_1
     spriteName: R_b_figner_1
     isGroup: 0
     parentIndex: 30
     spriteID: c949a6eaf061a5346a7dd72af4f3545e
     layerID: 112
-    mosaicPosition: {x: 1903, y: 1118}
+    mosaicPosition: {x: 1874, y: 3608}
   - name: R_b_figner_2
     spriteName: R_b_figner_2
     isGroup: 0
     parentIndex: 30
     spriteID: df618d4149d4af0438d8e9b680135b6b
     layerID: 111
-    mosaicPosition: {x: 1712, y: 3487}
+    mosaicPosition: {x: 4, y: 1662}
   - name: R_b
     spriteName: 
     isGroup: 1
@@ -111551,70 +111551,70 @@ ScriptedImporter:
     parentIndex: 37
     spriteID: b23864e2876730f4b9d0a36353a545b4
     layerID: 45
-    mosaicPosition: {x: 1408, y: 2292}
+    mosaicPosition: {x: 1412, y: 2301}
   - name: R_b_hand
     spriteName: R_b_hand_1
     isGroup: 0
     parentIndex: 37
     spriteID: 00ec0bae71fb46747a4c29b85ef8024b
     layerID: 43
-    mosaicPosition: {x: 1012, y: 561}
+    mosaicPosition: {x: 1014, y: 563}
   - name: R_b_arm
     spriteName: R_b_arm_1
     isGroup: 0
     parentIndex: 37
     spriteID: 6d582c3b17b615d42847bc16f20e6209
     layerID: 44
-    mosaicPosition: {x: 1750, y: 2292}
+    mosaicPosition: {x: 1014, y: 3824}
   - name: R_b_thumb
     spriteName: R_b_thumb_1
     isGroup: 0
     parentIndex: 37
     spriteID: 2ab7e8fda0bcc1d4b880bcab41b3ec76
     layerID: 42
-    mosaicPosition: {x: 1891, y: 3695}
+    mosaicPosition: {x: 185, y: 1452}
   - name: R_b_figner_1
     spriteName: R_b_figner_1_1
     isGroup: 0
     parentIndex: 37
     spriteID: 93ac5f98d743215468e610576df1e7f7
     layerID: 41
-    mosaicPosition: {x: 4, y: 1452}
+    mosaicPosition: {x: 1874, y: 3837}
   - name: R_b_figner_2
     spriteName: R_b_figner_2_1
     isGroup: 0
     parentIndex: 37
     spriteID: cda910d2af001ed40a8b9a041a293c9d
     layerID: 40
-    mosaicPosition: {x: 1712, y: 3695}
+    mosaicPosition: {x: 4, y: 1452}
   - name: L_leg
     spriteName: L_leg
     isGroup: 0
     parentIndex: -1
     spriteID: 3414d2a8da35f95438b4ef3d5d4c8ff3
     layerID: 120
-    mosaicPosition: {x: 1012, y: 3820}
+    mosaicPosition: {x: 4, y: 1094}
   - name: L_leg_02
     spriteName: L_leg_02
     isGroup: 0
     parentIndex: -1
     spriteID: 6789cf0c07ef6e840a305a58f4229972
     layerID: 123
-    mosaicPosition: {x: 1712, y: 2627}
+    mosaicPosition: {x: 1755, y: 1964}
   - name: R_leg
     spriteName: R_leg
     isGroup: 0
     parentIndex: -1
     spriteID: 0790d77d5e88cc8489c218fe33e69cf7
     layerID: 118
-    mosaicPosition: {x: 4, y: 1093}
+    mosaicPosition: {x: 4, y: 1273}
   - name: R_leg_02
     spriteName: R_leg_02
     isGroup: 0
     parentIndex: -1
     spriteID: b6bfb0ab527e55540902e993f6792549
     layerID: 122
-    mosaicPosition: {x: 1712, y: 2805}
+    mosaicPosition: {x: 1755, y: 2301}
   characterData:
     bones:
     - name: bone_1
