@@ -159,6 +159,7 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     IEnumerator Ceiling()
     {
         bool grounded = false; 
@@ -220,6 +221,9 @@ public class CharacterController2D : MonoBehaviour
 
 
     }
+=======
+
+>>>>>>> parent of 7b44999 (08.11_04번)
 
     private void Flip()
     {
