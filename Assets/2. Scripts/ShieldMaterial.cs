@@ -47,5 +47,4 @@ public class ShieldMaterial : MonoBehaviour
         isShield = true;
         myAnimator.SetTrigger("MakeShield");
     }
-    
 }

@@ -101,7 +101,7 @@ MonoBehaviour:
   isLayer:
     serializedVersion: 2
     m_Bits: 8448
-  speed: 20
+  speed: 7
   distance: 0.2
   damage: 1
 --- !u!50 &715567986148672877

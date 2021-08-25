@@ -66,10 +66,10 @@ public class Shield : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.gameObject.tag);
+        Debug.Log(other);
         if (other.gameObject.CompareTag("Enemy") && !isOnHand)
         {
-            Debug.Log("Hit!!!!!!!");
+            Debug.Log("Hit!");
             
             other.gameObject.GetComponent<Enemy>().TakeHit(durability + shield_passive_throwdamege);
             Destroy(gameObject);
