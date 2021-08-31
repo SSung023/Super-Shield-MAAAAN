@@ -12,7 +12,7 @@ public class ShieldManager
     {
         
     }
-    // Start is called before the first frame update
+
     
     public void shieldReset()
     {
@@ -23,6 +23,9 @@ public class ShieldManager
             shield_passive_num = 0; 
             shield_level_num = 0;
         }
+
+        // tmp code: 시작 시 들고 있는 방패의 등급 normal로 임시 설정
+        memory_use_number_table[0] = 1;
     }
 
     public void makeShield(PlayerController controller, Player player, Shield shield, int debuff, int passive, int level)
