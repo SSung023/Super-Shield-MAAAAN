@@ -84073,6 +84073,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4110397465917884980, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
+      propertyPath: myItem
+      value: 
+      objectReference: {fileID: 4303902023918710302, guid: 5815c45441646af4992ce729fa88fb46, type: 3}
     - target: {fileID: 4110397465917884982, guid: 1de0e5255044b134da3a423caa74001f, type: 3}
       propertyPath: m_Enabled
       value: 1
