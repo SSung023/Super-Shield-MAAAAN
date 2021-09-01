@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
         {
             if(overlapObject != null && overlapObject.gameObject.layer == 12)
             {
+                SoundManager._snd.RandomSfxCall(_playerAudioSource, 19, 26,true); // 방패만들 때 소리 내기 (임시)
                 myAnimator.SetTrigger("MakeShield");
                 _haveShield = true;
                 StartCoroutine(ProcessMakingShield(overlapObject.GetComponent<ShieldMaterial>()));

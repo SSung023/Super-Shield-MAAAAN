@@ -90,7 +90,7 @@ public class GroundEnemy : Roam
             if (iscurrent)
             {
                 switchBullet();
-                SoundManager._snd.SfxCall(enemyAudioSource,18); // 임시, 적이 총알 발사할 때 소리 재생
+                SoundManager._snd.RandomSfxCall(enemyAudioSource,27,29,true); // 임시, 적이 총알 발사할 때 소리 재생
                 Bullet bulletCopy = Instantiate(bullet, bulletGeneratePos.transform.position, transform.rotation);
                 bulletCopy.mother = this;
                 iscurrent = false;
