@@ -31,12 +31,15 @@ public class ShieldMaterial : MonoBehaviour
             tmp.transform.localScale = new Vector3(0.1f, 0.3f, 1);
 
             ShieldItem item = tmp.GetComponent<ShieldItem>();
-            item.randomShieldSet(debuff, passive, level);
+            //item.randomShieldSet(debuff, passive, level);
 
-            if (gameObject.transform.parent != null)
-            {
-                Destroy(gameObject.transform.parent.gameObject);
-            }
+            // 이 부분으로 인해 방패가 전부 없어지고 있었습니다.
+            // 들어가 있는 이유를 잘 모르겠네요 ㅎㅎ;
+            // if (gameObject.transform.parent != null)
+            // {
+            //     
+            //     Destroy(gameObject.transform.parent.gameObject);
+            // }
             Destroy(gameObject);
         }
     }

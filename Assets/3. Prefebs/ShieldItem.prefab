@@ -167,4 +167,4 @@ MonoBehaviour:
   myItem: {fileID: 3705949270909530715, guid: cd96269d5099d324d945bd0f3feb0d6f, type: 3}
   shield_debuff_num: 0
   shield_passive_num: 0
-  shield_level_num: 0
+  shield_level_num: 1

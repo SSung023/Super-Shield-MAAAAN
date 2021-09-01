@@ -160,7 +160,6 @@ public class Enemy : ShieldMaterial
 
         // 죽으면서 주변에 데미지 + 골드 드랍
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(transform.position, explosionSize, 0);
-        Debug.Log("아이고 탱크 터져유");
         if (collider2Ds != null)
         {
             // tag가 player나 enemy인 오브젝트에게 데미지를 준다

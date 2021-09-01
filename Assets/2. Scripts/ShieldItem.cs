@@ -23,5 +23,8 @@ public class ShieldItem : MonoBehaviour
         print("Make level " + level);
     }
 
-    
+    public void setShieldProperty()
+    {
+
+    }
 }
