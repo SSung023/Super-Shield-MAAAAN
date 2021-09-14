@@ -301,11 +301,11 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag.Equals("Ground") && !controller.m_Grounded)
-        {
-            m_BoxCollider2D.isTrigger = true;
-            StopCoroutine("triggerFalse");
-        }
+        // if (other.gameObject.tag.Equals("Ground") && !controller.m_Grounded)
+        // {
+        //     m_BoxCollider2D.isTrigger = true;
+        //     StopCoroutine(triggerFalse());
+        // }
     }
     public void OnTriggerStay2D(Collider2D other)
     {
